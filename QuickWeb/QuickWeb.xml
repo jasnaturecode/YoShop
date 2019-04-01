@@ -1,0 +1,974 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuickWeb</name>
+    </assembly>
+    <members>
+        <member name="T:QuickWeb.Controllers.Common.BaseController">
+            <summary>
+            基础公共控制器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Build(System.Int32,System.String)">
+            <summary>
+            只返回响应状态和提示信息
+            </summary>
+            <param name="status">状态</param>
+            <param name="msg">消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Build(System.Int32,System.String,System.Object)">
+            <summary>
+            返回响应状态、消息和数据对象
+            </summary>
+            <param name="status">状态</param>
+            <param name="msg">信息</param>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Build(Quick.Common.Models.ResultInfo)">
+            <summary>
+            返回响应状态、消息、数据和跳转地址
+            </summary>
+            <param name="result">ResultInfo实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes(System.String,System.Object)">
+            <summary>
+            返回成功状态、消息和数据对象
+            </summary>
+            <param name="msg">信息</param>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes(System.Object)">
+            <summary>
+            返回成功状态和数据对象
+            </summary>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes(System.String)">
+            <summary>
+            返回成功状态和消息
+            </summary>
+            <param name="msg">消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes">
+            <summary>
+            返回成功状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.No(System.String)">
+            <summary>
+            返回失败状态和消息
+            </summary>
+            <param name="msg">消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.No">
+            <summary>
+            返回失败状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.InfoResp(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="status"></param>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.SuccResp(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.FailResp(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.PageResult(System.Object,System.Int32,System.Int32)">
+            <summary>
+            分页响应数据
+            </summary>
+            <param name="data">数据</param>
+            <param name="pageCount">总页数</param>
+            <param name="totalCount">总条数</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.ResultData(System.Object,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            返回结果json
+            </summary>
+            <param name="data">响应数据</param>
+            <param name="success">响应状态</param>
+            <param name="message">响应消息</param>
+            <param name="isLogin">登录状态</param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.FileController">
+            <summary>
+            资源管理器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.FileController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Masuit.Tools.Files.ISevenZipCompressor)">
+            <summary>
+            资源管理器
+            </summary>
+            <param name="hostingEnvironment"></param>
+            <param name="sevenZipCompressor"></param>
+        </member>
+        <member name="M:QuickWeb.Controllers.FileController.GetFiles(System.String)">
+            <summary>
+            获取文件列表
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.FileController.Read(System.String)">
+            <summary>
+            读取文件内容
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.FileController.Save(System.String,System.String)">
+            <summary>
+            保存文件
+            </summary>
+            <param name="filename"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.FileController.Upload(System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.FileController.Handle(QuickWeb.Models.RequestModel.FileRequest)">
+            <summary>
+            操作文件
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.FileController.Handle(System.String,System.String[],System.String)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="path"></param>
+            <param name="items"></param>
+            <param name="toFilename"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.HealthController">
+            <summary>
+            健康检查
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.Check">
+            <summary>
+            心跳检测
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.GetBaseInfo">
+            <summary>
+            获取硬件基本信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.GetHistoryList">
+            <summary>
+            获取历史性能计数器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.MailTest(System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            邮件测试
+            </summary>
+            <param name="smtp"></param>
+            <param name="user"></param>
+            <param name="pwd"></param>
+            <param name="port"></param>
+            <param name="to"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.PathTest(System.String)">
+            <summary>
+            路径测试
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.ClearPerfCounter">
+            <summary>
+            清空性能计数器缓存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.IpBlackList">
+            <summary>
+            获取全局IP黑名单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.AreaIPBlackList">
+            <summary>
+            获取地区IP黑名单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.GetIPRangeBlackList">
+            <summary>
+            获取IP地址段黑名单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.SetIPRangeBlackList(System.String)">
+            <summary>
+            设置IP地址段黑名单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.IpWhiteList">
+            <summary>
+            全局IP白名单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.SetIpBlackList(System.String)">
+            <summary>
+            设置IP黑名单
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.SetIpWhiteList(System.String)">
+            <summary>
+            设置IP白名单
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.InterceptLog">
+            <summary>
+            获取拦截日志
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.ClearInterceptLog">
+            <summary>
+            清除拦截日志
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.AddToWhiteList(System.String)">
+            <summary>
+            将IP添加到白名单
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HealthController.AddToBlackList(System.String)">
+            <summary>
+            将IP添加到黑名单
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.PublicController">
+            <summary>
+            公共API
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.PublicController.Position(System.String,System.String)">
+            <summary>
+            根据经纬度获取详细地理信息
+            </summary>
+            <param name="lat">纬度</param>
+            <param name="lng">经度</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.PublicController.Address(System.String)">
+            <summary>
+            根据详细地址获取经纬度
+            </summary>
+            <param name="addr">详细地理信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.PublicController.GetIpInfo(System.String)">
+            <summary>
+            获取ip地址详细地理信息
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.TempController">
+            <summary>
+            不使用构造函数注入的属性，必须是共有成员属性(public)，不能是私有或受保护的成员属性
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Controllers.UploadController">
+            <summary>
+            文件上传
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            文件上传
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UploadWord">
+            <summary>
+            上传Word转码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.DecodeDataUri(System.String)">
+            <summary>
+            解码Base64图片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.Download(System.String)">
+            <summary>
+            文件下载
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UeditorFileUploader">
+            <summary>
+            UEditor文件上传处理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UploadFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.AppConfig">
+            <summary>
+            应用程序配置
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.AppConfig.BaiduAk">
+            <summary>
+            百度密钥
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.AppConfig.AppTitle">
+            <summary>
+            程序名称
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.AppConfig.AppVersion">
+            <summary>
+            程序版本
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.AppConfig.Init(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            初始化方法
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.AuthorityAttribute">
+            <summary>
+            授权验证过滤器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.AuthorityAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>在执行操作方法之前由 ASP.NET MVC 框架调用。</summary>
+            <param name="filterContext">筛选器上下文。</param>
+        </member>
+        <member name="T:QuickWeb.Extensions.Common.CommonHelper">
+            <summary>
+            公共类库
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.BanRegex">
+            <summary>
+            敏感词
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.ModRegex">
+            <summary>
+            审核词
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.DenyIP">
+            <summary>
+            全局禁止IP
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.DenyAreaIP">
+            <summary>
+            按地区禁用ip
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.IPWhiteList">
+            <summary>
+            ip白名单
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.DenyIPRange">
+            <summary>
+            IP黑名单地址段
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.IsDenyIpAddress(System.String)">
+            <summary>
+            判断IP地址是否被黑名单
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.IPErrorTimes">
+            <summary>
+            每IP错误的次数统计
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.SystemSettings">
+            <summary>
+            系统设定
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.InterviewCount">
+            <summary>
+            访问量
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.AverageCount">
+            <summary>
+            平均访问量
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.Common.CommonHelper.StartupTime">
+            <summary>
+            网站启动时间
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.Mapper``1(System.Object)">
+            <summary>
+            类型映射
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.UploadImage(System.String)">
+            <summary>
+            上传图片到新浪图床
+            </summary>
+            <param name="file">文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.UploadImageFallback(System.String)">
+            <summary>
+            上传图片到sm图床
+            </summary>
+            <param name="file">文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.UploadImageFallback2(System.String)">
+            <summary>
+            上传图片到百度图床
+            </summary>
+            <param name="file">文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.UploadImageFallback3(System.String)">
+            <summary>
+            上传图片到百度图床
+            </summary>
+            <param name="file">文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.ReplaceImgSrc(System.String)">
+            <summary>
+            替换图片地址
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.CommonHelper.IsRobot(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            是否是机器人访问
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.Common.DocumentConvert">
+            <summary>
+            文档转换操作
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.DocumentConvert.Doc2Html(System.String,System.String,System.String)">
+            <summary>
+            doc转html
+            </summary>
+            <param name="docPath">doc文件路径</param>
+            <param name="htmlDir">生成的html所在目录，由于生成html后会将图片都放到同级的目录下，所以用文件夹保存，默认的html文件名为index.html</param>
+            <param name="index">默认文档名为index.html</param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.DocumentConvert.Doc2HtmlAsync(System.String,System.String,System.String)">
+            <summary>
+            doc转html
+            </summary>
+            <param name="docPath">doc文件路径</param>
+            <param name="htmlDir">生成的html所在目录，由于生成html后会将图片都放到同级的目录下，所以用文件夹保存，默认的html文件名为index.html</param>
+            <param name="index">默认文档名为index.html</param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.DocumentConvert.Doc2Pdf(System.String,System.String,Aspose.Words.PaperSize,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            doc转pdf
+            </summary>
+            <param name="docPath">doc源文件</param>
+            <param name="pdfPath">目标pdf文件</param>
+            <param name="paperSize">纸张大小</param>
+            <param name="leftMargin">左边距</param>
+            <param name="rightMargin">右边距</param>
+            <param name="topMargin">上边距</param>
+            <param name="bottomMargin">下边距</param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.DocumentConvert.Doc2PdfAsync(System.String,System.String,Aspose.Words.PaperSize,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            doc转pdf
+            </summary>
+            <param name="docPath">doc源文件</param>
+            <param name="pdfPath">目标pdf文件</param>
+            <param name="paperSize">纸张大小</param>
+            <param name="leftMargin">左边距</param>
+            <param name="rightMargin">右边距</param>
+            <param name="topMargin">上边距</param>
+            <param name="bottomMargin">下边距</param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.DocumentConvert.Html2Word(System.String,System.String,Aspose.Words.PaperSize,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            html转Word
+            </summary>
+            <param name="htmlPath">html源文件</param>
+            <param name="docPath">目标doc文件</param>
+            <param name="paperSize">纸张大小，默认A4纸</param>
+            <param name="leftMargin">左边距，默认10</param>
+            <param name="rightMargin">右边距，默认10</param>
+            <param name="topMargin">上边距，默认10</param>
+            <param name="bottomMargin">下边距，默认10</param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.DocumentConvert.Html2WordAsync(System.String,System.String,Aspose.Words.PaperSize,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            html转Word
+            </summary>
+            <param name="htmlPath">html源文件</param>
+            <param name="docPath">目标doc文件</param>
+            <param name="paperSize">纸张大小，默认A4纸</param>
+            <param name="leftMargin">左边距，默认10</param>
+            <param name="rightMargin">右边距，默认10</param>
+            <param name="topMargin">上边距，默认10</param>
+            <param name="bottomMargin">下边距，默认10</param>
+        </member>
+        <member name="T:QuickWeb.Extensions.Common.HangfireHelper">
+            <summary>
+            HangfireHelper
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.HangfireHelper.CreateJob(System.Type,System.String,System.String,System.Object[])">
+            <summary>
+            创建任务
+            </summary>
+            <param name="type">任务类</param>
+            <param name="method">调用方法</param>
+            <param name="queue">队列名</param>
+            <param name="args">调用参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.HangfireConfig">
+            <summary>
+            hangfire任务配置
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.HangfireConfig.Start">
+            <summary>
+            hangfire初始化
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.HangfireConfig.CheckLinks">
+            <summary>
+            检查友链
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.HangfireConfig.EverydayJob">
+            <summary>
+            每日任务
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.HangfireConfig.EveryweekJob">
+            <summary>
+            每周任务
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.Hangfire.HangfireBackJob">
+            <summary>
+            hangfire后台任务
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Hangfire.HangfireBackJob.RecordPostVisit(System.Int32)">
+            <summary>
+            文章访问记录
+            </summary>
+            <param name="pid"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Hangfire.HangfireBackJob.InterceptLog(Masuit.MyBlogs.Core.Extensions.Hangfire.IpIntercepter)">
+            <summary>
+            防火墙拦截日志
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Hangfire.HangfireBackJob.EverydayJob">
+            <summary>
+            每天的任务
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Hangfire.HangfireBackJob.CheckLinks">
+            <summary>
+            检查友链
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.Hangfire.IHangfireBackJob">
+            <summary>
+            hangfire后台任务
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Hangfire.IHangfireBackJob.RecordPostVisit(System.Int32)">
+            <summary>
+            文章访问记录
+            </summary>
+            <param name="pid"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Hangfire.IHangfireBackJob.EverydayJob">
+            <summary>
+            每日任务
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Hangfire.IHangfireBackJob.CheckLinks">
+            <summary>
+            友链检查
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.ApplicationBuilderExtensions">
+            <summary>
+            Application扩展方法
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.ApplicationBuilderExtensions.UseException(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            异常处理
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.ApplicationBuilderExtensions.UseRequestIntercept(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            请求拦截
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.Middleware.ExceptionMiddleware">
+            <summary>
+            异常拦截中间件
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Middleware.ExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            异常拦截中间件
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Middleware.ExceptionMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行调用
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.Middleware.RequestInterceptMiddleware">
+            <summary>
+            请求拦截器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Middleware.RequestInterceptMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.Middleware.RequestInterceptMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.MyRestrictiveAuthorizationFilter">
+            <summary>
+            hangfire授权拦截器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.MyRestrictiveAuthorizationFilter.Authorize(Hangfire.Dashboard.DashboardContext)">
+            <summary>
+            授权校验
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.ConfigHandler">
+            <summary>
+            Config 的摘要说明
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.ConfigHandler.#ctor(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.ConfigHandler.Process">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.CrawlerHandler">
+            <summary>
+            Crawler 的摘要说明
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.Handler">
+            <summary>
+            Handler 的摘要说明
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.ListFileManager">
+            <summary>
+            FileManager 的摘要说明
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.NotSupportedHandler">
+            <summary>
+            NotSupportedHandler 的摘要说明
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.PathFormatter">
+            <summary>
+            PathFormater 的摘要说明
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.UeditorConfig">
+            <summary>
+            Config 的摘要说明
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.UploadHandler">
+            <summary>
+            UploadHandler 的摘要说明
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.PathFormat">
+            <summary>
+            文件命名规则
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.UploadFieldName">
+            <summary>
+            上传表单域名称
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.SizeLimit">
+            <summary>
+            上传大小限制
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.AllowExtensions">
+            <summary>
+            上传允许的文件格式
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.Base64">
+            <summary>
+            文件是否以 Base64 的形式上传
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.Base64Filename">
+            <summary>
+            Base64 字符串所表示的文件名
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Hubs.PerformanceCounter">
+            <summary>
+            性能计数器
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.Time">
+            <summary>
+            当前时间戳
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.CpuLoad">
+            <summary>
+            CPU当前负载
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.Temperature">
+            <summary>
+            CPU核心温度
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.MemoryUsage">
+            <summary>
+            内存使用率
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.DiskRead">
+            <summary>
+            磁盘读
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.DiskWrite">
+            <summary>
+            磁盘写
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.Upload">
+            <summary>
+            网络上行
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.PerformanceCounter.Download">
+            <summary>
+            网络下行
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Hubs.MyHub">
+            <summary>
+            hub
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.MyHub.PerformanceCounter">
+            <summary>
+            性能计数器缓存
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Hubs.MyHub.Init">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Hubs.MyHub.Connections">
+            <summary>
+            当前连接客户端
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Hubs.MyHub.OnConnectedAsync">
+            <summary>
+            连接事件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Hubs.MyHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            注销事件
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Hubs.MyHub.Counter(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            性能统计
+            </summary>
+            <param name="delay"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Models.RequestModel.FileList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Models.RequestModel.FileRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Program">
+            <summary>
+            程序启动类
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Program.Main(System.String[])">
+            <summary>
+            主方法
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:QuickWeb.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            参数构造
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Startup">
+            <summary>
+            asp.net core核心配置
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            asp.net core核心配置
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:QuickWeb.Startup.Configuration">
+            <summary>
+            属性对象
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+             This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="P:QuickWeb.Startup.AutofacContainer">
+            <summary>
+            依赖注入容器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+             This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>
