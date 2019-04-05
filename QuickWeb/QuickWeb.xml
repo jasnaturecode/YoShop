@@ -4,6 +4,62 @@
         <name>QuickWeb</name>
     </assembly>
     <members>
+        <member name="T:QuickWeb.Areas.Api.Controllers.ToolController">
+            <summary>
+            公共API
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Areas.Api.Controllers.ToolController.Position(System.String,System.String)">
+            <summary>
+            根据经纬度获取详细地理信息
+            </summary>
+            <param name="lat">纬度</param>
+            <param name="lng">经度</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Areas.Api.Controllers.ToolController.Address(System.String)">
+            <summary>
+            根据详细地址获取经纬度
+            </summary>
+            <param name="addr">详细地理信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Areas.Api.Controllers.ToolController.GetIpInfo(System.String)">
+            <summary>
+            获取ip地址详细地理信息
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Areas.Api.Controllers.UserController">
+            <summary>
+            用户接口
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Areas.Api.Controllers.UserController.Get(System.Int32)">
+            <summary>
+            根据用户Id获取用户信息
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Components.NavigationViewComponent">
+            <summary>
+            视图组件
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Components.NavigationViewComponent.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            视图组件
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:QuickWeb.Components.NavigationViewComponent.Invoke">
+            <summary>
+            渲染菜单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Controllers.Common.BaseController">
             <summary>
             基础公共控制器
@@ -171,30 +227,30 @@
             <param name="toFilename"></param>
             <returns></returns>
         </member>
-        <member name="T:QuickWeb.Controllers.HealthController">
+        <member name="T:QuickWeb.Controllers.SystemController">
             <summary>
             健康检查
             </summary>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.Check">
+        <member name="M:QuickWeb.Controllers.SystemController.Check">
             <summary>
             心跳检测
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.GetBaseInfo">
+        <member name="M:QuickWeb.Controllers.SystemController.GetBaseInfo">
             <summary>
             获取硬件基本信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.GetHistoryList">
+        <member name="M:QuickWeb.Controllers.SystemController.GetHistoryList">
             <summary>
             获取历史性能计数器
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.MailTest(System.String,System.String,System.String,System.Int32,System.String)">
+        <member name="M:QuickWeb.Controllers.SystemController.MailTest(System.String,System.String,System.String,System.Int32,System.String)">
             <summary>
             邮件测试
             </summary>
@@ -205,120 +261,88 @@
             <param name="to"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.PathTest(System.String)">
+        <member name="M:QuickWeb.Controllers.SystemController.PathTest(System.String)">
             <summary>
             路径测试
             </summary>
             <param name="path"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.ClearPerfCounter">
+        <member name="M:QuickWeb.Controllers.SystemController.ClearPerfCounter">
             <summary>
             清空性能计数器缓存
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.IpBlackList">
+        <member name="M:QuickWeb.Controllers.SystemController.IpBlackList">
             <summary>
             获取全局IP黑名单
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.AreaIPBlackList">
+        <member name="M:QuickWeb.Controllers.SystemController.AreaIPBlackList">
             <summary>
             获取地区IP黑名单
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.GetIPRangeBlackList">
+        <member name="M:QuickWeb.Controllers.SystemController.GetIPRangeBlackList">
             <summary>
             获取IP地址段黑名单
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.SetIPRangeBlackList(System.String)">
+        <member name="M:QuickWeb.Controllers.SystemController.SetIPRangeBlackList(System.String)">
             <summary>
             设置IP地址段黑名单
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.IpWhiteList">
+        <member name="M:QuickWeb.Controllers.SystemController.IpWhiteList">
             <summary>
             全局IP白名单
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.SetIpBlackList(System.String)">
+        <member name="M:QuickWeb.Controllers.SystemController.SetIpBlackList(System.String)">
             <summary>
             设置IP黑名单
             </summary>
             <param name="content"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.SetIpWhiteList(System.String)">
+        <member name="M:QuickWeb.Controllers.SystemController.SetIpWhiteList(System.String)">
             <summary>
             设置IP白名单
             </summary>
             <param name="content"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.InterceptLog">
+        <member name="M:QuickWeb.Controllers.SystemController.InterceptLog">
             <summary>
             获取拦截日志
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.ClearInterceptLog">
+        <member name="M:QuickWeb.Controllers.SystemController.ClearInterceptLog">
             <summary>
             清除拦截日志
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.AddToWhiteList(System.String)">
+        <member name="M:QuickWeb.Controllers.SystemController.AddToWhiteList(System.String)">
             <summary>
             将IP添加到白名单
             </summary>
             <param name="ip"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.HealthController.AddToBlackList(System.String)">
+        <member name="M:QuickWeb.Controllers.SystemController.AddToBlackList(System.String)">
             <summary>
             将IP添加到黑名单
             </summary>
             <param name="ip"></param>
             <returns></returns>
-        </member>
-        <member name="T:QuickWeb.Controllers.PublicController">
-            <summary>
-            公共API
-            </summary>
-        </member>
-        <member name="M:QuickWeb.Controllers.PublicController.Position(System.String,System.String)">
-            <summary>
-            根据经纬度获取详细地理信息
-            </summary>
-            <param name="lat">纬度</param>
-            <param name="lng">经度</param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.PublicController.Address(System.String)">
-            <summary>
-            根据详细地址获取经纬度
-            </summary>
-            <param name="addr">详细地理信息</param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.PublicController.GetIpInfo(System.String)">
-            <summary>
-            获取ip地址详细地理信息
-            </summary>
-            <param name="ip"></param>
-            <returns></returns>
-        </member>
-        <member name="T:QuickWeb.Controllers.TempController">
-            <summary>
-            不使用构造函数注入的属性，必须是共有成员属性(public)，不能是私有或受保护的成员属性
-            </summary>
         </member>
         <member name="T:QuickWeb.Controllers.UploadController">
             <summary>
@@ -362,6 +386,149 @@
             上传文件
             </summary>
             <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.GoodsController">
+            <summary>
+            商品管理
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Controllers.HomeController">
+            <summary>
+            管理首页
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Controllers.OrderController">
+            <summary>
+            订单管理
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.OrderController.Delivery_List">
+            <summary>
+            待发货
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.OrderController.Receipt_List">
+            <summary>
+            待收货
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.OrderController.Pay_List">
+            <summary>
+            待付款
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.OrderController.Complete_List">
+            <summary>
+            已完成
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.OrderController.Cancel_List">
+            <summary>
+            已取消
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.OrderController.All_List">
+            <summary>
+            全部订单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.SettingController">
+            <summary>
+            系统设置
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Store">
+            <summary>
+            商城设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Trade">
+            <summary>
+            交易设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Delivery">
+            <summary>
+            配送设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Sms">
+            <summary>
+            短信设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Storage">
+            <summary>
+            上传设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Clear">
+            <summary>
+            清理缓存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Index">
+            <summary>
+            环境检测
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.TempController">
+            <summary>
+            不使用构造函数注入的属性，必须是共有成员属性(public)，不能是私有或受保护的成员属性
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Controllers.UserController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Controllers.WxAppController">
+            <summary>
+            小程序管理
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.WxAppController.Setting">
+            <summary>
+            小程序设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.WxAppController.Home">
+            <summary>
+            页面设计
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.WxAppController.Links">
+            <summary>
+            页面链接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.WxAppController.Help">
+            <summary>
+            帮助中心
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.WxAppController.TabBar">
+            <summary>
+            导航设置
+            </summary>
             <returns></returns>
         </member>
         <member name="T:QuickWeb.Extensions.AppConfig">

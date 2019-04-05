@@ -1,22 +1,22 @@
-﻿using Masuit.Tools;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Masuit.Tools;
 using Masuit.Tools.Core.Net;
 using Masuit.Tools.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using QuickWeb.Extensions;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace QuickWeb.Controllers
+namespace QuickWeb.Areas.Api.Controllers
 {
     /// <summary>
     /// 公共API
     /// </summary>
     [Route("api")]
     [ApiController]
-    public class PublicController : Controller
+    public class ToolController : ControllerBase
     {
         /// <summary>
         /// 根据经纬度获取详细地理信息

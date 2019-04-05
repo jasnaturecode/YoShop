@@ -1,77 +1,126 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QuickWeb</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>萤火小程序商城</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="~/favicon.ico" />
+    <meta name="apple-mobile-web-app-title" content="萤火小程序商城" />
+    <link rel="stylesheet" href="~/css/amazeui.min.css" />
+    <link rel="stylesheet" href="~/css/app.css" />
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_783249_t6knt0guzo.css">
+    @RenderSection("Styles", required: false)
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
-    </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/jquery.min.js"></script>
+    <script src="//at.alicdn.com/t/font_783249_e5yrsf08rap.js"></script>
+    <script>
+        BASE_URL = '@(string.IsNullOrEmpty(ViewBag.base_url) ? ViewBag.base_url : "")';
+        STORE_URL = '@(string.IsNullOrEmpty(ViewBag.store_url) ? ViewBag.store_url : "")';
+    </script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QuickWeb</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+<body data-type="">
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+        <header class="tpl-header">
+            <!-- 右侧内容 -->
+            <div class="tpl-header-fluid">
+                <!-- 侧边切换 -->
+                <div class="am-fl tpl-header-button switch-button">
+                    <i class="iconfont icon-menufold"></i>
+                </div>
+                <!-- 刷新页面 -->
+                <div class="am-fl tpl-header-button refresh-button">
+                    <i class="iconfont icon-refresh"></i>
+                </div>
+                <!-- 其它功能-->
+                <div class="am-fr tpl-header-navbar">
+                    <ul>
+                        <!-- 欢迎语 -->
+                        <li class="am-text-sm tpl-header-navbar-welcome">
+                            <a href="url('store.user/renew')">
+                                欢迎你，<span>$store['user']['user_name']</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <!-- 退出 -->
+                        <li class="am-text-sm">
+                            <a href="url('passport/logout')">
+                                <i class="iconfont icon-tuichu"></i> 退出
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        </header>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - QuickWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <!-- 侧边导航栏 -->
+        <div class="left-sidebar">
+            @await Component.InvokeAsync("Navigation")
         </div>
-    </footer>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <!-- 内容区域 start -->
+        <div class="tpl-content-wrapper">
+            @RenderBody()
+        </div>
+        <!-- 内容区域 end -->
 
+    </div>
+    <script src="~/assets/layer/dist/layer.js"></script>
+    <script src="~/js/jquery.form.min.js"></script>
+    <script src="~/js/amazeui.min.js"></script>
+    <script src="~/js/webuploader.html5only.js"></script>
+    <script src="~/js/art-template.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/file.library.js"></script>
     @RenderSection("Scripts", required: false)
+    <script>
+        $(function () {
+            /* 一级菜单 */
+            $(".sidebar-nav-link a").each(function () {
+                if ($($(this))[0].href == String(window.location)) {
+                    $(this).addClass('active');
+                }
+            });
+
+            /* 有无子菜单 */
+            if ($(".left-sidebar-second").length == 0) {
+                $(".tpl-content-wrapper").addClass("no-sidebar-second");
+            }
+
+            /* 二级菜单 */
+            $(".sidebar-second-item a").each(function () {
+                if ($($(this))[0].href == String(window.location)) {
+                    $(this).addClass('active');
+                    
+					var index = $(this).attr("parent");
+                    $(".sidebar-nav-link a").each(function () {
+                        if ($(this).attr("index") == index) {
+                            $(this).addClass('active');
+                        }
+                    });
+
+                }
+            });
+
+            /* 三级菜单 */
+            $(".sidebar-third-nav-sub li a").each(function () {
+                if ($($(this))[0].href == String(window.location)) {
+                    $(this).addClass('active');
+
+                    var index = $(this).attr("parent");
+                    $(".sidebar-nav-link a").each(function () {
+                        if ($(this).attr("index") == index) {
+                            $(this).addClass('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>

@@ -18,7 +18,7 @@ namespace QuickWeb.Controllers
     /// <summary>
     /// 健康检查
     /// </summary>
-    public class HealthController : BaseController
+    public class SystemController : BaseController
     {
         /// <summary>
         /// 心跳检测

@@ -23,7 +23,7 @@
     <PackageReference Include="Masuit.Tools.Core" Version="2.2.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="sqlSugarCore" Version="4.9.9.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Z.ExtensionMethods" Version="2.1.1" />
@@ -78,6 +78,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TempController.tt</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\Api\Models\" />
   </ItemGroup>
 
 </Project>

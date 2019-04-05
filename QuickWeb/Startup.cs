@@ -74,7 +74,11 @@ namespace QuickWeb
             DbContext.SqlString = Configuration.GetConnectionString("Mysql");
             RedisHelper.Initialization(new CSRedisClient(Configuration.GetConnectionString("Redis")));
             // 配置Mvc模式和其他配置
-            services.AddMvc().AddJsonOptions(opt =>
+            services.AddMvc(options =>
+            {
+                // 缓存配置文件(默认30秒钟) [ResponseCache(CacheProfileName = "Default30")] 响应缓存在 ASP.NET Core | Microsoft Docs https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/response?view=aspnetcore-2.2
+                //options.CacheProfiles.Add("Default30", new CacheProfile() { Duration = 30 });
+            }).AddJsonOptions(opt =>
             {
                 opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -119,7 +123,7 @@ namespace QuickWeb
             //services.AddHangfire(x => x.UseRedisStorage(Configuration.GetConnectionString("Redis")));
             services.AddHangfire(x => x.UseMemoryStorage());
             //配置7z和断点续传
-             services.AddSevenZipCompressor().AddResumeFileResult();
+            services.AddSevenZipCompressor().AddResumeFileResult();
             //注入SignalR
             services.AddWebSockets(opt => opt.ReceiveBufferSize = 4096 * 1024).AddSignalR();
             //
