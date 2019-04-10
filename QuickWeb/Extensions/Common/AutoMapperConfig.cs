@@ -21,8 +21,16 @@ namespace QuickWeb.Extensions.Common
                 m.CreateMap<yoshop_category, CategoryViewModel>()
                     //映射发生之前
                     //.BeforeMap((src, dst) => { dst.create_time = src.create_time.ConvertToDateTime(); })
+                    //.BeforeMap((src, dst) => { dst.update_time = src.update_time.ConvertToDateTime(); })
                     //映射发生之后
-                    .AfterMap((src, dst) => { dst.create_time = src.create_time.ConvertToDateTime();});
+                    .AfterMap((src, dst) => { dst.create_time = src.create_time.ConvertToDateTime(); })
+                    .AfterMap((src, dst) => { dst.update_time = src.update_time.ConvertToDateTime(); });
+                m.CreateMap<CategoryViewModel, yoshop_category>()
+                    .ForMember(dst => dst.create_time, opt => { opt.MapFrom(src => src.create_time.ConvertToTimeStamp()); })
+                    .ForMember(dst => dst.update_time, opt => { opt.MapFrom(src => src.update_time.ConvertToTimeStamp()); });
+
+
+
             });
         }
     }

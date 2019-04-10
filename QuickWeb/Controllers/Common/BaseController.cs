@@ -22,27 +22,16 @@ namespace QuickWeb.Controllers.Common
         #region 通用返回JsonResult的封装
 
         /// <summary>
-        /// 只返回响应状态和提示信息
+        /// 返回响应状态、消息、数据对象和跳转地址
         /// </summary>
-        /// <param name="status">状态</param>
+        /// <param name="code">状态</param>
         /// <param name="msg">消息</param>
-        /// <returns></returns>
-        protected ContentResult Build(int status, string msg)
-        {
-            var js = new ResultInfo(status, msg);
-            return Build(js);
-        }
-
-        /// <summary>
-        /// 返回响应状态、消息和数据对象
-        /// </summary>
-        /// <param name="status">状态</param>
-        /// <param name="msg">信息</param>
         /// <param name="data">数据</param>
+        /// <param name="url">跳转地址</param>
         /// <returns></returns>
-        protected ContentResult Build(int status, string msg, object data)
+        protected ContentResult Build(int code, string msg, object data = null, string url = null)
         {
-            var js = new ResultInfo(status, msg, data);
+            var js = new ResultInfo(code, msg, data, url);
             return Build(js);
         }
 
@@ -53,72 +42,70 @@ namespace QuickWeb.Controllers.Common
         /// <returns></returns>
         protected ContentResult Build(ResultInfo result)
         {
-            var js = new ResultInfo(result.Status, result.Msg, result.Data);
+            var js = new ResultInfo(result.Code, result.Msg, result.Data, result.Url);
             return Content(JsonConvert.SerializeObject(js, new JsonSerializerSettings
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
             }), "application/json", Encoding.UTF8);
         }
 
         /// <summary>
-        /// 返回成功状态、消息和数据对象
-        /// </summary>
-        /// <param name="msg">信息</param>
-        /// <param name="data">数据</param>
-        /// <returns></returns>
-        protected ContentResult Yes(string msg, object data)
-        {
-            return Build(status: 1, msg: msg, data: data);
-        }
-
-        /// <summary>
-        /// 返回成功状态和数据对象
-        /// </summary>
-        /// <param name="data">数据</param>
-        /// <returns></returns>
-        protected ContentResult Yes(object data)
-        {
-            return Yes("Success", data: data);
-        }
-
-        /// <summary>
-        /// 返回成功状态和消息
+        /// 返回成功状态、消息、数据对象和跳转地址
         /// </summary>
         /// <param name="msg">消息</param>
+        /// <param name="data">数据</param>
+        /// <param name="url">跳转地址</param>
         /// <returns></returns>
-        protected ContentResult Yes(string msg)
+        protected ContentResult Yes(string msg = "Sucess", object data = null, string url = null)
         {
-            return Build(status: 1, msg: msg);
+            return Build(code: 1, msg: msg, data: data, url: url);
         }
 
         /// <summary>
-        /// 返回成功状态
-        /// </summary>
-        /// <returns></returns>
-        protected ContentResult Yes()
-        {
-            return Yes("Success");
-        }
-
-        /// <summary>
-        /// 返回失败状态和消息
+        /// 返回成功状态、消息、数据对象
         /// </summary>
         /// <param name="msg">消息</param>
+        /// <param name="data">数据</param>
         /// <returns></returns>
-        protected ContentResult No(string msg)
+        protected ContentResult YesResult(string msg, object data)
         {
-            return Build(status: 0, msg: msg);
+            return Yes(msg: msg, data: data);
         }
 
         /// <summary>
-        /// 返回失败状态
+        /// 返回成功状态、消息、数据对象和跳转地址
         /// </summary>
+        /// <param name="msg">消息</param>
+        /// <param name="url">跳转地址</param>
         /// <returns></returns>
-        protected ContentResult No()
+        protected ContentResult YesRedirect(string msg, string url)
         {
-            return No("Failure");
+            return Yes(msg: msg, url: url);
+        }
+
+        /// <summary>
+        /// 返回失败状态、消息、数据对象和跳转地址
+        /// </summary>
+        /// <param name="msg">消息</param>
+        /// <param name="data">数据</param>
+        /// <param name="url">跳转地址</param>
+        /// <returns></returns>
+        protected ContentResult No(string msg = "Failure", object data = null, string url = null)
+        {
+            return Build(code: 0, msg: msg, data: data, url: url);
+        }
+
+        /// <summary>
+        /// 返回失败状态、消息和跳转地址
+        /// </summary>
+        /// <param name="url">跳转地址</param>
+        /// <returns></returns>
+        protected ContentResult NoRedirect(string url)
+        {
+            return Build(code: 0, msg: "Failure", url: url);
         }
 
         #endregion
@@ -127,33 +114,49 @@ namespace QuickWeb.Controllers.Common
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="status"></param>
+        /// <param name="code"></param>
         /// <param name="msg"></param>
+        /// <param name="data"></param>
+        /// <param name="url"></param>
         /// <returns></returns>
-        protected ResultInfo InfoResp(int status, string msg)
+        protected ResultInfo InfoResp(int code, string msg, object data = null, string url = null)
         {
-            return new ResultInfo(status, msg);
+            return new ResultInfo(code, msg, data, url);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="msg"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
-        protected ResultInfo SuccResp(string msg)
+        protected ResultInfo SuccResp(string msg, object data = null)
         {
-            return InfoResp(1, msg);
+            return InfoResp(1, msg, data);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="msg"></param>
+        /// <param name="url"></param>
         /// <returns></returns>
-        protected ResultInfo FailResp(string msg)
+        protected ResultInfo SuccResp(string msg, string url = null)
         {
-            return InfoResp(0, msg);
+            return InfoResp(1, msg, url);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        protected ResultInfo FailResp(string msg, string url = null)
+        {
+            return InfoResp(0, msg, url);
+        }
+
         #endregion
 
         #region 通用返回PageInfo的封装
@@ -200,20 +203,20 @@ namespace QuickWeb.Controllers.Common
         #endregion
 
         #region 跳转自定义错误页面
-         /// <summary>
-         /// 404错误页面
-         /// </summary>
-         /// <returns></returns>
+        /// <summary>
+        /// 404错误页面
+        /// </summary>
+        /// <returns></returns>
         protected IActionResult Error() => RedirectToAction("Index", "Error");
-         /// <summary>
-         /// 参数错误页面
-         /// </summary>
-         /// <returns></returns>
+        /// <summary>
+        /// 参数错误页面
+        /// </summary>
+        /// <returns></returns>
         protected IActionResult ParamsError() => RedirectToAction("ParamsError", "Error");
-         /// <summary>
-         /// 已删除或不存在
-         /// </summary>
-         /// <returns></returns>
+        /// <summary>
+        /// 已删除或不存在
+        /// </summary>
+        /// <returns></returns>
         protected IActionResult NoOrDeleted() => RedirectToAction("NoOrDeleted", "Error");
         #endregion
     }

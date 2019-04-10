@@ -24,31 +24,31 @@ namespace Quick.Common.Models
 {
     public class ResultInfo
     {
-        public ResultInfo(int status, string msg, object data, string url)
+        public ResultInfo(int code, string msg, object data, string url)
         {
-            Status = status;
+            Code = code;
             Msg = msg;
             Data = data;
             Url = url;
         }
 
-        public ResultInfo(int status, string msg, object data)
+        public ResultInfo(int code, string msg, object data)
         {
-            Status = status;
+            Code = code;
             Msg = msg;
             Data = data;
         }
 
-        public ResultInfo(int status, string msg, string url)
+        public ResultInfo(int code, string msg, string url)
         {
-            Status = status;
+            Code = code;
             Msg = msg;
             Url = url;
         }
 
-        public ResultInfo(int status, string msg)
+        public ResultInfo(int code, string msg)
         {
-            Status = status;
+            Code = code;
             Msg = msg;
         }
 
@@ -59,7 +59,7 @@ namespace Quick.Common.Models
         /// <summary>
         /// 返回的状态码：ok: 1, error: 0, timeout: 2
         /// </summary>
-        public int Status { get; set; }
+        public int Code { get; set; }
         /// <summary>
         /// 返回的提示信息
         /// </summary>

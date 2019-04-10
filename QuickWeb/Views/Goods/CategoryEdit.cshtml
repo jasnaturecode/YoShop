@@ -14,12 +14,12 @@
                     <div class="widget-body">
                         <fieldset>
                             <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">添加商品分类</div>
+                                <div class="widget-title am-fl">编辑商品分类</div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分类名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" asp-for="name" value="" required>
+                                    <input type="text" class="tpl-form-input" asp-for="name" value="@Model.name" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -46,6 +46,14 @@
                                             <i class="am-icon-cloud-upload"></i> 选择图片
                                         </button>
                                         <div class="uploader-list am-cf">
+                                            @if (Model.image_id > 0)
+                                            {
+                                                <div class="file-item">
+                                                    <img src="<?= $model['image']['file_path'] ?>">
+                                                    <input type="hidden" asp-for="image_id" value="@Model.image_id">
+                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                     <div class="help-block am-margin-top-sm">
@@ -56,7 +64,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分类排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" asp-for="sort" value="100" required>
+                                    <input type="number" class="tpl-form-input" asp-for="sort" value="@Model.sort" required>
                                     <small>数字越小越靠前</small>
                                 </div>
                             </div>

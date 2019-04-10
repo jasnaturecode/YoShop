@@ -103,7 +103,7 @@ namespace QuickWeb.Controllers.Common
             }
             return Json(new
             {
-                status = 0,
+                code = 0,
                 msg = "Error",
                 data = "系统异常"
             });
@@ -121,7 +121,7 @@ namespace QuickWeb.Controllers.Common
             }
             return Json(new
             {
-                status = 0,
+                code = 0,
                 msg = "ParamsError",
                 data = "请求参数异常"
             });
@@ -139,7 +139,7 @@ namespace QuickWeb.Controllers.Common
             }
             return Json(new
             {
-                status = 0,
+                code = 0,
                 msg = "NoOrDeleted",
                 data = "请求的数据不存在或已经被删除"
             });
