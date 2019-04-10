@@ -17,7 +17,7 @@ namespace QuickWeb.Controllers
     /// 资源管理器
     /// </summary>
     [Route("[controller]/[action]")]
-    [NonController]
+    [ApiExplorerSettings(IgnoreApi = true)] 
     public class FileController : BaseController
     {
         private readonly IHostingEnvironment _hostingEnvironment;

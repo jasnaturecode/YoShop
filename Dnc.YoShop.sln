@@ -1,22 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_docs", "_docs", "{976DA5A4-359E-4F54-87CE-354B079B64E3}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Models", "Quick.Models\Quick.Models.csproj", "{BC7F1ADE-B0BD-4568-B020-64A7DA314C25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Models", "Quick.Models\Quick.Models.csproj", "{BC7F1ADE-B0BD-4568-B020-64A7DA314C25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.IService", "Quick.IService\Quick.IService.csproj", "{8B0F68F7-CB3E-4B1A-9542-238FFB682F0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.IService", "Quick.IService\Quick.IService.csproj", "{8B0F68F7-CB3E-4B1A-9542-238FFB682F0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Service", "Quick.Service\Quick.Service.csproj", "{997FB2A2-0298-45D5-84B4-BC2BF57FFC16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Service", "Quick.Service\Quick.Service.csproj", "{997FB2A2-0298-45D5-84B4-BC2BF57FFC16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Common", "Quick.Common\Quick.Common.csproj", "{6864CF53-2BC8-43A9-8FA7-56A94717BD3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Common", "Quick.Common\Quick.Common.csproj", "{6864CF53-2BC8-43A9-8FA7-56A94717BD3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickWeb", "QuickWeb\QuickWeb.csproj", "{08301275-DE5F-4943-B98A-6A6D82846029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickWeb", "QuickWeb\QuickWeb.csproj", "{08301275-DE5F-4943-B98A-6A6D82846029}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

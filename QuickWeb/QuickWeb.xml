@@ -36,6 +36,11 @@
             用户接口
             </summary>
         </member>
+        <member name="P:QuickWeb.Areas.Api.Controllers.UserController.UserService">
+            <summary>
+            yoshop_user对象业务逻辑方法
+            </summary>
+        </member>
         <member name="M:QuickWeb.Areas.Api.Controllers.UserController.Get(System.Int32)">
             <summary>
             根据用户Id获取用户信息
@@ -60,9 +65,42 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:QuickWeb.Controllers.Common.AdminBaseController">
+            <summary>
+            管理员公共控制器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.AdminBaseController.IsAdminLogin">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.AdminBaseController.GetAdminSession">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.AdminBaseController.SetAdminSession(Quick.Models.Dto.AdminDto)">
+            <summary>
+            
+            </summary>
+            <param name="dto"></param>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.AdminBaseController.SetAdminLogOut">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:QuickWeb.Controllers.Common.BaseController">
             <summary>
             基础公共控制器
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Controllers.Common.BaseController.IsDebug">
+            <summary>
+            应用程序的Debug模式
             </summary>
         </member>
         <member name="M:QuickWeb.Controllers.Common.BaseController.Build(System.Int32,System.String)">
@@ -169,6 +207,71 @@
             <param name="success">响应状态</param>
             <param name="message">响应消息</param>
             <param name="isLogin">登录状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Error">
+            <summary>
+            404错误页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.ParamsError">
+            <summary>
+            参数错误页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.NoOrDeleted">
+            <summary>
+            已删除或不存在
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Controllers.Common.ErrorController">
+            <summary>
+            错误处理控制器
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.ErrorController.AccessNoRight">
+            <summary>
+            AccessNoRight
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.ErrorController.PageNotFound">
+            <summary>
+            PageNotFound
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.ErrorController.ServerError">
+            <summary>
+            ServerError
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.ErrorController.ServiceUnavailable">
+            <summary>
+            ServiceUnavailable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.ErrorController.Index">
+            <summary>
+            自定义错误页面1
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.ErrorController.ParamsError">
+            <summary>
+            自定义错误页面2
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.ErrorController.NoOrDeleted">
+            <summary>
+            自定义错误页面2
+            </summary>
             <returns></returns>
         </member>
         <member name="T:QuickWeb.Controllers.FileController">
@@ -393,6 +496,22 @@
             商品管理
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.GoodsController.CategoryService">
+            <summary>
+            yoshop_category对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.GoodsController.GoodsService">
+            <summary>
+            yoshop_goods对象业务方法
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryIndex">
+            <summary>
+            商品分类列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Controllers.HomeController">
             <summary>
             管理首页
@@ -491,6 +610,131 @@
             不使用构造函数注入的属性，必须是共有成员属性(public)，不能是私有或受保护的成员属性
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.TempController.CategoryService">
+            <summary>
+            yoshop_category对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.DeliveryService">
+            <summary>
+            yoshop_delivery对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.DeliveryRuleService">
+            <summary>
+            yoshop_delivery_rule对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.DictionaryService">
+            <summary>
+            yoshop_dictionary对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.GoodsService">
+            <summary>
+            yoshop_goods对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.GoodsImageService">
+            <summary>
+            yoshop_goods_image对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.GoodsSpecService">
+            <summary>
+            yoshop_goods_spec对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.GoodsSpecRelService">
+            <summary>
+            yoshop_goods_spec_rel对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.OrderService">
+            <summary>
+            yoshop_order对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.OrderAddressService">
+            <summary>
+            yoshop_order_address对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.OrderGoodsService">
+            <summary>
+            yoshop_order_goods对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.RegionService">
+            <summary>
+            yoshop_region对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.SettingService">
+            <summary>
+            yoshop_setting对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.SpecService">
+            <summary>
+            yoshop_spec对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.SpecValueService">
+            <summary>
+            yoshop_spec_value对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.StoreUserService">
+            <summary>
+            yoshop_store_user对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.UploadFileService">
+            <summary>
+            yoshop_upload_file对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.UploadFileUsedService">
+            <summary>
+            yoshop_upload_file_used对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.UploadGroupService">
+            <summary>
+            yoshop_upload_group对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.UserService">
+            <summary>
+            yoshop_user对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.UserAddressService">
+            <summary>
+            yoshop_user_address对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.WxappService">
+            <summary>
+            yoshop_wxapp对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.WxappHelpService">
+            <summary>
+            yoshop_wxapp_help对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.WxappNavbarService">
+            <summary>
+            yoshop_wxapp_navbar对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.TempController.WxappPageService">
+            <summary>
+            yoshop_wxapp_page对象业务方法
+            </summary>
+        </member>
         <member name="T:QuickWeb.Controllers.UserController">
             <summary>
             用户管理
@@ -531,12 +775,22 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:QuickWeb.Extensions.AppSettings">
+            <summary>
+            appsetings.json 文件中的配置项
+            </summary>
+        </member>
         <member name="T:QuickWeb.Extensions.AppConfig">
             <summary>
             应用程序配置
             </summary>
         </member>
-        <member name="P:QuickWeb.Extensions.AppConfig.BaiduAk">
+        <member name="P:QuickWeb.Extensions.AppConfig.IsDebug">
+            <summary>
+            调试模式
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.AppConfig.BaiDuAk">
             <summary>
             百度密钥
             </summary>
@@ -551,9 +805,24 @@
             程序版本
             </summary>
         </member>
-        <member name="M:QuickWeb.Extensions.AppConfig.Init(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="T:QuickWeb.Extensions.RedisConfig">
             <summary>
-            初始化方法
+            Redis配置文件
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.RedisConfig.UseRedis">
+            <summary>
+            是否启用Redis
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.RedisConfig.UseRedisCache">
+            <summary>
+            是否启用Redis缓存
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.RedisConfig.ConnectionString">
+            <summary>
+            Redis连接字符串
             </summary>
         </member>
         <member name="T:QuickWeb.Extensions.AuthorityAttribute">
@@ -564,6 +833,16 @@
         <member name="M:QuickWeb.Extensions.AuthorityAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>在执行操作方法之前由 ASP.NET MVC 框架调用。</summary>
             <param name="filterContext">筛选器上下文。</param>
+        </member>
+        <member name="T:QuickWeb.Extensions.Common.AutoMapperConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.Common.AutoMapperConfig.Register">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:QuickWeb.Extensions.Common.CommonHelper">
             <summary>
@@ -766,6 +1045,25 @@
             <param name="args">调用参数</param>
             <returns></returns>
         </member>
+        <member name="T:QuickWeb.Extensions.DateTimeExtensions">
+            <summary>
+            时间转换扩展方法
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.DateTimeExtensions.ConvertToTimeStamp(System.DateTime)">
+            <summary>
+            日期转换为时间戳（时间戳单位秒）
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.DateTimeExtensions.ConvertToDateTime(System.UInt32)">
+            <summary>
+            时间戳转换为日期（时间戳单位秒）
+            </summary>
+            <param name="ts"></param>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Extensions.HangfireConfig">
             <summary>
             hangfire任务配置
@@ -773,7 +1071,17 @@
         </member>
         <member name="M:QuickWeb.Extensions.HangfireConfig.Start">
             <summary>
-            hangfire初始化
+            Cron表达式范例：
+             每隔5秒执行一次：*/5 * * * * ?
+             每隔1分钟执行一次：0 */1 * * * ?
+             每隔5小时执行一次：0 * */5 * * ?
+             每天23点执行一次：0 0 23 * * ?
+             每天凌晨1点执行一次：0 0 1 * * ?
+             每月1号凌晨1点执行一次：0 0 1 1 * ?
+             每月最后一天23点执行一次：0 0 23 L * ?
+             每周星期天凌晨1点实行一次：0 0 1 ? * L
+             在26分、29分、33分执行一次：0 26,29,33 * * * ?
+             每天的0点、13点、18点、21点都执行一次：0 0 0,13,18,21 * * ?
             </summary>
         </member>
         <member name="M:QuickWeb.Extensions.HangfireConfig.CheckLinks">
@@ -841,7 +1149,7 @@
         </member>
         <member name="T:QuickWeb.Extensions.ApplicationBuilderExtensions">
             <summary>
-            Application扩展方法
+            IIApplicationBuilder扩展方法
             </summary>
         </member>
         <member name="M:QuickWeb.Extensions.ApplicationBuilderExtensions.UseException(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
@@ -856,6 +1164,642 @@
             请求拦截
             </summary>
             <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.ConfigurationExtensions">
+            <summary>
+            IConfiguration扩展方法
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.ConfigurationExtensions.GetSectionValue``1(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取Config配置方法，只支持1级节点
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.ConfigurationExtensions.GetSectionValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
+            <summary>
+            获取Config配置方法，最多支持2级节点
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="configuration">IConfiguration</param>
+            <param name="section">根节点</param>
+            <param name="subsection">子节点</param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.L2Cache.ICacheService">
+            <summary>
+            缓存接口
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Exists(System.String)">
+            <summary>
+            验证缓存项是否存在
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.ExistsAsync(System.String)">
+            <summary>
+            验证缓存项是否存在（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Add(System.String,System.Object)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.AddAsync(System.String,System.Object)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Add(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.AddAsync(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Add(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.AddAsync(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Remove(System.String)">
+            <summary>
+            删除缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.RemoveAsync(System.String)">
+            <summary>
+            删除缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.RemoveAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            批量删除缓存
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.RemoveAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            批量删除缓存（异步方式）
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Get``1(System.String)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.GetAsync``1(System.String)">
+            <summary>
+            获取缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Get(System.String)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.GetAsync(System.String)">
+            <summary>
+            获取缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.GetAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取缓存集合
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.GetAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取缓存集合（异步方式）
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Replace(System.String,System.Object)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.ReplaceAsync(System.String,System.Object)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Replace(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.ReplaceAsync(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.Replace(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.ICacheService.ReplaceAsync(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.L2Cache.MemoryCacheService">
+            <summary>
+            Memory缓存实现类
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            Memory缓存实现类
+            </summary>
+            <param name="cache"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Exists(System.String)">
+            <summary>
+            验证缓存项是否存在
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.ExistsAsync(System.String)">
+            <summary>
+            验证缓存项是否存在（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Add(System.String,System.Object)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.AddAsync(System.String,System.Object)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Add(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.AddAsync(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Add(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.AddAsync(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Remove(System.String)">
+            <summary>
+            删除缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.RemoveAsync(System.String)">
+            <summary>
+            删除缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.RemoveAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            批量删除缓存
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.RemoveAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            批量删除缓存（异步方式）
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Get``1(System.String)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.GetAsync``1(System.String)">
+            <summary>
+            获取缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Get(System.String)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.GetAsync(System.String)">
+            <summary>
+            获取缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.GetAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取缓存集合
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.GetAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取缓存集合（异步方式）
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Replace(System.String,System.Object)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.ReplaceAsync(System.String,System.Object)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Replace(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.ReplaceAsync(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Replace(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.ReplaceAsync(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.MemoryCacheService.Dispose">
+            <summary>
+            释放MemoryCache
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.L2Cache.RedisCacheService">
+            <summary>
+            Redis缓存实现类
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Exists(System.String)">
+            <summary>
+            验证缓存项是否存在
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.ExistsAsync(System.String)">
+            <summary>
+            验证缓存项是否存在（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Add(System.String,System.Object)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.AddAsync(System.String,System.Object)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Add(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.AddAsync(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Add(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.AddAsync(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            添加缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Remove(System.String)">
+            <summary>
+            删除缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.RemoveAsync(System.String)">
+            <summary>
+            删除缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.RemoveAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            批量删除缓存
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.RemoveAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            批量删除缓存（异步方式）
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Get``1(System.String)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.GetAsync``1(System.String)">
+            <summary>
+            获取缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Get(System.String)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.GetAsync(System.String)">
+            <summary>
+            获取缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.GetAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取缓存集合
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.GetAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取缓存集合（异步方式）
+            </summary>
+            <param name="keys">缓存Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Replace(System.String,System.Object)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.ReplaceAsync(System.String,System.Object)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Replace(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.ReplaceAsync(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiresAbsolute">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.Replace(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            修改缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.L2Cache.RedisCacheService.ReplaceAsync(System.String,System.Object,System.TimeSpan,System.Boolean)">
+            <summary>
+            修改缓存（异步方式）
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">新的缓存Value</param>
+            <param name="expiresIn">缓存时长</param>
+            <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
             <returns></returns>
         </member>
         <member name="T:QuickWeb.Extensions.Middleware.ExceptionMiddleware">
@@ -1080,6 +2024,46 @@
             </summary>
         </member>
         <member name="T:QuickWeb.Models.RequestModel.FileRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.category_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.parent_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.image_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.sort">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.wxapp_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.create_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.update_time">
             <summary>
             
             </summary>

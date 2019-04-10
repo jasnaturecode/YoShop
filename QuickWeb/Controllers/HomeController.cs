@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickWeb.Models;
 using System.Diagnostics;
+using QuickWeb.Controllers.Common;
 
 namespace QuickWeb.Controllers
 {
     /// <summary>
     /// 管理首页
     /// </summary>
-    public class HomeController : Controller
+    public class HomeController : AdminBaseController
     {
         public IActionResult Index()
         {

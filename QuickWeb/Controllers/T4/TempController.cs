@@ -27,55 +27,130 @@ namespace QuickWeb.Controllers
     /// </summary>
     public class TempController : Controller
     {
-		private readonly Iyoshop_categoryService CategoryService;	
+        /// <summary>
+        /// yoshop_category对象业务方法
+        /// </summary>
+		public Iyoshop_categoryService CategoryService { get; set; }	
 
-		private readonly Iyoshop_deliveryService DeliveryService;	
+        /// <summary>
+        /// yoshop_delivery对象业务方法
+        /// </summary>
+		public Iyoshop_deliveryService DeliveryService { get; set; }	
 
-		private readonly Iyoshop_delivery_ruleService DeliveryruleService;	
+        /// <summary>
+        /// yoshop_delivery_rule对象业务方法
+        /// </summary>
+		public Iyoshop_delivery_ruleService DeliveryRuleService { get; set; }	
 
-		private readonly Iyoshop_dictionaryService DictionaryService;	
+        /// <summary>
+        /// yoshop_dictionary对象业务方法
+        /// </summary>
+		public Iyoshop_dictionaryService DictionaryService { get; set; }	
 
-		private readonly Iyoshop_goodsService GoodsService;	
+        /// <summary>
+        /// yoshop_goods对象业务方法
+        /// </summary>
+		public Iyoshop_goodsService GoodsService { get; set; }	
 
-		private readonly Iyoshop_goods_imageService GoodsimageService;	
+        /// <summary>
+        /// yoshop_goods_image对象业务方法
+        /// </summary>
+		public Iyoshop_goods_imageService GoodsImageService { get; set; }	
 
-		private readonly Iyoshop_goods_specService GoodsspecService;	
+        /// <summary>
+        /// yoshop_goods_spec对象业务方法
+        /// </summary>
+		public Iyoshop_goods_specService GoodsSpecService { get; set; }	
 
-		private readonly Iyoshop_goods_spec_relService GoodsspecrelService;	
+        /// <summary>
+        /// yoshop_goods_spec_rel对象业务方法
+        /// </summary>
+		public Iyoshop_goods_spec_relService GoodsSpecRelService { get; set; }	
 
-		private readonly Iyoshop_orderService OrderService;	
+        /// <summary>
+        /// yoshop_order对象业务方法
+        /// </summary>
+		public Iyoshop_orderService OrderService { get; set; }	
 
-		private readonly Iyoshop_order_addressService OrderaddressService;	
+        /// <summary>
+        /// yoshop_order_address对象业务方法
+        /// </summary>
+		public Iyoshop_order_addressService OrderAddressService { get; set; }	
 
-		private readonly Iyoshop_order_goodsService OrdergoodsService;	
+        /// <summary>
+        /// yoshop_order_goods对象业务方法
+        /// </summary>
+		public Iyoshop_order_goodsService OrderGoodsService { get; set; }	
 
-		private readonly Iyoshop_regionService RegionService;	
+        /// <summary>
+        /// yoshop_region对象业务方法
+        /// </summary>
+		public Iyoshop_regionService RegionService { get; set; }	
 
-		private readonly Iyoshop_settingService SettingService;	
+        /// <summary>
+        /// yoshop_setting对象业务方法
+        /// </summary>
+		public Iyoshop_settingService SettingService { get; set; }	
 
-		private readonly Iyoshop_specService SpecService;	
+        /// <summary>
+        /// yoshop_spec对象业务方法
+        /// </summary>
+		public Iyoshop_specService SpecService { get; set; }	
 
-		private readonly Iyoshop_spec_valueService SpecvalueService;	
+        /// <summary>
+        /// yoshop_spec_value对象业务方法
+        /// </summary>
+		public Iyoshop_spec_valueService SpecValueService { get; set; }	
 
-		private readonly Iyoshop_store_userService StoreuserService;	
+        /// <summary>
+        /// yoshop_store_user对象业务方法
+        /// </summary>
+		public Iyoshop_store_userService StoreUserService { get; set; }	
 
-		private readonly Iyoshop_upload_fileService UploadfileService;	
+        /// <summary>
+        /// yoshop_upload_file对象业务方法
+        /// </summary>
+		public Iyoshop_upload_fileService UploadFileService { get; set; }	
 
-		private readonly Iyoshop_upload_file_usedService UploadfileusedService;	
+        /// <summary>
+        /// yoshop_upload_file_used对象业务方法
+        /// </summary>
+		public Iyoshop_upload_file_usedService UploadFileUsedService { get; set; }	
 
-		private readonly Iyoshop_upload_groupService UploadgroupService;	
+        /// <summary>
+        /// yoshop_upload_group对象业务方法
+        /// </summary>
+		public Iyoshop_upload_groupService UploadGroupService { get; set; }	
 
-		private readonly Iyoshop_userService UserService;	
+        /// <summary>
+        /// yoshop_user对象业务方法
+        /// </summary>
+		public Iyoshop_userService UserService { get; set; }	
 
-		private readonly Iyoshop_user_addressService UseraddressService;	
+        /// <summary>
+        /// yoshop_user_address对象业务方法
+        /// </summary>
+		public Iyoshop_user_addressService UserAddressService { get; set; }	
 
-		private readonly Iyoshop_wxappService WxappService;	
+        /// <summary>
+        /// yoshop_wxapp对象业务方法
+        /// </summary>
+		public Iyoshop_wxappService WxappService { get; set; }	
 
-		private readonly Iyoshop_wxapp_helpService WxapphelpService;	
+        /// <summary>
+        /// yoshop_wxapp_help对象业务方法
+        /// </summary>
+		public Iyoshop_wxapp_helpService WxappHelpService { get; set; }	
 
-		private readonly Iyoshop_wxapp_navbarService WxappnavbarService;	
+        /// <summary>
+        /// yoshop_wxapp_navbar对象业务方法
+        /// </summary>
+		public Iyoshop_wxapp_navbarService WxappNavbarService { get; set; }	
 
-		private readonly Iyoshop_wxapp_pageService WxapppageService;	
+        /// <summary>
+        /// yoshop_wxapp_page对象业务方法
+        /// </summary>
+		public Iyoshop_wxapp_pageService WxappPageService { get; set; }	
 
 	}
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using QuickWeb.Controllers.Common;
 
 namespace QuickWeb.Controllers
 {
     /// <summary>
     /// 小程序管理
     /// </summary>
-    public class WxAppController : Controller
+    public class WxAppController : AdminBaseController
     {
         /// <summary>
         /// 小程序设置

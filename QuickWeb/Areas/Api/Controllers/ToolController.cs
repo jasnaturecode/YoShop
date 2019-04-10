@@ -41,7 +41,7 @@ namespace QuickWeb.Areas.Api.Controllers
             {
                 BaseAddress = new Uri("http://api.map.baidu.com")
             };
-            string s = client.GetStringAsync($"/geocoder/v2/?location={lat},{lng}&output=json&pois=1&ak={AppConfig.BaiduAk}").Result;
+            string s = client.GetStringAsync($"/geocoder/v2/?location={lat},{lng}&output=json&pois=1&ak={AppConfig.BaiDuAk}").Result;
             PhysicsAddress physicsAddress = JsonConvert.DeserializeObject<PhysicsAddress>(s);
             return physicsAddress;
         }
@@ -71,7 +71,7 @@ namespace QuickWeb.Areas.Api.Controllers
             {
                 BaseAddress = new Uri("http://api.map.baidu.com")
             };
-            string s = client.GetStringAsync($"/geocoder/v2/?output=json&address={addr}&ak={AppConfig.BaiduAk}").Result;
+            string s = client.GetStringAsync($"/geocoder/v2/?output=json&address={addr}&ak={AppConfig.BaiDuAk}").Result;
             var physicsAddress = JsonConvert.DeserializeAnonymousType(s, new
             {
                 status = 0,

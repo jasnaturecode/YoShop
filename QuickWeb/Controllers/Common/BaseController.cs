@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Quick.Common.Models;
+using QuickWeb.Extensions;
 
 namespace QuickWeb.Controllers.Common
 {
@@ -10,6 +11,14 @@ namespace QuickWeb.Controllers.Common
     /// </summary>
     public class BaseController : Controller
     {
+        #region 获取应用程序的Debug模式
+        /// <summary>
+        /// 应用程序的Debug模式
+        /// </summary>
+        protected bool IsDebug = AppConfig.IsDebug;
+
+        #endregion
+
         #region 通用返回JsonResult的封装
 
         /// <summary>
@@ -188,6 +197,24 @@ namespace QuickWeb.Controllers.Common
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             }), "application/json", Encoding.UTF8);
         }
+        #endregion
+
+        #region 跳转自定义错误页面
+         /// <summary>
+         /// 404错误页面
+         /// </summary>
+         /// <returns></returns>
+        protected IActionResult Error() => RedirectToAction("Index", "Error");
+         /// <summary>
+         /// 参数错误页面
+         /// </summary>
+         /// <returns></returns>
+        protected IActionResult ParamsError() => RedirectToAction("ParamsError", "Error");
+         /// <summary>
+         /// 已删除或不存在
+         /// </summary>
+         /// <returns></returns>
+        protected IActionResult NoOrDeleted() => RedirectToAction("NoOrDeleted", "Error");
         #endregion
     }
 }

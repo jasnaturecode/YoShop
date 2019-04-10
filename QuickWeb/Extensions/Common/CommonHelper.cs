@@ -118,7 +118,17 @@ namespace QuickWeb.Extensions.Common
                     return 1;
                 }
             }
-            set => RedisHelper.IncrBy("Interview:ViewCount");
+            set
+            {
+                try
+                {
+                    value = RedisHelper.IncrBy("Interview:ViewCount");
+                }
+                catch
+                {
+                    value = 0;
+                }
+            }
         }
 
         /// <summary>

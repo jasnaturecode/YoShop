@@ -41,7 +41,10 @@ namespace QuickWeb.Controllers
 		var file = new FileInfo(filePath);
 		var item = file.Name.Replace(".cs",string.Empty);
 #>
-		private readonly I<#=item#>Service <#=System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(item.Replace("yoshop_","").Replace("_",""))#>Service;	
+        /// <summary>
+        /// <#=item#>对象业务方法
+        /// </summary>
+		public I<#=item#>Service <#=System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(item.Replace("yoshop_","")).Replace("_","")#>Service { get; set; }	
 
 <#}#>
 	}

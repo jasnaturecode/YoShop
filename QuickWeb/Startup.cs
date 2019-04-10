@@ -30,8 +30,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.Extensions.Logging;
 using Quick.Service;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Redis;
+using QuickWeb.Extensions.L2Cache;
 
 namespace QuickWeb
 {
@@ -69,10 +74,11 @@ namespace QuickWeb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             //读取应用程序配置
-            AppConfig.Init(Configuration);
-            //配置数据库和Redis连接字符串
+            Configuration.GetSectionValue<AppConfig>();
+            //配置数据库
             DbContext.SqlString = Configuration.GetConnectionString("Mysql");
-            RedisHelper.Initialization(new CSRedisClient(Configuration.GetConnectionString("Redis")));
+            //读取Redis缓存配置
+            Configuration.GetSectionValue<RedisConfig>();
             // 配置Mvc模式和其他配置
             services.AddMvc(options =>
             {
@@ -83,7 +89,7 @@ namespace QuickWeb
                 opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddControllersAsServices();
             //配置跨域
             services.AddCors(opt =>
             {
@@ -119,18 +125,49 @@ namespace QuickWeb
             });
             //注入Session
             services.AddSession();
-            //配置Hangfire
-            //services.AddHangfire(x => x.UseRedisStorage(Configuration.GetConnectionString("Redis")));
-            services.AddHangfire(x => x.UseMemoryStorage());
+            // 配置MemoryCache缓存
+            services.AddMemoryCache();
+
+            if (RedisConfig.UseRedis)
+            {
+                // //初始化 RedisHelper  nuget Install-Package CSRedisCore  https://github.com/2881099/csredis
+                RedisHelper.Initialization(new CSRedisClient(RedisConfig.ConnectionString));
+
+                // 注册mvc分布式缓存（暂时不用）  nuget Install-Package Caching.CSRedis
+                //services.AddSingleton<IDistributedCache>(new CSRedisCache(RedisHelper.Instance));
+
+                //配置Hangfire
+                services.AddHangfire(x => x.UseRedisStorage(RedisConfig.ConnectionString));
+
+                if (RedisConfig.UseRedisCache)
+                {
+                    //Use Redis
+                    services.AddSingleton<ICacheService, RedisCacheService>();
+                }
+            }
+            else
+            {
+                //Use MemoryCache
+                services.AddSingleton<IMemoryCache>(factory =>
+                {
+                    var cache = new MemoryCache(new MemoryCacheOptions());
+                    return cache;
+                });
+                services.AddSingleton<ICacheService, MemoryCacheService>();
+
+                //配置Hangfire
+                services.AddHangfire(x => x.UseMemoryStorage());
+            }
+
             //配置7z和断点续传
             services.AddSevenZipCompressor().AddResumeFileResult();
             //注入SignalR
             services.AddWebSockets(opt => opt.ReceiveBufferSize = 4096 * 1024).AddSignalR();
-            //
-            services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
-            });
+            // 配置Https跳转
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+            //});
             //解决razor视图中中文被编码的问题
             services.Configure<WebEncoderOptions>(options =>
             {
@@ -139,10 +176,12 @@ namespace QuickWeb
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
+            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces().Where(t => t.Name.EndsWith("Repository") || t.Name.EndsWith("Service") || t.Name.EndsWith("Controller")).PropertiesAutowired().AsSelf().InstancePerDependency(); //注册控制器为属性注入
             builder.RegisterAssemblyTypes(typeof(BaseService<>).Assembly).AsImplementedInterfaces().Where(t => t.Name.EndsWith("Service")).PropertiesAutowired().AsSelf().InstancePerDependency();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces().Where(t => t.Name.EndsWith("Controller")).PropertiesAutowired().AsSelf().InstancePerDependency(); //注册控制器为属性注入
             builder.RegisterType<BackgroundJobClient>().SingleInstance(); //指定生命周期为单例
             builder.RegisterType<HangfireBackJob>().As<IHangfireBackJob>().PropertiesAutowired(PropertyWiringOptions.PreserveSetValues).InstancePerDependency();
+
             AutofacContainer = new AutofacServiceProvider(builder.Build());
             return AutofacContainer;
         }
@@ -167,12 +206,12 @@ namespace QuickWeb
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
 
                 app.UseException();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseStaticFiles(new StaticFileOptions //静态资源缓存策略
             {
@@ -213,6 +252,7 @@ namespace QuickWeb
             app.UseSwagger().UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", AppConfig.AppTitle);
+                c.RoutePrefix = "swagger";
             });
             //配置SignalR
             app.UseSignalR(hub => hub.MapHub<MyHub>("/hubs"));

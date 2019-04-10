@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using QuickWeb.Controllers.Common;
 
 namespace QuickWeb.Controllers
 {
     /// <summary>
     /// 系统设置
     /// </summary>
-    public class SettingController : Controller
+    public class SettingController : AdminBaseController
     {
+
         /// <summary>
         /// 商城设置
         /// </summary>

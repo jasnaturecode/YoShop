@@ -8,7 +8,7 @@ using QuickWeb.Extensions.Middleware;
 namespace QuickWeb.Extensions
 {
     /// <summary>
-    /// Application扩展方法
+    /// IIApplicationBuilder扩展方法
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
