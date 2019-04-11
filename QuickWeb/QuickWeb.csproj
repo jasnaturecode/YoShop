@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\C Language\公司项目\2019\萤火虫小程序商城\Dnc.YoShop\QuickWeb\QuickWeb.xml</DocumentationFile>
+    <DocumentationFile>E:\C_Language\VS_2013\Repository\YoShop\QuickWeb\QuickWeb.xml</DocumentationFile>
   </PropertyGroup>
 
 

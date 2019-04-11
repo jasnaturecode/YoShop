@@ -35,6 +35,12 @@ namespace Quick.Common
         /// 管理员中心地址
         /// </summary>
         public const string AdminHome = "/home/index";
+
+        /// <summary>
+        ///  管理员密码密钥
+        /// </summary>
+        public const string EncryptKey = "yoshop_salt_SmTRx";
+
     }
 
     /// <summary>

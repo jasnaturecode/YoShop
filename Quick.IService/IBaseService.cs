@@ -41,6 +41,14 @@ namespace Quick.IService
         /// <param name="password"></param>
         /// <returns></returns>
         yoshop_store_user Login(string username, string password);
+
+        /// <summary>
+        /// 商家用户修改密码
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        bool ChangePwd(uint user_id,string password);
     }
 
     /// <summary>

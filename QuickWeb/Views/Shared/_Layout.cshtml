@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    AdminDto admin = Context.Session.Get<AdminDto>(SessionKey.AdminInfo) ?? new AdminDto();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -42,13 +46,13 @@
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="url('store.user/renew')">
-                                欢迎你，<span>$store['user']['user_name']</span>
+                            <a href="/store.user/renew">
+                                欢迎你，<span>@admin.user_name</span>
                             </a>
                         </li>
                         <!-- 退出 -->
                         <li class="am-text-sm">
-                            <a href="url('passport/logout')">
+                            <a href="/passport/logout">
                                 <i class="iconfont icon-tuichu"></i> 退出
                             </a>
                         </li>

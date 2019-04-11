@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Quick.Common\Quick.Common.csproj" />
     <ProjectReference Include="..\Quick.IService\Quick.IService.csproj" />
     <ProjectReference Include="..\Quick.Models\Quick.Models.csproj" />
   </ItemGroup>

@@ -26,7 +26,7 @@ namespace QuickWeb.Extensions
         /// <summary>
         /// 百度密钥
         /// </summary>
-        public static string BaiDuAk { get; set; }
+        public static string BaiduAK { get; set; }
 
         /// <summary>
         /// 程序名称

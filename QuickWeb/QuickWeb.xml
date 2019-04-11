@@ -533,6 +533,42 @@
             管理首页
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.HomeController.StoreUserService">
+            <summary>
+            yoshop_store_user对象业务方法
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.HomeController.Index">
+            <summary>
+            管理首页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HomeController.RenewPassword">
+            <summary>
+            修改密码页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HomeController.RenewPassword(QuickWeb.Models.RequestModel.AdminPwdRequest)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HomeController.Logout">
+            <summary>
+            注销登录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.HomeController.Error">
+            <summary>
+            错误页面
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Controllers.LoginController">
             <summary>
             管理员登录授权
@@ -547,6 +583,13 @@
             <summary>
             登录页面
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.LoginController.Login(QuickWeb.Models.RequestModel.AdminLoginRequest)">
+            <summary>
+            登陆检查
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.LoginController.ValidateCode">
@@ -936,7 +979,7 @@
             调试模式
             </summary>
         </member>
-        <member name="P:QuickWeb.Extensions.AppConfig.BaiDuAk">
+        <member name="P:QuickWeb.Extensions.AppConfig.BaiduAK">
             <summary>
             百度密钥
             </summary>
@@ -2169,6 +2212,56 @@
             <param name="delay"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Models.RequestModel.AdminLoginRequest">
+            <summary>
+            商家登录请求
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminLoginRequest.user_name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminLoginRequest.password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminLoginRequest.valid_code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminLoginRequest.remember">
+            <summary>
+            记住我
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Models.RequestModel.AdminPwdRequest">
+            <summary>
+            管理员密码
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminPwdRequest.user_name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminPwdRequest.password">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminPwdRequest.password_new">
+            <summary>
+            新密码
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.AdminPwdRequest.password_confirm">
+            <summary>
+            确认密码
+            </summary>
         </member>
         <member name="T:QuickWeb.Models.RequestModel.FileList">
             <summary>

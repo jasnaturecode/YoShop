@@ -54,7 +54,6 @@ namespace QuickWeb.Controllers
         /// </summary>
         public Iyoshop_upload_groupService UploadGroupService { get; set; }
 
-
         #region Word上传转码
 
         /// <summary>
@@ -305,6 +304,24 @@ namespace QuickWeb.Controllers
 
         #endregion
 
+        #region 文件库文件管理
+
+        /// <summary>
+        /// 文件库列表
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="type"></param>
+        /// <param name="group_id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("/upload.library/fileList")]
+        public async Task<IActionResult> LibraryFileList(FilePageRequest request, string type = "image", int group_id = -1)
+        {
+            var group_list = await GetUploadGroupList(type);
+            var data = GetUploadFileList(group_id, type, request);
+            request.data = data;
+            request.last_page = (int)Math.Ceiling(request.total * 1.0f / request.per_page * 1.0f);
+            return YesResult(new { group_list, file_list = request });
+        }
 
         /// <summary>
         /// 通用图片文件上传 (多文件)
@@ -323,25 +340,6 @@ namespace QuickWeb.Controllers
                 return No(e.Message);
             }
             return YesResult("图片上传成功！", new { });
-        }
-
-        #region 文件库文件管理
-
-        /// <summary>
-        /// 文件库列表
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="type"></param>
-        /// <param name="group_id"></param>
-        /// <returns></returns>
-        [HttpGet, Route("/upload.library/fileList")]
-        public async Task<IActionResult> LibraryFileList(FilePageRequest request, string type = "image", int group_id = -1)
-        {
-            var group_list = await GetUploadGroupList(type);
-            var data = GetUploadFileList(group_id, type, request);
-            request.data = data;
-            request.last_page = (int)Math.Ceiling(request.total * 1.0f / request.per_page * 1.0f);
-            return YesResult(new { group_list, file_list = request });
         }
 
         /// <summary>

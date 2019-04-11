@@ -52,7 +52,7 @@ namespace QuickWeb.Controllers
             if (Request.Cookies.Count > 2)
             {
                 string name = Request.Cookies["admin_username"];
-                string pwd = Request.Cookies["admin_password"]?.DesDecrypt(AppConfig.BaiDuAk);
+                string pwd = Request.Cookies["admin_password"]?.DesDecrypt(AppConfig.BaiduAK);
                 var userInfo = StoreUserService.Login(name, pwd);
                 if (userInfo != null)
                 {
@@ -71,45 +71,43 @@ namespace QuickWeb.Controllers
         /// <summary>
         /// 登陆检查
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="valid"></param>
-        /// <param name="remem"></param>
+        /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Login(string username, string password, string valid, string remem)
+        [HttpPost,Route("/passport/login"), ValidateAntiForgeryToken]
+        public IActionResult Login(AdminLoginRequest request)
         {
-            string validSession = HttpContext.Session.Get<string>("valid") ?? string.Empty; //将验证码从Session中取出来，用于登录验证比较
-            if (string.IsNullOrEmpty(validSession) || !valid.Trim().Equals(validSession, StringComparison.InvariantCultureIgnoreCase))
+            //string validSession = HttpContext.Session.Get<string>("valid") ?? string.Empty; //将验证码从Session中取出来，用于登录验证比较
+            //if (string.IsNullOrEmpty(validSession) || !valid.Trim().Equals(validSession, StringComparison.InvariantCultureIgnoreCase))
+            //{
+            //    return No("验证码错误");
+            //}
+            //HttpContext.Session.Remove("valid"); //验证成功就销毁验证码Session，非常重要
+
+            if (string.IsNullOrEmpty(request.user_name.Trim()) || string.IsNullOrEmpty(request.password.Trim()))
             {
-                return ResultData(null, false, "验证码错误");
+                return No("用户名或密码不能为空");
             }
-            HttpContext.Session.Remove("valid"); //验证成功就销毁验证码Session，非常重要
-            if (string.IsNullOrEmpty(username.Trim()) || string.IsNullOrEmpty(password.Trim()))
-            {
-                return ResultData(null, false, "用户名或密码不能为空");
-            }
-            var userInfo = StoreUserService.Login(username, password);
+            var userInfo = StoreUserService.Login(request.user_name, request.password);
             if (userInfo != null)
             {
                 HttpContext.Session.Set(SessionKey.UserInfo, userInfo);
-                if (remem.Trim().Contains(new[] { "on", "true" })) //是否记住登录
+                if (request.remember.Trim().Contains(new[] { "on", "true" })) //是否记住登录
                 {
-                    Response.Cookies.Append("admin_username", HttpUtility.UrlEncode(username.Trim()), new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
-                    Response.Cookies.Append("admin_password", password.Trim().DesEncrypt(AppConfig.BaiDuAk), new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
+                    Response.Cookies.Append("admin_username", HttpUtility.UrlEncode(request.user_name.Trim()), new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
+                    Response.Cookies.Append("admin_password", request.password.Trim().DesEncrypt(AppConfig.BaiduAK), new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
                 }
                 //HangfireHelper.CreateJob(typeof(IHangfireBackJob), nameof(HangfireBackJob.LoginRecord), "default", userInfo, HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(), LoginType.Default);
                 string refer = Request.Cookies["refer"];
-                return ResultData(null, true, string.IsNullOrEmpty(refer) ? "/" : refer);
+                return YesRedirect("登陆成功！", string.IsNullOrEmpty(refer) ? "/" : refer);
             }
-            return ResultData(null, false, "用户名或密码错误");
+            return No("用户名或密码错误");
         }
 
         /// <summary>
         /// 生成验证码
         /// </summary>
         /// <returns></returns>
-        public ActionResult ValidateCode()
+        public IActionResult ValidateCode()
         {
             string code = Masuit.Tools.Strings.ValidateCode.CreateValidateCode(6);
             HttpContext.Session.Set("valid", code); //将验证码生成到Session中
@@ -132,5 +130,6 @@ namespace QuickWeb.Controllers
             }
             return Yes("验证码正确");
         }
+
     }
 }
