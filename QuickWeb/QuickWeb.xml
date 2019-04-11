@@ -103,21 +103,14 @@
             应用程序的Debug模式
             </summary>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.Build(System.Int32,System.String)">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Build(System.Int32,System.String,System.Object,System.String)">
             <summary>
-            只返回响应状态和提示信息
+            返回响应状态、消息、数据对象和跳转地址
             </summary>
-            <param name="status">状态</param>
+            <param name="code">状态</param>
             <param name="msg">消息</param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.Build(System.Int32,System.String,System.Object)">
-            <summary>
-            返回响应状态、消息和数据对象
-            </summary>
-            <param name="status">状态</param>
-            <param name="msg">信息</param>
             <param name="data">数据</param>
+            <param name="url">跳转地址</param>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.Common.BaseController.Build(Quick.Common.Models.ResultInfo)">
@@ -127,67 +120,93 @@
             <param name="result">ResultInfo实体</param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes(System.String,System.Object)">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes(System.String,System.Object,System.String)">
             <summary>
-            返回成功状态、消息和数据对象
+            返回成功状态、消息、数据对象和跳转地址
             </summary>
-            <param name="msg">信息</param>
+            <param name="msg">消息</param>
+            <param name="data">数据</param>
+            <param name="url">跳转地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.YesResult(System.String,System.Object)">
+            <summary>
+            返回成功状态、消息、数据对象
+            </summary>
+            <param name="msg">消息</param>
             <param name="data">数据</param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes(System.Object)">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.YesResult(System.Object)">
             <summary>
-            返回成功状态和数据对象
+            返回成功状态、消息、数据对象
             </summary>
             <param name="data">数据</param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes(System.String)">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.YesRedirect(System.String,System.String)">
             <summary>
-            返回成功状态和消息
+            返回成功状态、消息和跳转地址
             </summary>
             <param name="msg">消息</param>
+            <param name="url">跳转地址</param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.Yes">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.YesRedirect(System.String)">
             <summary>
-            返回成功状态
+            返回成功状态、消息和跳转地址
             </summary>
+            <param name="url">跳转地址</param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.No(System.String)">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.No(System.String,System.Object,System.String)">
             <summary>
-            返回失败状态和消息
+            返回失败状态、消息、数据对象和跳转地址
             </summary>
             <param name="msg">消息</param>
+            <param name="data">数据</param>
+            <param name="url">跳转地址</param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.No">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.NoRedirect(System.String)">
             <summary>
-            返回失败状态
+            返回失败状态、消息和跳转地址
             </summary>
+            <param name="url">跳转地址</param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.InfoResp(System.Int32,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="status"></param>
-            <param name="msg"></param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.SuccResp(System.String)">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.InfoResp(System.Int32,System.String,System.Object,System.String)">
             <summary>
             
             </summary>
+            <param name="code"></param>
             <param name="msg"></param>
+            <param name="data"></param>
+            <param name="url"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.Common.BaseController.FailResp(System.String)">
+        <member name="M:QuickWeb.Controllers.Common.BaseController.SuccResp(System.String,System.Object)">
             <summary>
             
             </summary>
             <param name="msg"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.SuccResp(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.FailResp(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <param name="url"></param>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.Common.BaseController.PageResult(System.Object,System.Int32,System.Int32)">
@@ -447,50 +466,6 @@
             <param name="ip"></param>
             <returns></returns>
         </member>
-        <member name="T:QuickWeb.Controllers.UploadController">
-            <summary>
-            文件上传
-            </summary>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
-            <summary>
-            文件上传
-            </summary>
-            <param name="hostingEnvironment"></param>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.UploadWord">
-            <summary>
-            上传Word转码
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.DecodeDataUri(System.String)">
-            <summary>
-            解码Base64图片
-            </summary>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.Download(System.String)">
-            <summary>
-            文件下载
-            </summary>
-            <param name="path"></param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.UeditorFileUploader">
-            <summary>
-            UEditor文件上传处理
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.UploadFile(Microsoft.AspNetCore.Http.IFormFile)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="file"></param>
-            <returns></returns>
-        </member>
         <member name="T:QuickWeb.Controllers.GoodsController">
             <summary>
             商品管理
@@ -506,16 +481,86 @@
             yoshop_goods对象业务方法
             </summary>
         </member>
+        <member name="M:QuickWeb.Controllers.GoodsController.Index">
+            <summary>
+            商品列表页面
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:QuickWeb.Controllers.GoodsController.CategoryIndex">
             <summary>
-            商品分类列表
+            商品分类列表页面
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryAdd">
+            <summary>
+            商品分类添加页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryAdd(QuickWeb.Models.ViewModel.CategoryViewModel)">
+            <summary>
+            添加商品分类
+            </summary>
+            <param name="viewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryEdit(System.UInt32)">
+            <summary>
+            商品分类编辑页面
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryEdit(QuickWeb.Models.ViewModel.CategoryViewModel,System.UInt32)">
+            <summary>
+            编辑商品分类
+            </summary>
+            <param name="viewModel"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryDelete(System.UInt32)">
+            <summary>
+            删除商品分类
+            </summary>
+            <param name="category_id"></param>
             <returns></returns>
         </member>
         <member name="T:QuickWeb.Controllers.HomeController">
             <summary>
             管理首页
             </summary>
+        </member>
+        <member name="T:QuickWeb.Controllers.LoginController">
+            <summary>
+            管理员登录授权
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.LoginController.StoreUserService">
+            <summary>
+            yoshop_store_user对象业务方法
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.LoginController.Index">
+            <summary>
+            登录页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.LoginController.ValidateCode">
+            <summary>
+            生成验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.LoginController.CheckValidateCode(System.String)">
+            <summary>
+            检查验证码
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
         </member>
         <member name="T:QuickWeb.Controllers.OrderController">
             <summary>
@@ -734,6 +779,107 @@
             <summary>
             yoshop_wxapp_page对象业务方法
             </summary>
+        </member>
+        <member name="T:QuickWeb.Controllers.UploadController">
+            <summary>
+            文件上传
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            文件上传
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="P:QuickWeb.Controllers.UploadController.UploadFileService">
+            <summary>
+            yoshop_upload_file对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.UploadController.UploadGroupService">
+            <summary>
+            yoshop_upload_group对象业务方法
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UploadWord">
+            <summary>
+            上传Word转码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.DecodeDataUri(System.String)">
+            <summary>
+            解码Base64图片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.Download(System.String)">
+            <summary>
+            文件下载
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UeditorFileUploader">
+            <summary>
+            UEditor文件上传处理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UploadFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UploadImage">
+            <summary>
+            通用图片文件上传 (多文件)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.LibraryFileList(QuickWeb.Models.RequestModel.FilePageRequest,System.String,System.Int32)">
+            <summary>
+            文件库列表
+            </summary>
+            <param name="request"></param>
+            <param name="type"></param>
+            <param name="group_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.LibraryMoveFiles(System.UInt32,System.UInt32[])">
+            <summary>
+            文件库移动文件
+            </summary>
+            <param name="group_id"></param>
+            <param name="fileIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.LibraryDeleteFiles(System.UInt32[])">
+            <summary>
+            文件库删除文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.LibraryAddGroup(QuickWeb.Models.RequestModel.UploadGroupRequest)">
+            <summary>
+            添加文件组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.LibraryEditGroup(QuickWeb.Models.RequestModel.UploadGroupRequest)">
+            <summary>
+            编辑文件组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.LibraryDeleteGroup(System.Int32)">
+            <summary>
+            删除文件组
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:QuickWeb.Controllers.UserController">
             <summary>
@@ -1062,6 +1208,12 @@
             时间戳转换为日期（时间戳单位秒）
             </summary>
             <param name="ts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.DateTimeExtensions.GetCurrentTimeStamp">
+            <summary>
+            获取当前时间戳（时间戳单位秒）
+            </summary>
             <returns></returns>
         </member>
         <member name="T:QuickWeb.Extensions.HangfireConfig">
@@ -2023,9 +2175,59 @@
             
             </summary>
         </member>
+        <member name="T:QuickWeb.Models.RequestModel.FilePageRequest">
+            <summary>
+            分页操作
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FilePageRequest.current_page">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FilePageRequest.last_page">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FilePageRequest.per_page">
+            <summary>
+            每页条数
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Models.RequestModel.FilePageRequest.total">
+            <summary>
+            总记录数
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FilePageRequest.data">
+            <summary>
+            数据
+            </summary>
+        </member>
         <member name="T:QuickWeb.Models.RequestModel.FileRequest">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Models.RequestModel.UploadGroupRequest">
+            <summary>
+            上传文件分组
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.UploadGroupRequest.group_id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.UploadGroupRequest.group_name">
+            <summary>
+            分组名称
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.UploadGroupRequest.group_type">
+            <summary>
+            分组类别
             </summary>
         </member>
         <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.category_id">

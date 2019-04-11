@@ -16,6 +16,8 @@
 *         CopyRight @ 班纳工作室 2019. All rights reserved
 * ==============================================================================*/
 
+using Quick.Models.Entity.Table;
+
 namespace Quick.Service
 {
     /// <summary>
@@ -25,6 +27,31 @@ namespace Quick.Service
     public partial class BaseService<T>
     {
 
+    }
+
+    /// <summary>
+    /// yoshop_user业务类
+    /// </summary>
+    public partial class yoshop_userService
+    {
+
+    }
+
+    /// <summary>
+    /// yoshop_store_user业务类
+    /// </summary>
+    public partial class yoshop_store_userService
+    {
+        /// <summary>
+        /// 商家用户登录
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public yoshop_store_user Login(string username, string password)
+        {
+            return GetFirstEntity(u => u.user_name == username && u.password == password);
+        }
     }
 
 }

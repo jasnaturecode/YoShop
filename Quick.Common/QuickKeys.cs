@@ -27,7 +27,14 @@ namespace Quick.Common
     /// </summary>
     public class QuickKeys
     {
-
+        /// <summary>
+        /// 管理员登录地址
+        /// </summary>
+        public const string AdminLogin = "/passport/login";
+        /// <summary>
+        /// 管理员中心地址
+        /// </summary>
+        public const string AdminHome = "/home/index";
     }
 
     /// <summary>

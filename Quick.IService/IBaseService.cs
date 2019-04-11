@@ -16,6 +16,8 @@
 *         CopyRight @ 班纳工作室 2019. All rights reserved
 * ==============================================================================*/
 
+using Quick.Models.Entity.Table;
+
 namespace Quick.IService
 {
     /// <summary>
@@ -27,4 +29,25 @@ namespace Quick.IService
 
     }
 
+    /// <summary>
+    /// yoshop_store_user业务接口
+    /// </summary>
+    public partial interface Iyoshop_store_userService
+    {
+        /// <summary>
+        /// 商家用户登录
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        yoshop_store_user Login(string username, string password);
+    }
+
+    /// <summary>
+    /// yoshop_user业务接口
+    /// </summary>
+    public partial interface Iyoshop_userService
+    {
+
+    }
 }
