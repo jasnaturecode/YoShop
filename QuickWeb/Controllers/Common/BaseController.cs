@@ -76,7 +76,17 @@ namespace QuickWeb.Controllers.Common
         }
 
         /// <summary>
-        /// 返回成功状态、消息、数据对象和跳转地址
+        /// 返回成功状态、消息、数据对象
+        /// </summary>
+        /// <param name="data">数据</param>
+        /// <returns></returns>
+        protected ContentResult YesResult(object data)
+        {
+            return Yes(msg: "Success", data: data);
+        }
+
+        /// <summary>
+        /// 返回成功状态、消息和跳转地址
         /// </summary>
         /// <param name="msg">消息</param>
         /// <param name="url">跳转地址</param>
@@ -84,6 +94,16 @@ namespace QuickWeb.Controllers.Common
         protected ContentResult YesRedirect(string msg, string url)
         {
             return Yes(msg: msg, url: url);
+        }
+
+        /// <summary>
+        /// 返回成功状态、消息和跳转地址
+        /// </summary>
+        /// <param name="url">跳转地址</param>
+        /// <returns></returns>
+        protected ContentResult YesRedirect(string url)
+        {
+            return Yes(msg: "Success", url: url);
         }
 
         /// <summary>

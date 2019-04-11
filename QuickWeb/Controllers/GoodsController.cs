@@ -144,6 +144,7 @@ namespace QuickWeb.Controllers
             try
             {
                 CategoryService.DeleteById(category_id);
+                // TODO: (未实现) 由于主键未定义，删除失败 - 朱锦润
             }
             catch (Exception e)
             {
@@ -163,6 +164,5 @@ namespace QuickWeb.Controllers
         }
 
         #endregion
-
     }
 }

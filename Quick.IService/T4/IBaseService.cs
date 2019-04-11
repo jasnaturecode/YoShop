@@ -426,7 +426,7 @@ namespace Quick.IService
         /// <param name="isAsc">升序降序</param>
         /// <returns>还未执行的SQL语句</returns>
         IEnumerable<T> LoadPageEntities<TS>(int pageIndex, int pageSize, ref int totalCount, Expression<Func<T, bool>> where, Expression<Func<T, object>> orderby, bool isAsc, params Expression<Func<T, object>>[] thenby);
-
+        
         /// <summary>
         /// 高效分页查询方法，优先从缓存读取
         /// </summary>

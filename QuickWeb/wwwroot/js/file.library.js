@@ -10,8 +10,8 @@
         // 配置项
         var defaults = {
             type: 'image',
-            layerId: 'file-library'
-            , layerSkin: 'file-library'
+            layerId: 'file-library',
+            layerSkin: 'file-library'
         };
         this.options = $.extend({}, defaults, options);
         // 触发对象
@@ -51,7 +51,7 @@
          */
         showLibraryModal: function () {
             var _this = this;
-            _this.getJsonData({group_id: -1}, function (data) {
+            _this.getJsonData({ group_id: -1 }, function (data) {
                 data.is_default = true;
                 // 捕获页
                 layer.open({
@@ -402,7 +402,7 @@
             var _this = this
                 , groupId = this.getCurrentGroupId();
             // 重新渲染文件列表
-            _this.getJsonData({group_id: groupId, page: page || 1}, function (data) {
+            _this.getJsonData({ group_id: groupId, current_page: page || 1}, function (data) {
                 _this.$element.find('#file-list-body').html(template('tpl-file-list', data.file_list));
             });
         },

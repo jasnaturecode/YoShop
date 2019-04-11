@@ -18,6 +18,13 @@ using Microsoft.AspNetCore.Http;
 using QuickWeb.Controllers.Common;
 using QuickWeb.Extensions.Common;
 using QuickWeb.Extensions.UEditor;
+using Quick.IService;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Quick.Models.Entity.Table;
+using QuickWeb.Models.RequestModel;
+using QuickWeb.Extensions;
+using System.Linq;
 
 namespace QuickWeb.Controllers
 {
@@ -25,10 +32,9 @@ namespace QuickWeb.Controllers
     /// 文件上传
     /// </summary>
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class UploadController : BaseController
+    public class UploadController : AdminBaseController
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-
         /// <summary>
         /// 文件上传
         /// </summary>
@@ -37,6 +43,17 @@ namespace QuickWeb.Controllers
         {
             _hostingEnvironment = hostingEnvironment;
         }
+
+        /// <summary>
+        /// yoshop_upload_file对象业务方法
+        /// </summary>
+        public Iyoshop_upload_fileService UploadFileService { get; set; }
+
+        /// <summary>
+        /// yoshop_upload_group对象业务方法
+        /// </summary>
+        public Iyoshop_upload_groupService UploadGroupService { get; set; }
+
 
         #region Word上传转码
 
@@ -231,7 +248,7 @@ namespace QuickWeb.Controllers
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        [HttpPost("upload"), ApiExplorerSettings(IgnoreApi = false)]
+        [HttpPost("upload")]
         public ActionResult UploadFile(IFormFile file)
         {
             string path;
@@ -288,9 +305,180 @@ namespace QuickWeb.Controllers
 
         #endregion
 
-        #region Library
 
-        
+        /// <summary>
+        /// 通用图片文件上传 (多文件)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost, Route("/upload/image")]
+        public IActionResult UploadImage()
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+            return YesResult("图片上传成功！", new { });
+        }
+
+        #region 文件库文件管理
+
+        /// <summary>
+        /// 文件库列表
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="type"></param>
+        /// <param name="group_id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("/upload.library/fileList")]
+        public async Task<IActionResult> LibraryFileList(FilePageRequest request, string type = "image", int group_id = -1)
+        {
+            var group_list = await GetUploadGroupList(type);
+            var data = GetUploadFileList(group_id, type, request);
+            request.data = data;
+            request.last_page = (int)Math.Ceiling(request.total * 1.0f / request.per_page * 1.0f);
+            return YesResult(new { group_list, file_list = request });
+        }
+
+        /// <summary>
+        /// 文件库移动文件
+        /// </summary>
+        /// <param name="group_id"></param>
+        /// <param name="fileIds"></param>
+        /// <returns></returns>
+        [HttpPost, Route("/upload.library/moveFiles")]
+        public IActionResult LibraryMoveFiles(uint group_id, uint[] fileIds)
+        {
+            try
+            {
+                if (fileIds.Length > 0)
+                {
+                    UploadFileService.Update(x => new yoshop_upload_file { group_id = group_id }, l => fileIds.ToList().Contains(l.file_id));
+                }
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+            return Yes("移动成功！");
+        }
+
+        /// <summary>
+        /// 文件库删除文件
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost, Route("/upload.library/deleteFiles")]
+        public IActionResult LibraryDeleteFiles(uint[] fileIds)
+        {
+            try
+            {
+                if (fileIds.Length > 0)
+                {
+                    UploadFileService.Update(x => new yoshop_upload_file { is_delete = 1 }, l => fileIds.ToList().Contains(l.file_id));
+                }
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+            return Yes("删除成功！");
+        }
+
+        private IEnumerable<yoshop_upload_file> GetUploadFileList(int group_id, string type = "image", FilePageRequest request = null)
+        {
+            return group_id == -1
+                ? UploadFileService.LoadPageEntities<uint>(request.current_page, request.per_page, ref request.total, l => l.file_type == type && l.is_delete == 0, l => l.file_id, true)
+                : UploadFileService.LoadPageEntities<uint>(request.current_page, request.per_page, ref request.total, l => l.file_type == type && l.is_delete == 0 && l.group_id == group_id, l => l.file_id, true);
+        }
+
+        #endregion
+
+        #region 文件库文件分组管理
+
+        /// <summary>
+        /// 添加文件组
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost, Route("/upload.library/addGroup")]
+        public IActionResult LibraryAddGroup(UploadGroupRequest request)
+        {
+            var timestamp = DateTimeExtensions.GetCurrentTimeStamp();
+
+            var model = new yoshop_upload_group();
+            model.group_name = request.group_name;
+            model.group_type = request.group_type;
+            model.sort = 100;
+            model.wxapp_id = GetAdminSession().wxapp_id;
+            model.create_time = timestamp;
+            model.update_time = timestamp;
+            int group_id = 0;
+            try
+            {
+                group_id = UploadGroupService.AddEntityReturnIdentity(model);
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+
+            return YesResult("添加成功！", new { group_id, request.group_name });
+        }
+
+        /// <summary>
+        /// 编辑文件组
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost, Route("/upload.library/editGroup")]
+        public IActionResult LibraryEditGroup(UploadGroupRequest request)
+        {
+            try
+            {
+                var model = UploadGroupService.GetById(request.group_id);
+                if (model == null) return No("文件分组不存在或已被删除");
+                model.group_name = request.group_name;
+                model.update_time = DateTimeExtensions.GetCurrentTimeStamp();
+                UploadGroupService.UpdateEntity(model);
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+            return Yes("编辑成功！");
+        }
+
+        /// <summary>
+        /// 删除文件组
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost, Route("/upload.library/deleteGroup")]
+        public IActionResult LibraryDeleteGroup(int group_id)
+        {
+            try
+            {
+                UploadGroupService.DeleteById(group_id);
+                // TODO: (未实现) 更新该分组下的所有文件的group_id = 0 - 朱锦润
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+
+            return Yes("删除成功！");
+        }
+
+        private async Task<List<yoshop_upload_group>> GetUploadGroupList(string group_type = "image")
+        {
+            return await UploadGroupService.LoadOrderedEntities<uint>(l => l.group_type == group_type, l => l.sort, true).ToListAsync();
+        }
 
         #endregion
     }

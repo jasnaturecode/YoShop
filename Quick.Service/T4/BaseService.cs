@@ -1,4 +1,4 @@
-﻿ 
+﻿
 /* ==============================================================================
 * 命名空间：Quick.Service
 * 类 名 称：BaseService
@@ -35,7 +35,7 @@ namespace Quick.Service
     /// 业务层基类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public partial class BaseService<T> :DbContext, IBaseService<T> where T : class, new()
+    public partial class BaseService<T> : DbContext, IBaseService<T> where T : class, new()
     {
         #region 基本增删改
 
@@ -170,27 +170,27 @@ namespace Quick.Service
             return parameters == null ? Db.Ado.ExecuteCommand(sql) : Db.Ado.ExecuteCommand(sql, parameters);
         }
 
-		/// <summary>
+        /// <summary>
         /// 获取DataTable数据
         /// </summary>
         /// <param name="sql">待执行的sql语句</param>
         /// <param name="parameters">预编译的参数</param>
         /// <returns></returns>
-        public DataTable GetDataTable(string sql,object parameters = null)
+        public DataTable GetDataTable(string sql, object parameters = null)
         {
-            return parameters == null ? Db.Ado.GetDataTable(sql) : Db.Ado.GetDataTable(sql,parameters);
+            return parameters == null ? Db.Ado.GetDataTable(sql) : Db.Ado.GetDataTable(sql, parameters);
         }
 
-		/// <summary>
+        /// <summary>
         /// 获取数据的记录数
         /// </summary>
         /// <param name="sql">待执行的sql语句</param>
         /// <param name="parameters">预编译的参数</param>
         /// <returns></returns>
-        public int GetCount(string sql,object parameters = null)
-		{
-			return parameters == null ? Db.Ado.GetInt(sql) : Db.Ado.GetInt(sql,parameters);
-		}
+        public int GetCount(string sql, object parameters = null)
+        {
+            return parameters == null ? Db.Ado.GetInt(sql) : Db.Ado.GetInt(sql, parameters);
+        }
 
         #endregion
 
@@ -623,207 +623,207 @@ namespace Quick.Service
         }
 
         #endregion
-	}
+    }
 
     /// <summary>
     /// yoshop_category业务类
     /// </summary>
 	public partial class yoshop_categoryService : BaseService<yoshop_category>, Iyoshop_categoryService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_delivery业务类
     /// </summary>
 	public partial class yoshop_deliveryService : BaseService<yoshop_delivery>, Iyoshop_deliveryService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_delivery_rule业务类
     /// </summary>
 	public partial class yoshop_delivery_ruleService : BaseService<yoshop_delivery_rule>, Iyoshop_delivery_ruleService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_dictionary业务类
     /// </summary>
 	public partial class yoshop_dictionaryService : BaseService<yoshop_dictionary>, Iyoshop_dictionaryService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_goods业务类
     /// </summary>
 	public partial class yoshop_goodsService : BaseService<yoshop_goods>, Iyoshop_goodsService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_goods_image业务类
     /// </summary>
 	public partial class yoshop_goods_imageService : BaseService<yoshop_goods_image>, Iyoshop_goods_imageService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_goods_spec业务类
     /// </summary>
 	public partial class yoshop_goods_specService : BaseService<yoshop_goods_spec>, Iyoshop_goods_specService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_goods_spec_rel业务类
     /// </summary>
 	public partial class yoshop_goods_spec_relService : BaseService<yoshop_goods_spec_rel>, Iyoshop_goods_spec_relService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_order业务类
     /// </summary>
 	public partial class yoshop_orderService : BaseService<yoshop_order>, Iyoshop_orderService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_order_address业务类
     /// </summary>
 	public partial class yoshop_order_addressService : BaseService<yoshop_order_address>, Iyoshop_order_addressService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_order_goods业务类
     /// </summary>
 	public partial class yoshop_order_goodsService : BaseService<yoshop_order_goods>, Iyoshop_order_goodsService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_region业务类
     /// </summary>
 	public partial class yoshop_regionService : BaseService<yoshop_region>, Iyoshop_regionService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_setting业务类
     /// </summary>
 	public partial class yoshop_settingService : BaseService<yoshop_setting>, Iyoshop_settingService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_spec业务类
     /// </summary>
 	public partial class yoshop_specService : BaseService<yoshop_spec>, Iyoshop_specService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_spec_value业务类
     /// </summary>
 	public partial class yoshop_spec_valueService : BaseService<yoshop_spec_value>, Iyoshop_spec_valueService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_store_user业务类
     /// </summary>
 	public partial class yoshop_store_userService : BaseService<yoshop_store_user>, Iyoshop_store_userService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_upload_file业务类
     /// </summary>
 	public partial class yoshop_upload_fileService : BaseService<yoshop_upload_file>, Iyoshop_upload_fileService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_upload_file_used业务类
     /// </summary>
 	public partial class yoshop_upload_file_usedService : BaseService<yoshop_upload_file_used>, Iyoshop_upload_file_usedService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_upload_group业务类
     /// </summary>
 	public partial class yoshop_upload_groupService : BaseService<yoshop_upload_group>, Iyoshop_upload_groupService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_user业务类
     /// </summary>
 	public partial class yoshop_userService : BaseService<yoshop_user>, Iyoshop_userService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_user_address业务类
     /// </summary>
 	public partial class yoshop_user_addressService : BaseService<yoshop_user_address>, Iyoshop_user_addressService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_wxapp业务类
     /// </summary>
 	public partial class yoshop_wxappService : BaseService<yoshop_wxapp>, Iyoshop_wxappService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_wxapp_help业务类
     /// </summary>
 	public partial class yoshop_wxapp_helpService : BaseService<yoshop_wxapp_help>, Iyoshop_wxapp_helpService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_wxapp_navbar业务类
     /// </summary>
 	public partial class yoshop_wxapp_navbarService : BaseService<yoshop_wxapp_navbar>, Iyoshop_wxapp_navbarService
-	{
-		
-	}
+    {
+
+    }
 
     /// <summary>
     /// yoshop_wxapp_page业务类
     /// </summary>
 	public partial class yoshop_wxapp_pageService : BaseService<yoshop_wxapp_page>, Iyoshop_wxapp_pageService
-	{
-		
-	}
+    {
+
+    }
 
 
 }

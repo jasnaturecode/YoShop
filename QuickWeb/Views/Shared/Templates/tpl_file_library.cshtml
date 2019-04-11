@@ -95,13 +95,13 @@
 <script id="tpl-file-list-item" type="text/template">
     {{ each $data }}
     <li class="ng-scope" title="{{ $value.file_name }}" data-file-id="{{ $value.file_id }}"
-        data-file-path="{{ $value.file_path }}">
+        data-file-path="{{ $value.file_url }}">
         <div class="img-cover"
-             style="background-image: url('{{ $value.file_path }}')">
+             style="background-image: url('{{ $value.file_url }}')">
         </div>
         <p class="file-name am-text-center am-text-truncate">{{ $value.file_name }}</p>
         <div class="select-mask">
-            <img src="assets/store/img/chose.png">
+            <img src="/img/chose.png">
         </div>
     </li>
     {{ /each }}

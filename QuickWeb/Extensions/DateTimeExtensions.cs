@@ -49,5 +49,15 @@ namespace QuickWeb.Extensions
             var start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return start.AddSeconds(ts).AddHours(8);
         }
+
+        /// <summary>
+        /// 获取当前时间戳（时间戳单位秒）
+        /// </summary>
+        /// <returns></returns>
+        public static uint GetCurrentTimeStamp()
+        {
+            var _ = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return (uint)(DateTime.Now.AddHours(-8) - _).TotalSeconds;
+        }
     }
 }
