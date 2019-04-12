@@ -49,7 +49,7 @@
                                             @if (Model.image_id > 0)
                                             {
                                                 <div class="file-item">
-                                                    <img src="<?= $model['image']['file_path'] ?>">
+                                                    <img src="@ViewData["file_url"]">
                                                     <input type="hidden" asp-for="image_id" value="@Model.image_id">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>

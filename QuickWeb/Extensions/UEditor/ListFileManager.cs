@@ -28,12 +28,22 @@ namespace QuickWeb.Extensions.UEditor
         private string[] _fileList;
         private readonly string[] _searchExtensions;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="pathToList"></param>
+        /// <param name="searchExtensions"></param>
         public ListFileManager(HttpContext context, string pathToList, string[] searchExtensions) : base(context)
         {
             _searchExtensions = searchExtensions.Select(x => x.ToLower()).ToArray();
             _pathToList = pathToList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Process()
         {
             try

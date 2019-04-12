@@ -9,10 +9,7 @@ namespace QuickWeb.Extensions
     /// <summary>
     /// appsetings.json 文件中的配置项
     /// </summary>
-    public class AppSettings
-    {
-
-    }
+    public class AppSettings { }
 
     /// <summary>
     /// 应用程序配置

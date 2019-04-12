@@ -100,7 +100,7 @@
             /* 二级菜单 */
             $(".sidebar-second-item a").each(function () {
                 if ($($(this))[0].href == String(window.location)
-                    || String(window.location).split('/').slice(0, 4).join('/') == $($(this))[0].href.split('/').slice(0, 4).join('/')
+                    || String(window.location).includes(".") && String(window.location).split('/').slice(0, 4).join('/') == $($(this))[0].href.split('/').slice(0, 4).join('/')
                 ) {
                     $(this).addClass('active');
                     

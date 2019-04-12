@@ -193,6 +193,13 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:QuickWeb.Controllers.Common.BaseController.SuccResp(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickWeb.Controllers.Common.BaseController.SuccResp(System.String,System.String)">
             <summary>
             
@@ -481,6 +488,11 @@
             yoshop_goods对象业务方法
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.GoodsController.UploadFileService">
+            <summary>
+            yoshop_upload_file对象业务方法
+            </summary>
+        </member>
         <member name="M:QuickWeb.Controllers.GoodsController.Index">
             <summary>
             商品列表页面
@@ -560,12 +572,6 @@
         <member name="M:QuickWeb.Controllers.HomeController.Logout">
             <summary>
             注销登录
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.HomeController.Error">
-            <summary>
-            错误页面
             </summary>
             <returns></returns>
         </member>
@@ -877,12 +883,6 @@
             <param name="file"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.UploadController.UploadImage">
-            <summary>
-            通用图片文件上传 (多文件)
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:QuickWeb.Controllers.UploadController.LibraryFileList(QuickWeb.Models.RequestModel.FilePageRequest,System.String,System.Int32)">
             <summary>
             文件库列表
@@ -890,6 +890,12 @@
             <param name="request"></param>
             <param name="type"></param>
             <param name="group_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.UploadImage(Microsoft.AspNetCore.Http.IFormFile,QuickWeb.Models.RequestModel.FileUploadRequest)">
+            <summary>
+            通用图片文件上传 (多文件)
+            </summary>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.UploadController.LibraryMoveFiles(System.UInt32,System.UInt32[])">
@@ -904,6 +910,13 @@
             <summary>
             文件库删除文件
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.UploadController.FileUpload(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            通用文件上传
+            </summary>
+            <param name="file"></param>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.UploadController.LibraryAddGroup(QuickWeb.Models.RequestModel.UploadGroupRequest)">
@@ -928,6 +941,12 @@
             <summary>
             用户管理
             </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.UserController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:QuickWeb.Controllers.WxAppController">
             <summary>
@@ -2045,6 +2064,18 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="T:QuickWeb.Extensions.RewriteOptionsExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.RewriteOptionsExtensions.AddRedirectToNonWww(Microsoft.AspNetCore.Rewrite.RewriteOptions)">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Extensions.UEditor.ConfigHandler">
             <summary>
             Config 的摘要说明
@@ -2067,9 +2098,87 @@
             Crawler 的摘要说明
             </summary>
         </member>
+        <member name="M:QuickWeb.Extensions.UEditor.CrawlerHandler.#ctor(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.CrawlerHandler.Process">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.Crawler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.Crawler.SourceUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.Crawler.ServerUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.Crawler.State">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.Crawler.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sourceUrl"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.Crawler.Fetch">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Extensions.UEditor.Handler">
             <summary>
             Handler 的摘要说明
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.Handler.#ctor(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.Handler.Process">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.Handler.WriteJson(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.Handler.Request">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.Handler.Response">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.Handler.Context">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:QuickWeb.Extensions.UEditor.ListFileManager">
@@ -2077,24 +2186,120 @@
             FileManager 的摘要说明
             </summary>
         </member>
+        <member name="M:QuickWeb.Extensions.UEditor.ListFileManager.#ctor(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="pathToList"></param>
+            <param name="searchExtensions"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.ListFileManager.Process">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Extensions.UEditor.NotSupportedHandler">
             <summary>
             NotSupportedHandler 的摘要说明
             </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.NotSupportedHandler.#ctor(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.NotSupportedHandler.Process">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:QuickWeb.Extensions.UEditor.PathFormatter">
             <summary>
             PathFormater 的摘要说明
             </summary>
         </member>
+        <member name="M:QuickWeb.Extensions.UEditor.PathFormatter.Format(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="originFileName"></param>
+            <param name="pathFormat"></param>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Extensions.UEditor.UeditorConfig">
             <summary>
             Config 的摘要说明
             </summary>
         </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UeditorConfig.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.UeditorConfig.GetValue``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.UeditorConfig.GetStringList(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.UeditorConfig.GetString(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.UeditorConfig.GetInt(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Extensions.UEditor.UploadHandler">
             <summary>
             UploadHandler 的摘要说明
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadHandler.UploadConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadHandler.Result">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.UploadHandler.#ctor(Microsoft.AspNetCore.Http.HttpContext,QuickWeb.Extensions.UEditor.UploadConfig)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:QuickWeb.Extensions.UEditor.UploadHandler.Process">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.UploadConfig">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.PathFormat">
@@ -2125,6 +2330,66 @@
         <member name="P:QuickWeb.Extensions.UEditor.UploadConfig.Base64Filename">
             <summary>
             Base64 字符串所表示的文件名
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.UploadResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadResult.State">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadResult.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadResult.OriginFileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.UEditor.UploadResult.ErrorMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Extensions.UEditor.UploadState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Extensions.UEditor.UploadState.NetworkError">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Extensions.UEditor.UploadState.FileAccessError">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Extensions.UEditor.UploadState.TypeNotAllow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Extensions.UEditor.UploadState.SizeLimitExceed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Extensions.UEditor.UploadState.Success">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:QuickWeb.Extensions.UEditor.UploadState.Unknown">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:QuickWeb.Hubs.PerformanceCounter">
@@ -2268,6 +2533,31 @@
             
             </summary>
         </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileList.name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileList.rights">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileList.size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileList.date">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileList.type">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:QuickWeb.Models.RequestModel.FilePageRequest">
             <summary>
             分页操作
@@ -2303,6 +2593,116 @@
             
             </summary>
         </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Path">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.NewItemPath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.NewPath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.SingleFilename">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Perms">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.PermsCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Recursive">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.Destination">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.CompressedFilename">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.FolderName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileRequest.ToFilename">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Models.RequestModel.FileUploadRequest">
+            <summary>
+            文件上传
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileUploadRequest.id">
+            <summary>
+            上传Id
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileUploadRequest.name">
+            <summary>
+            上传文件名
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileUploadRequest.type">
+            <summary>
+            文件类型
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileUploadRequest.group_id">
+            <summary>
+            文件分组
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileUploadRequest.lastModifiedDate">
+            <summary>
+            上传时间
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.RequestModel.FileUploadRequest.size">
+            <summary>
+            上传文件大小
+            </summary>
+        </member>
         <member name="T:QuickWeb.Models.RequestModel.UploadGroupRequest">
             <summary>
             上传文件分组
@@ -2321,6 +2721,11 @@
         <member name="P:QuickWeb.Models.RequestModel.UploadGroupRequest.group_type">
             <summary>
             分组类别
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Models.ViewModel.CategoryViewModel">
+            <summary>
+            商品分类
             </summary>
         </member>
         <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.category_id">
@@ -2415,6 +2820,26 @@
             </summary>
             <param name="app"></param>
             <param name="env"></param>
+        </member>
+        <member name="T:Masuit.MyBlogs.Core.Extensions.Hangfire.IpIntercepter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Masuit.MyBlogs.Core.Extensions.Hangfire.IpIntercepter.IP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Masuit.MyBlogs.Core.Extensions.Hangfire.IpIntercepter.RequestUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Masuit.MyBlogs.Core.Extensions.Hangfire.IpIntercepter.Time">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>

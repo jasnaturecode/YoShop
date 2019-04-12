@@ -87,17 +87,5 @@ namespace QuickWeb.Controllers
             return Yes("注销成功！");
         }
         #endregion
-
-        #region 错误页面
-        /// <summary>
-        /// 错误页面
-        /// </summary>
-        /// <returns></returns>
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        #endregion
     }
 }

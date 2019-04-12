@@ -10,9 +10,19 @@ namespace QuickWeb.Extensions.UEditor
     /// </summary>
     public class UploadHandler : Handler
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public UploadConfig UploadConfig { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         public UploadResult Result { get; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="config"></param>
         public UploadHandler(HttpContext context, UploadConfig config) : base(context)
         {
             UploadConfig = config;
@@ -21,7 +31,10 @@ namespace QuickWeb.Extensions.UEditor
                 State = UploadState.Unknown
             };
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Process()
         {
             byte[] uploadFileBytes;
@@ -140,7 +153,9 @@ namespace QuickWeb.Extensions.UEditor
             return size < UploadConfig.SizeLimit;
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public class UploadConfig
     {
         /// <summary>
@@ -173,23 +188,57 @@ namespace QuickWeb.Extensions.UEditor
         /// </summary>
         public string Base64Filename { get; set; }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public class UploadResult
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public UploadState State { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Url { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string OriginFileName { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string ErrorMessage { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public enum UploadState
     {
+        /// <summary>
+        /// 
+        /// </summary>
         NetworkError = -4,
+        /// <summary>
+        /// 
+        /// </summary>
         FileAccessError = -3,
+        /// <summary>
+        /// 
+        /// </summary>
         TypeNotAllow = -2,
+        /// <summary>
+        /// 
+        /// </summary>
         SizeLimitExceed = -1,
+        /// <summary>
+        /// 
+        /// </summary>
         Success = 0,
+        /// <summary>
+        /// 
+        /// </summary>
         Unknown = 1
     }
 }

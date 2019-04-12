@@ -69,7 +69,7 @@ namespace Quick.Service
             return Db.GetSimpleClient().InsertRange(list.ToArray());
         }
         /// <summary>
-        /// 根据ID删除实体
+        /// 根据ID删除实体（必须指定主键特性 [SugarColumn(IsPrimaryKey=true)]），如果是联合主键，请使用Where条件
         /// </summary>
         /// <param name="id">实体id</param>
         /// <returns>删除成功</returns>
@@ -79,7 +79,7 @@ namespace Quick.Service
         }
 
         /// <summary>
-        /// 根据ID集合删除实体
+        /// 根据ID集合删除实体（必须指定主键特性 [SugarColumn(IsPrimaryKey=true)]），如果是联合主键，请使用Where条件
         /// </summary>
         /// <param name="ids">实体ids集合</param>
         /// <returns>删除成功</returns>

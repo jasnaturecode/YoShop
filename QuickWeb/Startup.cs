@@ -21,7 +21,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Quick.Models.Application;
 using QuickWeb.Extensions;
-using QuickWeb.Extensions.Common;
 using QuickWeb.Extensions.Hangfire;
 using QuickWeb.Hubs;
 using Swashbuckle.AspNetCore.Swagger;
@@ -30,13 +29,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Microsoft.Extensions.Logging;
 using Quick.Service;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Caching.Redis;
 using QuickWeb.Extensions.L2Cache;
+using Masuit.Tools.Logging;
+using System.IO;
+using Quick.Models.Entity.Table;
 
 namespace QuickWeb
 {
@@ -204,21 +205,19 @@ namespace QuickWeb
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/Index");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //app.UseHsts();
 
                 app.UseException();
             }
-
             //app.UseHttpsRedirection();
-
             app.UseStaticFiles(new StaticFileOptions //静态资源缓存策略
             {
-                OnPrepareResponse = context =>
+                OnPrepareResponse = ctx =>
                 {
-                    context.Context.Response.Headers[HeaderNames.CacheControl] = "public,no-cache";
-                    context.Context.Response.Headers[HeaderNames.Expires] = DateTime.UtcNow.AddDays(7).ToString("R");
+                    ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public,no-cache";
+                    ctx.Context.Response.Headers[HeaderNames.Expires] = DateTime.UtcNow.AddDays(7).ToString("R");
                 },
                 ContentTypeProvider = new FileExtensionContentTypeProvider(MimeMapper.MimeTypes)
             }).UseCookiePolicy();

@@ -15,10 +15,18 @@ namespace QuickWeb.Extensions.UEditor
         private string[] _sources;
         private Crawler[] _crawlers;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public CrawlerHandler(HttpContext context) : base(context)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Process()
         {
             _sources = Request.Form["source[]"];
@@ -43,20 +51,39 @@ namespace QuickWeb.Extensions.UEditor
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Crawler
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string SourceUrl { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string ServerUrl { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string State { get; set; }
 
         //private HttpServerUtility Server { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceUrl"></param>
         public Crawler(string sourceUrl)
         {
             SourceUrl = sourceUrl;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Crawler Fetch()
         {
             if (!(SourceUrl.IsExternalAddress()))

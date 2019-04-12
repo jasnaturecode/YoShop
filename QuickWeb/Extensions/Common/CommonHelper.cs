@@ -99,8 +99,7 @@ namespace QuickWeb.Extensions.Common
         /// <summary>
         /// 系统设定
         /// </summary>
-        // TODO: 初始化系统设置参数(未实现) CommonHelper.SystemSettings = db.SystemSetting.ToDictionary(s => s.Name, s => s.Value); - 朱锦润
-        public static Dictionary<string, string> SystemSettings { get; set; }
+        public static Dictionary<string, JObject> SystemSettings { get; set; }
 
         /// <summary>
         /// 访问量

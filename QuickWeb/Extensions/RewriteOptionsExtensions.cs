@@ -6,8 +6,16 @@ using Microsoft.AspNetCore.Rewrite;
 
 namespace QuickWeb.Extensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class RewriteOptionsExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public static RewriteOptions AddRedirectToNonWww(this RewriteOptions options)
         {
             options.Rules.Add(new NonWwwRule());

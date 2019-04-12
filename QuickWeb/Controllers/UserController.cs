@@ -12,6 +12,10 @@ namespace QuickWeb.Controllers
     /// </summary>
     public class UserController : AdminBaseController
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();

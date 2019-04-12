@@ -30,6 +30,12 @@ namespace QuickWeb.Controllers
         /// </summary>
         public Iyoshop_goodsService GoodsService { get; set; }
 
+        /// <summary>
+        /// yoshop_upload_file对象业务方法
+        /// </summary>
+        public Iyoshop_upload_fileService UploadFileService { get; set; }
+
+
         #region 商品管理
         /// <summary>
         /// 商品列表页面
@@ -38,7 +44,7 @@ namespace QuickWeb.Controllers
         public IActionResult Index()
         {
             return View();
-        } 
+        }
         #endregion
 
         #region 商品分类管理
@@ -100,6 +106,8 @@ namespace QuickWeb.Controllers
         {
             var model = CategoryService.GetById(id).Mapper<CategoryViewModel>();
             if (model == null) return NoOrDeleted();
+            var file = await UploadFileService.GetFirstEntityAsync(l=>l.file_id == model.image_id);
+            ViewData["file_url"] = file?.file_url;
             var list = await GetCategories(l => l.parent_id == 0);
             ViewData["first"] = list;
             return View(model);
@@ -143,8 +151,7 @@ namespace QuickWeb.Controllers
         {
             try
             {
-                CategoryService.DeleteById(category_id);
-                // TODO: (未实现) 由于主键未定义，删除失败 - 朱锦润
+                CategoryService.Delete(l => l.category_id == category_id);
             }
             catch (Exception e)
             {

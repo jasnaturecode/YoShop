@@ -7,10 +7,18 @@ namespace QuickWeb.Extensions.UEditor
     /// </summary>
     public class NotSupportedHandler : Handler
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public NotSupportedHandler(HttpContext context) : base(context)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Process()
         {
             return WriteJson(new

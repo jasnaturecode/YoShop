@@ -158,10 +158,20 @@ namespace QuickWeb.Controllers.Common
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        protected ResultInfo SuccResp(object data)
+        {
+            return InfoResp(1, "Success", data);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="msg"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        protected ResultInfo SuccResp(string msg, string url = null)
+        protected ResultInfo SuccResp(string msg, string url)
         {
             return InfoResp(1, msg, url);
         }

@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Common", "Quick.Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickWeb", "QuickWeb\QuickWeb.csproj", "{08301275-DE5F-4943-B98A-6A6D82846029}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.UnitTests", "Quick.UnitTests\Quick.UnitTests.csproj", "{16D7C517-D095-4C58-B660-3B76AA48AEFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{08301275-DE5F-4943-B98A-6A6D82846029}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08301275-DE5F-4943-B98A-6A6D82846029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08301275-DE5F-4943-B98A-6A6D82846029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16D7C517-D095-4C58-B660-3B76AA48AEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D7C517-D095-4C58-B660-3B76AA48AEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D7C517-D095-4C58-B660-3B76AA48AEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D7C517-D095-4C58-B660-3B76AA48AEFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

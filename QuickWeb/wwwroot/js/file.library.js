@@ -197,7 +197,7 @@
                     multiple: true
                 },
                 // 文件上传域的name
-                fileVal: 'iFile',
+                fileVal: 'file',
                 // 图片上传前不进行压缩
                 compress: false,
                 // 允许重复

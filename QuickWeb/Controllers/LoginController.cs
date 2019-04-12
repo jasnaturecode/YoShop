@@ -10,11 +10,13 @@ using Masuit.Tools.Security;
 using Masuit.Tools.Strings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Quick.Common;
 using Quick.IService;
 using Quick.Models.Dto;
 using QuickWeb.Controllers.Common;
 using QuickWeb.Extensions;
+using QuickWeb.Extensions.Common;
 using QuickWeb.Models.RequestModel;
 
 namespace QuickWeb.Controllers
@@ -29,6 +31,11 @@ namespace QuickWeb.Controllers
         /// yoshop_store_user对象业务方法
         /// </summary>
         public Iyoshop_store_userService StoreUserService { get; set; }
+
+        /// <summary>
+        /// yoshop_setting对象业务方法
+        /// </summary>
+        public Iyoshop_settingService SettingService { get; set; }
 
         /// <summary>
         /// 登录页面
@@ -73,7 +80,7 @@ namespace QuickWeb.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost,Route("/passport/login"), ValidateAntiForgeryToken]
+        [HttpPost, Route("/passport/login"), ValidateAntiForgeryToken]
         public IActionResult Login(AdminLoginRequest request)
         {
             //string validSession = HttpContext.Session.Get<string>("valid") ?? string.Empty; //将验证码从Session中取出来，用于登录验证比较
@@ -98,6 +105,8 @@ namespace QuickWeb.Controllers
                 }
                 //HangfireHelper.CreateJob(typeof(IHangfireBackJob), nameof(HangfireBackJob.LoginRecord), "default", userInfo, HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(), LoginType.Default);
                 string refer = Request.Cookies["refer"];
+                //初始化系统设置参数
+                CommonHelper.SystemSettings = SettingService.LoadEntities(l => l.wxapp_id == userInfo.wxapp_id).ToList().ToDictionary(s => s.key, s => JObject.Parse(s.values));
                 return YesRedirect("登陆成功！", string.IsNullOrEmpty(refer) ? "/" : refer);
             }
             return No("用户名或密码错误");

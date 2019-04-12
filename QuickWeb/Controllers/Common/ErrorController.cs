@@ -97,15 +97,16 @@ namespace QuickWeb.Controllers.Common
         /// <returns></returns>
         public IActionResult Index()
         {
+            var Message = "系统异常";
             if (Request.Method.ToLower().Equals("get"))
             {
-                return View();
+                return View("~/Views/Error/Index.html", Message);
             }
             return Json(new
             {
                 code = 0,
                 msg = "Error",
-                data = "系统异常"
+                data = Message
             });
         }
 
@@ -115,15 +116,16 @@ namespace QuickWeb.Controllers.Common
         /// <returns></returns>
         public IActionResult ParamsError()
         {
+            var Message = "请求参数异常";
             if (Request.Method.ToLower().Equals("get"))
             {
-                return View("~/Views/Error/ParamsError.cshtml");
+                return View("~/Views/Error/ParamsError.cshtml", Message);
             }
             return Json(new
             {
                 code = 0,
                 msg = "ParamsError",
-                data = "请求参数异常"
+                data = Message
             });
         }
 
@@ -133,15 +135,16 @@ namespace QuickWeb.Controllers.Common
         /// <returns></returns>
         public IActionResult NoOrDeleted()
         {
+            var Message = "请求的数据不存在或已经被删除";
             if (Request.Method.ToLower().Equals("get"))
             {
-                return View("~/Views/Error/NoOrDeleted.cshtml");
+                return View("~/Views/Error/NoOrDeleted.cshtml", Message);
             }
             return Json(new
             {
                 code = 0,
                 msg = "NoOrDeleted",
-                data = "请求的数据不存在或已经被删除"
+                data = Message
             });
         }
     }

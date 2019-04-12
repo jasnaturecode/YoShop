@@ -25,6 +25,7 @@ using Quick.Models.Entity.Table;
 using QuickWeb.Models.RequestModel;
 using QuickWeb.Extensions;
 using System.Linq;
+using Quick.Common.Models;
 
 namespace QuickWeb.Controllers
 {
@@ -241,7 +242,7 @@ namespace QuickWeb.Controllers
         }
         #endregion
 
-        #region 上传文件
+        #region Masuit通用上传文件
         /// <summary>
         /// 上传文件
         /// </summary>
@@ -251,11 +252,11 @@ namespace QuickWeb.Controllers
         public ActionResult UploadFile(IFormFile file)
         {
             string path;
-            string filename = SnowFlake.GetInstance().GetUniqueId() + Path.GetExtension(file.FileName);
+            string filename = $"{DateTime.Now:yyyyMMddHHmmss}"+ SnowFlake.GetInstance().GetUniqueShortId(9) + Path.GetExtension(file.FileName);
             switch (file.ContentType)
             {
                 case var _ when file.ContentType.StartsWith("image"):
-                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "images", filename);
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "images", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
                     var dir = Path.GetDirectoryName(path);
                     if (!Directory.Exists(dir))
                     {
@@ -269,17 +270,17 @@ namespace QuickWeb.Controllers
                     if (success)
                     {
                         BackgroundJob.Enqueue(() => System.IO.File.Delete(path));
-                        return ResultData(url);
+                        return YesResult(url);
                     }
                     break;
                 case var _ when file.ContentType.StartsWith("audio") || file.ContentType.StartsWith("video"):
-                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "media", filename);
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "medias", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
                     break;
                 case var _ when file.ContentType.StartsWith("text") || (ContentType.Doc + "," + ContentType.Xls + "," + ContentType.Ppt + "," + ContentType.Pdf).Contains(file.ContentType):
-                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "docs", filename);
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "docs", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
                     break;
                 default:
-                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "files", filename);
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "files", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
                     break;
             }
             try
@@ -293,12 +294,12 @@ namespace QuickWeb.Controllers
                 {
                     file.CopyTo(fs);
                 }
-                return ResultData(path.Substring(_hostingEnvironment.WebRootPath.Length).Replace("\\", "/"));
+                return YesResult(path.Substring(_hostingEnvironment.WebRootPath.Length).Replace("\\", "/"));
             }
             catch (Exception e)
             {
                 LogManager.Error(e);
-                return ResultData(null, false, "文件上传失败！");
+                return No("文件上传失败！");
             }
         }
 
@@ -328,18 +329,36 @@ namespace QuickWeb.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost, Route("/upload/image")]
-        public IActionResult UploadImage()
+        public async Task<IActionResult> UploadImage(IFormFile file, FileUploadRequest request)
         {
+            //var file = Request.Form.Files[0];
+            yoshop_upload_file upload;
             try
             {
+                var result = _ = await FileUpload(file);
+                if (result.Code == 0) return No(result.Msg);
+                upload = new yoshop_upload_file
+                {
+                    create_time = DateTimeExtensions.GetCurrentTimeStamp(),
+                    file_type = "image",
+                    storage = "local",
+                    is_delete = 0,
+                    group_id = request.group_id,
+                    file_size = request.size,
+                    file_url = result.Msg,
+                    file_name = request.name,
+                    extension = Path.GetExtension(request.name).TrimStart('.'),
+                    wxapp_id = GetAdminSession().wxapp_id
+                };
 
+                UploadFileService.AddEntity(upload);
             }
             catch (Exception e)
             {
                 LogManager.Error(GetType(), e);
                 return No(e.Message);
             }
-            return YesResult("图片上传成功！", new { });
+            return YesResult("图片上传成功！", upload);
         }
 
         /// <summary>
@@ -355,7 +374,7 @@ namespace QuickWeb.Controllers
             {
                 if (fileIds.Length > 0)
                 {
-                    UploadFileService.Update(x => new yoshop_upload_file { group_id = group_id }, l => fileIds.ToList().Contains(l.file_id));
+                    UploadFileService.Update(x => new yoshop_upload_file() { group_id = group_id }, l => fileIds.Contains(l.file_id));
                 }
             }
             catch (Exception e)
@@ -377,7 +396,7 @@ namespace QuickWeb.Controllers
             {
                 if (fileIds.Length > 0)
                 {
-                    UploadFileService.Update(x => new yoshop_upload_file { is_delete = 1 }, l => fileIds.ToList().Contains(l.file_id));
+                    UploadFileService.Update(x => new yoshop_upload_file() { is_delete = 1 }, l => fileIds.Contains(l.file_id));
                 }
             }
             catch (Exception e)
@@ -393,6 +412,52 @@ namespace QuickWeb.Controllers
             return group_id == -1
                 ? UploadFileService.LoadPageEntities<uint>(request.current_page, request.per_page, ref request.total, l => l.file_type == type && l.is_delete == 0, l => l.file_id, true)
                 : UploadFileService.LoadPageEntities<uint>(request.current_page, request.per_page, ref request.total, l => l.file_type == type && l.is_delete == 0 && l.group_id == group_id, l => l.file_id, true);
+        }
+
+        /// <summary>
+        /// 通用文件上传
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        private async Task<ResultInfo> FileUpload(IFormFile file)
+        {
+            if(file == null)
+                return FailResp("上传文件为空！");
+            string filename = $"{DateTime.Now:yyyyMMddHHmmss}"+ SnowFlake.GetInstance().GetUniqueShortId(9) + Path.GetExtension(file.FileName);
+            string path;
+            switch (file.ContentType)
+            {
+                case var _ when file.ContentType.StartsWith("image"):
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "images", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
+                    break;
+                case var _ when file.ContentType.StartsWith("audio") || file.ContentType.StartsWith("video"):
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "media", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
+                    break;
+                case var _ when file.ContentType.StartsWith("text") || (ContentType.Doc + "," + ContentType.Xls + "," + ContentType.Ppt + "," + ContentType.Pdf).Contains(file.ContentType):
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "docs", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
+                    break;
+                default:
+                    path = Path.Combine(_hostingEnvironment.WebRootPath, "upload", "files", $"{DateTime.Now:yyyy}/{DateTime.Now:MM}/{DateTime.Now:dd}", filename);
+                    break;
+            }
+            try
+            {
+                var dir = Path.GetDirectoryName(path);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                {
+                    await file.CopyToAsync(fs);
+                }
+                return SuccResp(path.Substring(_hostingEnvironment.WebRootPath.Length).Replace("\\", "/"));
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return FailResp("文件上传失败！");
+            }
         }
 
         #endregion
@@ -415,7 +480,7 @@ namespace QuickWeb.Controllers
             model.wxapp_id = GetAdminSession().wxapp_id;
             model.create_time = timestamp;
             model.update_time = timestamp;
-            int group_id = 0;
+            int group_id;
             try
             {
                 group_id = UploadGroupService.AddEntityReturnIdentity(model);
@@ -461,8 +526,9 @@ namespace QuickWeb.Controllers
         {
             try
             {
-                UploadGroupService.DeleteById(group_id);
-                // TODO: (未实现) 更新该分组下的所有文件的group_id = 0 - 朱锦润
+                var _ = UploadGroupService.Delete(l => l.group_id == group_id);
+                if (_)
+                    UploadFileService.Update(x => new yoshop_upload_file { group_id = 0 }, l => l.group_id == group_id);
             }
             catch (Exception e)
             {

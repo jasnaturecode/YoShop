@@ -1,10 +1,10 @@
 ﻿/* ==============================================================================
-* 命名空间：QuickWeb.Models.ViewModel 
-* 类 名 称：CategoryViewModel
-* 创 建 者：Qing
-* 创建时间：2019/04/10 20:05:22
+* 命名空间：QuickWeb.Models.RequestModel 
+* 类 名 称：FileUploadRequest
+* 创 建 者：Run
+* 创建时间：2019/4/12 10:17:13
 * CLR 版本：4.0.30319.42000
-* 保存的文件名：CategoryViewModel
+* 保存的文件名：FileUploadRequest
 * 文件版本：V1.0.0.0
 *
 * 功能描述：N/A 
@@ -21,51 +21,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuickWeb.Models.ViewModel
+namespace QuickWeb.Models.RequestModel
 {
     /// <summary>
-    /// 商品分类
+    /// 文件上传
     /// </summary>
-    public class CategoryViewModel
+    public class FileUploadRequest
     {
         /// <summary>
-        /// 
+        /// 上传Id
         /// </summary>
-        public uint category_id { get; set; }
-
+        public string id { get; set; }
         /// <summary>
-        /// 
+        /// 上传文件名
         /// </summary>
         public string name { get; set; }
-
         /// <summary>
-        /// 
+        /// 文件类型
         /// </summary>
-        public uint parent_id { get; set; }
-
+        public string type { get; set; }
         /// <summary>
-        /// 
+        /// 文件分组
         /// </summary>
-        public uint image_id { get; set; }
-
+        public uint group_id { get; set; }
         /// <summary>
-        /// 
+        /// 上传时间
         /// </summary>
-        public uint sort { get; set; }
-
+        public DateTime lastModifiedDate { get; set; }
         /// <summary>
-        /// 
+        /// 上传文件大小
         /// </summary>
-        public uint wxapp_id { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime create_time { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime update_time { get; set; }
+        public uint size { get; set; }
     }
 }
