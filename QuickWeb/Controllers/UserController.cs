@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Quick.IService;
 using QuickWeb.Controllers.Common;
 
 namespace QuickWeb.Controllers
@@ -13,12 +14,21 @@ namespace QuickWeb.Controllers
     public class UserController : AdminBaseController
     {
         /// <summary>
-        /// 
+        /// yoshop_user对象业务方法
+        /// </summary>
+        public Iyoshop_userService UserService { get; set; }
+
+        /// <summary>
+        /// 用户列表
         /// </summary>
         /// <returns></returns>
+        [HttpGet, Route("/user/index")]
         public IActionResult Index()
         {
+
             return View();
         }
+
+
     }
 }

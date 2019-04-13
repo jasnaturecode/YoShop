@@ -53,20 +53,22 @@ namespace QuickWeb.Controllers
             if (HttpContext.Session.Get<AdminDto>(SessionKey.AdminInfo) != null)
             {
                 if (string.IsNullOrEmpty(from))
-                    from = "/home/index";
+                    from = QuickKeys.AdminHome;
                 return Redirect(from);
             }
             if (Request.Cookies.Count > 2)
             {
                 string name = Request.Cookies["admin_username"];
                 string pwd = Request.Cookies["admin_password"]?.DesDecrypt(AppConfig.BaiduAK);
-                var userInfo = StoreUserService.Login(name, pwd);
-                if (userInfo != null)
+                var adminDto = StoreUserService.Login(name, pwd).Mapper<AdminDto>();
+                if (adminDto != null)
                 {
                     Response.Cookies.Append("admin_username", name, new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
                     Response.Cookies.Append("admin_password", Request.Cookies["admin_password"], new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
-                    HttpContext.Session.Set(SessionKey.UserInfo, userInfo);
-                    //HangfireHelper.CreateJob(typeof(IHangfireBackJob), nameof(HangfireBackJob.LoginRecord), "default", userInfo, HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(), LoginType.Default);
+                    HttpContext.Session.Set(SessionKey.AdminInfo, adminDto);
+                    //HangfireHelper.CreateJob(typeof(IHangfireBackJob), nameof(HangfireBackJob.LoginRecord), "default", adminDto, HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(), LoginType.Default);
+                    //初始化系统设置参数
+                    CommonHelper.SystemSettings = SettingService.LoadEntities(l => l.wxapp_id == adminDto.wxapp_id).ToList().ToDictionary(s => s.key, s => JObject.Parse(s.values));
                     if (string.IsNullOrEmpty(from))
                         from = QuickKeys.AdminHome;
                     return Redirect(from);
@@ -94,19 +96,19 @@ namespace QuickWeb.Controllers
             {
                 return No("用户名或密码不能为空");
             }
-            var userInfo = StoreUserService.Login(request.user_name, request.password);
-            if (userInfo != null)
+            var adminDto = StoreUserService.Login(request.user_name, request.password).Mapper<AdminDto>();
+            if (adminDto != null)
             {
-                HttpContext.Session.Set(SessionKey.UserInfo, userInfo);
+                HttpContext.Session.Set(SessionKey.AdminInfo, adminDto);
                 if (request.remember.Trim().Contains(new[] { "on", "true" })) //是否记住登录
                 {
                     Response.Cookies.Append("admin_username", HttpUtility.UrlEncode(request.user_name.Trim()), new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
                     Response.Cookies.Append("admin_password", request.password.Trim().DesEncrypt(AppConfig.BaiduAK), new CookieOptions() { Expires = DateTime.Now.AddDays(7) });
                 }
-                //HangfireHelper.CreateJob(typeof(IHangfireBackJob), nameof(HangfireBackJob.LoginRecord), "default", userInfo, HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(), LoginType.Default);
+                //HangfireHelper.CreateJob(typeof(IHangfireBackJob), nameof(HangfireBackJob.LoginRecord), "default", adminDto, HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(), LoginType.Default);
                 string refer = Request.Cookies["refer"];
                 //初始化系统设置参数
-                CommonHelper.SystemSettings = SettingService.LoadEntities(l => l.wxapp_id == userInfo.wxapp_id).ToList().ToDictionary(s => s.key, s => JObject.Parse(s.values));
+                CommonHelper.SystemSettings = SettingService.LoadEntities(l => l.wxapp_id == adminDto.wxapp_id).ToList().ToDictionary(s => s.key, s => JObject.Parse(s.values));
                 return YesRedirect("登陆成功！", string.IsNullOrEmpty(refer) ? "/" : refer);
             }
             return No("用户名或密码错误");

@@ -1,5 +1,5 @@
 ﻿@{
-    AdminDto admin = Context.Session.Get<AdminDto>(SessionKey.AdminInfo) ?? new AdminDto();
+    AdminDto admin = Context.Session.Get<AdminDto>(SessionKey.AdminInfo);
 }
 
 <!DOCTYPE html>
@@ -8,12 +8,12 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>萤火小程序商城</title>
+    <title>@CommonHelper.SystemSettings["store"]["name"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="renderer" content="webkit" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="icon" type="image/png" href="~/favicon.ico" />
-    <meta name="apple-mobile-web-app-title" content="萤火小程序商城" />
+    <meta name="apple-mobile-web-app-title" content="@CommonHelper.SystemSettings["store"]["name"]" />
     <link rel="stylesheet" href="~/css/amazeui.min.css" />
     <link rel="stylesheet" href="~/css/app.css" />
     <link rel="stylesheet" href="//at.alicdn.com/t/font_783249_t6knt0guzo.css">
@@ -86,7 +86,7 @@
             /* 一级菜单 */
             $(".sidebar-nav-link a").each(function () {
                 if ($($(this))[0].href == String(window.location)
-                    || String(window.location).indexOf($($(this))[0].href.split('/')[3]) > 0
+                    || String(window.location).includes(".") && String(window.location).indexOf($($(this))[0].href.split('/')[3]) > 0
                 ) {
                     $(this).addClass('active');
                 }

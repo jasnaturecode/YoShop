@@ -40,6 +40,7 @@ namespace QuickWeb.Extensions.Common
                 }
                 catch (IndexOutOfRangeException)
                 {
+
                 }
             }
 
@@ -125,7 +126,6 @@ namespace QuickWeb.Extensions.Common
                 }
                 catch
                 {
-                    value = 0;
                 }
             }
         }

@@ -11,14 +11,6 @@ namespace QuickWeb.Controllers.Common
     /// </summary>
     public class BaseController : Controller
     {
-        #region 获取应用程序的Debug模式
-        /// <summary>
-        /// 应用程序的Debug模式
-        /// </summary>
-        protected bool IsDebug = AppConfig.IsDebug;
-
-        #endregion
-
         #region 通用返回JsonResult的封装
 
         /// <summary>

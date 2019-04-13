@@ -35,7 +35,6 @@ namespace QuickWeb.Controllers
         /// </summary>
         public Iyoshop_upload_fileService UploadFileService { get; set; }
 
-
         #region 商品管理
         /// <summary>
         /// 商品列表页面

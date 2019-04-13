@@ -36,8 +36,14 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Caching.Redis;
 using QuickWeb.Extensions.L2Cache;
 using Masuit.Tools.Logging;
+using Masuit.Tools.Core.Net;
 using System.IO;
 using Quick.Models.Entity.Table;
+using Quick.IService;
+using QuickWeb.Extensions.Common;
+using Newtonsoft.Json.Linq;
+using Quick.Common;
+using Quick.Models.Dto;
 
 namespace QuickWeb
 {
@@ -125,21 +131,25 @@ namespace QuickWeb
                 options.MultipartBodyLengthLimit = 104857600;// 100MB
             });
             //注入Session
-            services.AddSession();
-            // 配置MemoryCache缓存
+            services.AddSession(opt =>
+            {
+                opt.IdleTimeout = TimeSpan.FromHours(2);
+                opt.Cookie.HttpOnly = true;
+            });
+            //配置MemoryCache缓存
             services.AddMemoryCache();
-
+            //
             if (RedisConfig.UseRedis)
             {
-                // //初始化 RedisHelper  nuget Install-Package CSRedisCore  https://github.com/2881099/csredis
+                //初始化 RedisHelper  nuget Install-Package CSRedisCore  https://github.com/2881099/csredis
                 RedisHelper.Initialization(new CSRedisClient(RedisConfig.ConnectionString));
 
-                // 注册mvc分布式缓存（暂时不用）  nuget Install-Package Caching.CSRedis
+                //注册mvc分布式缓存（暂时不用）  nuget Install-Package Caching.CSRedis
                 //services.AddSingleton<IDistributedCache>(new CSRedisCache(RedisHelper.Instance));
 
                 //配置Hangfire
                 services.AddHangfire(x => x.UseRedisStorage(RedisConfig.ConnectionString));
-
+                // 
                 if (RedisConfig.UseRedisCache)
                 {
                     //Use Redis
@@ -155,7 +165,6 @@ namespace QuickWeb
                     return cache;
                 });
                 services.AddSingleton<ICacheService, MemoryCacheService>();
-
                 //配置Hangfire
                 services.AddHangfire(x => x.UseMemoryStorage());
             }
@@ -197,7 +206,10 @@ namespace QuickWeb
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        /// <param name="context"></param>
+        /// <param name="store"></param>
+        /// <param name="setting"></param>
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,IHttpContextAccessor context, Iyoshop_store_userService store, Iyoshop_settingService setting)
         {
             if (env.IsDevelopment())
             {
@@ -212,6 +224,14 @@ namespace QuickWeb
                 app.UseException();
             }
             //app.UseHttpsRedirection();
+
+            if (AppConfig.IsDebug)
+            {
+                var adminDto = store.GetFirstEntity(l => l.store_user_id == 1).Mapper<AdminDto>();
+                context.HttpContext.Session.Set(SessionKey.AdminInfo, adminDto);
+                CommonHelper.SystemSettings = setting.LoadEntities(l => l.wxapp_id == adminDto.wxapp_id).ToList().ToDictionary(s => s.key, s => JObject.Parse(s.values));
+            }
+
             app.UseStaticFiles(new StaticFileOptions //静态资源缓存策略
             {
                 OnPrepareResponse = ctx =>

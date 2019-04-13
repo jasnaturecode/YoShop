@@ -7,7 +7,9 @@ using Masuit.Tools.Files;
 using Masuit.Tools.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using QuickWeb.Controllers.Common;
+using QuickWeb.Extensions;
 using QuickWeb.Extensions.Common;
 using QuickWeb.Models.RequestModel;
 
@@ -96,7 +98,7 @@ namespace QuickWeb.Controllers
             {
                 foreach (var t in Request.Form.Files)
                 {
-                    string path = Path.Combine(_hostingEnvironment.ContentRootPath, CommonHelper.SystemSettings["PathRoot"].TrimStart('\\', '/'), destination.TrimStart('\\', '/'), t.FileName);
+                    string path = Path.Combine(_hostingEnvironment.ContentRootPath, AppConfig.PathRoot.TrimStart('\\', '/'), destination.TrimStart('\\', '/'), t.FileName);
                     using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         t.CopyTo(fs);
@@ -118,7 +120,7 @@ namespace QuickWeb.Controllers
         public ActionResult Handle([FromBody]FileRequest req)
         {
             List<object> list = new List<object>();
-            var root = Path.Combine(_hostingEnvironment.ContentRootPath, CommonHelper.SystemSettings["PathRoot"].TrimStart('\\', '/'));
+            var root = Path.Combine(_hostingEnvironment.ContentRootPath, AppConfig.PathRoot.TrimStart('\\', '/'));
             switch (req.Action)
             {
                 case "list":
@@ -282,7 +284,7 @@ namespace QuickWeb.Controllers
         public ActionResult Handle(string path, string[] items, string toFilename)
         {
             path = path?.TrimStart('\\', '/') ?? "";
-            var root = CommonHelper.SystemSettings["PathRoot"].TrimStart('\\', '/');
+            var root = AppConfig.PathRoot.TrimStart('\\', '/');
             var file = Path.Combine(_hostingEnvironment.ContentRootPath, root, path);
             switch (Request.Query["action"])
             {

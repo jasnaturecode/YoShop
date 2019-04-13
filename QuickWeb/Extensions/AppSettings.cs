@@ -35,6 +35,10 @@ namespace QuickWeb.Extensions
         /// </summary>
         public static string AppVersion { get; set; }
 
+        /// <summary>
+        /// UEditor上传根目录
+        /// </summary>
+        public static string PathRoot { get; set; }
     }
 
     /// <summary>

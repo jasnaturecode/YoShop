@@ -585,6 +585,11 @@
             yoshop_store_user对象业务方法
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.LoginController.SettingService">
+            <summary>
+            yoshop_setting对象业务方法
+            </summary>
+        </member>
         <member name="M:QuickWeb.Controllers.LoginController.Index">
             <summary>
             登录页面
@@ -1011,6 +1016,11 @@
         <member name="P:QuickWeb.Extensions.AppConfig.AppVersion">
             <summary>
             程序版本
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.AppConfig.PathRoot">
+            <summary>
+            UEditor上传根目录
             </summary>
         </member>
         <member name="T:QuickWeb.Extensions.RedisConfig">
@@ -2814,12 +2824,13 @@
             依赖注入容器
             </summary>
         </member>
-        <member name="M:QuickWeb.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+        <member name="M:QuickWeb.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,Quick.IService.Iyoshop_settingService)">
             <summary>
              This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             </summary>
             <param name="app"></param>
             <param name="env"></param>
+            <param name="setting"></param>
         </member>
         <member name="T:Masuit.MyBlogs.Core.Extensions.Hangfire.IpIntercepter">
             <summary>
