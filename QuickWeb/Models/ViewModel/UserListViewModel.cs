@@ -1,10 +1,10 @@
 ﻿/* ==============================================================================
 * 命名空间：QuickWeb.Models.ViewModel 
-* 类 名 称：CategoryViewModel
+* 类 名 称：UserListViewModel
 * 创 建 者：Qing
-* 创建时间：2019/04/10 20:05:22
+* 创建时间：2019/04/13 17:05:45
 * CLR 版本：4.0.30319.42000
-* 保存的文件名：CategoryViewModel
+* 保存的文件名：UserListViewModel
 * 文件版本：V1.0.0.0
 *
 * 功能描述：N/A 
@@ -16,6 +16,8 @@
 *         CopyRight @ 班纳工作室 2019. All rights reserved
 * ==============================================================================*/
 
+using Quick.Models.Dto;
+using Quick.Models.Entity.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,48 +26,37 @@ using System.Threading.Tasks;
 namespace QuickWeb.Models.ViewModel
 {
     /// <summary>
-    /// 商品分类
+    /// 用户列表视图
     /// </summary>
-    public class CategoryViewModel
+    public class UserListViewModel
     {
         /// <summary>
         /// 
         /// </summary>
-        public uint category_id { get; set; }
+        public UserListViewModel()
+        {
+
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public string name { get; set; }
+        /// <param name="list"></param>
+        /// <param name="total"></param>
+        public UserListViewModel(IEnumerable<UserDto> list, int total)
+        {
+            this.list = list;
+            this.total = total;
+        }
 
         /// <summary>
-        /// 
+        /// 用户列表
         /// </summary>
-        public uint parent_id { get; set; }
+        public IEnumerable<UserDto> list { get; set; }
 
         /// <summary>
-        /// 
+        /// 总记录数
         /// </summary>
-        public uint image_id { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public uint sort { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public uint wxapp_id { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime create_time { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime update_time { get; set; }
+        public int total { get; set; } = 0;
     }
 }

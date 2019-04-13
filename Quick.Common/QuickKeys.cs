@@ -41,6 +41,22 @@ namespace Quick.Common
         /// </summary>
         public const string EncryptKey = "yoshop_salt_SmTRx";
 
+        /// <summary>
+        /// 短信设置
+        /// </summary>
+        public const string SmsSetting = "sms";
+        /// <summary>
+        /// 上传设置
+        /// </summary>
+        public const string UploadSetting = "storage";
+        /// <summary>
+        /// 商城设置
+        /// </summary>
+        public const string StoreSetting = "store";
+        /// <summary>
+        /// 交易设置
+        /// </summary>
+        public const string TradeSetting = "trade";
     }
 
     /// <summary>

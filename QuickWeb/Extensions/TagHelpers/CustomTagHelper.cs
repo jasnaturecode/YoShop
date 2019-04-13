@@ -1,5 +1,5 @@
 ﻿/* ==============================================================================
-* 命名空间：QuickWeb.Extensions.TagHelper 
+* 命名空间：QuickWeb.Extensions.TagHelpers 
 * 类 名 称：PagerTagHelper
 * 创 建 者：Run
 * 创建时间：2019/4/13 12:46:04
@@ -20,7 +20,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,7 +74,7 @@ namespace QuickWeb.Extensions.TagHelpers
             if (TotalCount == 0) return;
 
             if (string.IsNullOrEmpty(RouteUrl)) 
-                RouteUrl = $"/{ViewContext.RouteData.Values["Controller"].ToString().ToLower()}/{ViewContext.RouteData.Values["Action"].ToString().ToLower()}/";
+                RouteUrl = $"/{ViewContext.RouteData.Values["Controller"].ToString().ToLower()}/{ViewContext.RouteData.Values["Action"].ToString().ToLower()}";
 
             //总页数
             var totalPage = (int)Math.Ceiling(TotalCount * 1.0f / PageSize * 1.0f);

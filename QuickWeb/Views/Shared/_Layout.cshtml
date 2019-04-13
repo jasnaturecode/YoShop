@@ -85,7 +85,7 @@
         $(function () {
             /* 一级菜单 */
             $(".sidebar-nav-link a").each(function () {
-                if ($($(this))[0].href == String(window.location)
+                if ($($(this))[0].href == String(window.location).split('?')[0]
                     || String(window.location).includes(".") && String(window.location).indexOf($($(this))[0].href.split('/')[3]) > 0
                 ) {
                     $(this).addClass('active');
@@ -99,7 +99,7 @@
 
             /* 二级菜单 */
             $(".sidebar-second-item a").each(function () {
-                if ($($(this))[0].href == String(window.location)
+                if ($($(this))[0].href == String(window.location).split('?')[0]
                     || String(window.location).includes(".") && String(window.location).split('/').slice(0, 4).join('/') == $($(this))[0].href.split('/').slice(0, 4).join('/')
                 ) {
                     $(this).addClass('active');
@@ -116,7 +116,7 @@
 
             /* 三级菜单 */
             $(".sidebar-third-nav-sub li a").each(function () {
-                if ($($(this))[0].href == String(window.location)) {
+                if ($($(this))[0].href == String(window.location).split('?')[0]) {
                     $(this).addClass('active');
 
                     var index = $(this).attr("parent");

@@ -556,7 +556,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.GoodsController.CategoryAdd(QuickWeb.Models.ViewModel.CategoryViewModel)">
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryAdd(Quick.Models.Dto.CategoryDto)">
             <summary>
             添加商品分类
             </summary>
@@ -570,7 +570,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.GoodsController.CategoryEdit(QuickWeb.Models.ViewModel.CategoryViewModel,System.UInt32)">
+        <member name="M:QuickWeb.Controllers.GoodsController.CategoryEdit(Quick.Models.Dto.CategoryDto,System.UInt32)">
             <summary>
             编辑商品分类
             </summary>
@@ -707,9 +707,30 @@
             系统设置
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.SettingController.SettingService">
+            <summary>
+            yoshop_setting对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.SettingController.DeliveryService">
+            <summary>
+            yoshop_delivery对象业务方法
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Controllers.SettingController.DeliveryRuleService">
+            <summary>
+            yoshop_delivery_rule对象业务方法
+            </summary>
+        </member>
         <member name="M:QuickWeb.Controllers.SettingController.Store">
             <summary>
             商城设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Store(System.String,System.String,System.String)">
+            <summary>
+            保存商城设置
             </summary>
             <returns></returns>
         </member>
@@ -719,15 +740,40 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.SettingController.Delivery">
+        <member name="M:QuickWeb.Controllers.SettingController.Trade(System.String,System.String,System.String,System.String)">
+            <summary>
+            保存交易设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryIndex">
             <summary>
             配送设置
             </summary>
             <returns></returns>
         </member>
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryIndex(System.String)">
+            <summary>
+            保存配送设置
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickWeb.Controllers.SettingController.Sms">
             <summary>
             短信设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.Sms(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            短信设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.SmsTest(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            短信测试
             </summary>
             <returns></returns>
         </member>
@@ -737,13 +783,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.SettingController.Clear">
+        <member name="M:QuickWeb.Controllers.SettingController.Storage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            保存上传设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.CacheClear">
             <summary>
             清理缓存
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.SettingController.Index">
+        <member name="M:QuickWeb.Controllers.SettingController.ScienceIndex">
             <summary>
             环境检测
             </summary>
@@ -964,7 +1016,7 @@
             yoshop_user对象业务方法
             </summary>
         </member>
-        <member name="M:QuickWeb.Controllers.UserController.Index">
+        <member name="M:QuickWeb.Controllers.UserController.Index(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             用户列表
             </summary>
@@ -2789,49 +2841,31 @@
             分组类别
             </summary>
         </member>
-        <member name="T:QuickWeb.Models.ViewModel.CategoryViewModel">
+        <member name="T:QuickWeb.Models.ViewModel.UserListViewModel">
             <summary>
-            商品分类
+            用户列表视图
             </summary>
         </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.category_id">
+        <member name="M:QuickWeb.Models.ViewModel.UserListViewModel.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.name">
+        <member name="M:QuickWeb.Models.ViewModel.UserListViewModel.#ctor(System.Collections.Generic.IEnumerable{Quick.Models.Dto.UserDto},System.Int32)">
             <summary>
             
             </summary>
+            <param name="list"></param>
+            <param name="total"></param>
         </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.parent_id">
+        <member name="P:QuickWeb.Models.ViewModel.UserListViewModel.list">
             <summary>
-            
+            用户列表
             </summary>
         </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.image_id">
+        <member name="P:QuickWeb.Models.ViewModel.UserListViewModel.total">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.sort">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.wxapp_id">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.create_time">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:QuickWeb.Models.ViewModel.CategoryViewModel.update_time">
-            <summary>
-            
+            总记录数
             </summary>
         </member>
         <member name="T:QuickWeb.Program">

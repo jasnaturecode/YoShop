@@ -18,18 +18,19 @@ namespace QuickWeb.Extensions.Common
             Mapper.Initialize(m =>
             {
                 m.CreateMap<yoshop_store_user, AdminDto>();
-                m.CreateMap<yoshop_category, CategoryViewModel>()
+                m.CreateMap<yoshop_category, CategoryDto>()
                     //映射发生之前
                     //.BeforeMap((src, dst) => { dst.create_time = src.create_time.ConvertToDateTime(); })
                     //.BeforeMap((src, dst) => { dst.update_time = src.update_time.ConvertToDateTime(); })
                     //映射发生之后
                     .AfterMap((src, dst) => { dst.create_time = src.create_time.ConvertToDateTime(); })
                     .AfterMap((src, dst) => { dst.update_time = src.update_time.ConvertToDateTime(); });
-                m.CreateMap<CategoryViewModel, yoshop_category>()
+                m.CreateMap<CategoryDto, yoshop_category>()
                     .ForMember(dst => dst.create_time, opt => { opt.MapFrom(src => src.create_time.ConvertToTimeStamp()); })
                     .ForMember(dst => dst.update_time, opt => { opt.MapFrom(src => src.update_time.ConvertToTimeStamp()); });
-
-
+                m.CreateMap<yoshop_user, UserDto>()
+                    .ForMember(dst => dst.create_time,  opt => {  opt.MapFrom(src => src.create_time.ConvertToDateTime()); })
+                    .ForMember(dst => dst.update_time,  opt => {  opt.MapFrom(src => src.update_time.ConvertToDateTime()); });
 
             });
         }

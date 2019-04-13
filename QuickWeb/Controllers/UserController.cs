@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Quick.IService;
+using Quick.Models.Dto;
 using QuickWeb.Controllers.Common;
+using QuickWeb.Extensions.Common;
+using QuickWeb.Models.ViewModel;
 
 namespace QuickWeb.Controllers
 {
@@ -23,10 +26,11 @@ namespace QuickWeb.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("/user/index")]
-        public IActionResult Index()
+        public IActionResult Index(int? page,int? size)
         {
-
-            return View();
+            var total = 0;
+            var list = UserService.LoadPageEntities<uint>(page ?? 1, size ?? 15, ref total, l => true, s => s.user_id, true).Mapper<IEnumerable<UserDto>>();
+            return View(new UserListViewModel(list, total));
         }
 
 

@@ -7,6 +7,7 @@ using Masuit.Tools.Core.Linq;
 using Masuit.Tools.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Quick.IService;
+using Quick.Models.Dto;
 using Quick.Models.Entity.Table;
 using QuickWeb.Controllers.Common;
 using QuickWeb.Extensions;
@@ -67,7 +68,7 @@ namespace QuickWeb.Controllers
         {
             var list = await GetCategories(l => l.parent_id == 0);
             ViewData["first"] = list;
-            return View(new CategoryViewModel());
+            return View(new CategoryDto());
         }
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace QuickWeb.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost, Route("/goods.category/add")]
-        public IActionResult CategoryAdd(CategoryViewModel viewModel)
+        public IActionResult CategoryAdd(CategoryDto viewModel)
         {
             viewModel.wxapp_id = GetAdminSession().wxapp_id;
             viewModel.create_time = DateTime.Now;
@@ -103,7 +104,7 @@ namespace QuickWeb.Controllers
         [HttpGet, Route("/goods.category/edit/category_id/{id}")]
         public async Task<IActionResult> CategoryEdit(uint id)
         {
-            var model = CategoryService.GetById(id).Mapper<CategoryViewModel>();
+            var model = CategoryService.GetById(id).Mapper<CategoryDto>();
             if (model == null) return NoOrDeleted();
             var file = await UploadFileService.GetFirstEntityAsync(l=>l.file_id == model.image_id);
             ViewData["file_url"] = file?.file_url;
@@ -119,7 +120,7 @@ namespace QuickWeb.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost, Route("/goods.category/edit/category_id/{id}")]
-        public IActionResult CategoryEdit(CategoryViewModel viewModel, uint id)
+        public IActionResult CategoryEdit(CategoryDto viewModel, uint id)
         {
             var model = CategoryService.GetById(id);
             if (model == null) return NoOrDeleted();
@@ -161,12 +162,12 @@ namespace QuickWeb.Controllers
         }
 
 
-        private async Task<List<CategoryViewModel>> GetCategories(Expression<Func<yoshop_category, bool>> where)
+        private async Task<List<CategoryDto>> GetCategories(Expression<Func<yoshop_category, bool>> where)
         {
             Expression<Func<yoshop_category, bool>> cond = l => l.wxapp_id == GetAdminSession().wxapp_id;
             cond = cond.And(where);
             var list = await CategoryService.LoadOrderedEntities<int>(cond, s => s.sort, true).ToListAsync();
-            return list.Mapper<List<CategoryViewModel>>();
+            return list.Mapper<List<CategoryDto>>();
         }
 
         #endregion
