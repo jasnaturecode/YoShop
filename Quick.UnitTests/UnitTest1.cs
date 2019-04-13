@@ -31,5 +31,24 @@ namespace Quick.UnitTests
             Assert.IsTrue(close_days == "0");
             Assert.IsTrue(freight_rule == 0);
         }
+
+
+        [TestMethod]
+        public void TimeStampTest()
+        {
+            var stamp = GetCurrentTimeStamp();
+            Console.WriteLine(stamp);
+            Assert.IsTrue(stamp > 0);
+        }
+
+        /// <summary>
+        /// 获取当前时间戳（时间戳单位秒）
+        /// </summary>
+        /// <returns></returns>
+        public static uint GetCurrentTimeStamp()
+        {
+            var _ = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return (uint)(DateTime.Now.AddHours(-8) - _).TotalSeconds;
+        }
     }
 }

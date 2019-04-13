@@ -24,21 +24,6 @@ namespace QuickWeb.Extensions
         /// 百度密钥
         /// </summary>
         public static string BaiduAK { get; set; }
-
-        /// <summary>
-        /// 程序名称
-        /// </summary>
-        public static string AppTitle { get; set; }
-
-        /// <summary>
-        /// 程序版本
-        /// </summary>
-        public static string AppVersion { get; set; }
-
-        /// <summary>
-        /// UEditor上传根目录
-        /// </summary>
-        public static string PathRoot { get; set; }
     }
 
     /// <summary>

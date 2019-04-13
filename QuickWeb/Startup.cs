@@ -44,6 +44,8 @@ using QuickWeb.Extensions.Common;
 using Newtonsoft.Json.Linq;
 using Quick.Common;
 using Quick.Models.Dto;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
 
 namespace QuickWeb
 {
@@ -77,26 +79,15 @@ namespace QuickWeb
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = httpContext => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            //读取应用程序配置
-            Configuration.GetSectionValue<AppConfig>();
             //配置数据库
             DbContext.SqlString = Configuration.GetConnectionString("Mysql");
+            //读取应用程序配置
+            Configuration.GetSectionValue<AppConfig>();
             //读取Redis缓存配置
             Configuration.GetSectionValue<RedisConfig>();
-            // 配置Mvc模式和其他配置
-            services.AddMvc(options =>
-            {
-                // 缓存配置文件(默认30秒钟) [ResponseCache(CacheProfileName = "Default30")] 响应缓存在 ASP.NET Core | Microsoft Docs https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/response?view=aspnetcore-2.2
-                //options.CacheProfiles.Add("Default30", new CacheProfile() { Duration = 30 });
-            }).AddJsonOptions(opt =>
-            {
-                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddControllersAsServices();
             //配置跨域
             services.AddCors(opt =>
             {
@@ -123,12 +114,33 @@ namespace QuickWeb
             services.AddHttpClient();
             //注入静态HttpContext
             services.AddHttpContextAccessor();
+            // HttpContextAccessor 默认实现了IHttpContextAccessor接口，它简化了HttpContext的操作
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //注入响应缓存
             services.AddResponseCaching();
             //配置请求长度
             services.Configure<FormOptions>(options =>
             {
                 options.MultipartBodyLengthLimit = 104857600;// 100MB
+            });
+            //配置请求压缩
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+                options.Providers.Add<CustomCompressionProvider>();
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
+                {
+                    "image/svg+xml"
+                });
             });
             //注入Session
             services.AddSession(opt =>
@@ -138,7 +150,7 @@ namespace QuickWeb
             });
             //配置MemoryCache缓存
             services.AddMemoryCache();
-            //
+            //配置Redis缓存和Hangfire任务
             if (RedisConfig.UseRedis)
             {
                 //初始化 RedisHelper  nuget Install-Package CSRedisCore  https://github.com/2881099/csredis
@@ -168,7 +180,6 @@ namespace QuickWeb
                 //配置Hangfire
                 services.AddHangfire(x => x.UseMemoryStorage());
             }
-
             //配置7z和断点续传
             services.AddSevenZipCompressor().AddResumeFileResult();
             //注入SignalR
@@ -178,12 +189,24 @@ namespace QuickWeb
             //{
             //    options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
             //});
+            // 配置Mvc模式和其他配置
+            services.AddMvc(options =>
+            {
+                // 缓存配置文件(默认30秒钟) [ResponseCache(CacheProfileName = "Default30")] 响应缓存在 ASP.NET Core | Microsoft Docs https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/response?view=aspnetcore-2.2
+                //options.CacheProfiles.Add("Default30", new CacheProfile() { Duration = 30 });
+            }).AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddControllersAsServices()
+            .AddViewComponentsAsServices()
+            .AddTagHelpersAsServices();
             //解决razor视图中中文被编码的问题
             services.Configure<WebEncoderOptions>(options =>
             {
                 options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
             });
-
             var builder = new ContainerBuilder();
             builder.Populate(services);
             //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces().Where(t => t.Name.EndsWith("Repository") || t.Name.EndsWith("Service") || t.Name.EndsWith("Controller")).PropertiesAutowired().AsSelf().InstancePerDependency(); //注册控制器为属性注入
@@ -206,10 +229,8 @@ namespace QuickWeb
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        /// <param name="context"></param>
-        /// <param name="store"></param>
         /// <param name="setting"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,IHttpContextAccessor context, Iyoshop_store_userService store, Iyoshop_settingService setting)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Iyoshop_settingService setting)
         {
             if (env.IsDevelopment())
             {
@@ -223,15 +244,14 @@ namespace QuickWeb
 
                 app.UseException();
             }
+            app.UseResponseCompression();
+            // URL重写
+            app.UseRewriter(new RewriteOptions().AddRedirectToNonWww());
+            //注入静态HttpContext对象
+            app.UseStaticHttpContext();
+            //注入Session
+            app.UseSession();
             //app.UseHttpsRedirection();
-
-            if (AppConfig.IsDebug)
-            {
-                var adminDto = store.GetFirstEntity(l => l.store_user_id == 1).Mapper<AdminDto>();
-                context.HttpContext.Session.Set(SessionKey.AdminInfo, adminDto);
-                CommonHelper.SystemSettings = setting.LoadEntities(l => l.wxapp_id == adminDto.wxapp_id).ToList().ToDictionary(s => s.key, s => JObject.Parse(s.values));
-            }
-
             app.UseStaticFiles(new StaticFileOptions //静态资源缓存策略
             {
                 OnPrepareResponse = ctx =>
@@ -241,14 +261,13 @@ namespace QuickWeb
                 },
                 ContentTypeProvider = new FileExtensionContentTypeProvider(MimeMapper.MimeTypes)
             }).UseCookiePolicy();
-            // URL重写
-            app.UseRewriter(new RewriteOptions().AddRedirectToNonWww());
-            //注入静态HttpContext对象
-            app.UseStaticHttpContext();
-            //注入Session
-            app.UseSession();
             //启用网站防火墙
             app.UseRequestIntercept();
+            //自定义Debug模式下的操作
+            if (AppConfig.IsDebug)
+            {
+                CommonHelper.SystemSettings = setting.LoadEntities(l => l.wxapp_id == 10001).ToList().ToDictionary(s => s.key, s => JObject.Parse(s.values));
+            }
             //配置hangfire
             app.UseHangfireServer().UseHangfireDashboard("/taskcenter", new DashboardOptions()
             {
@@ -270,7 +289,7 @@ namespace QuickWeb
             //配置swagger
             app.UseSwagger().UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", AppConfig.AppTitle);
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", CommonHelper.SystemSettings["store"]["name"].Value<string>());
                 c.RoutePrefix = "swagger";
             });
             //配置SignalR

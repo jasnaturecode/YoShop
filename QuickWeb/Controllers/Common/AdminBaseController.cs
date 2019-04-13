@@ -4,8 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Masuit.Tools.Core.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Quick.Common;
+using Quick.IService;
 using Quick.Models.Dto;
+using QuickWeb.Extensions;
+using QuickWeb.Extensions.Common;
 
 namespace QuickWeb.Controllers.Common
 {
@@ -57,6 +61,22 @@ namespace QuickWeb.Controllers.Common
 
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (AppConfig.IsDebug)
+            {
+                if (!IsAdminLogin())
+                {
+                    var adminDto = new AdminDto(){ store_user_id = 10001,wxapp_id = 10001, user_name = "admin" };
+                    context.HttpContext.Session.Set(SessionKey.AdminInfo, adminDto);
+                }
+            }
+            base.OnActionExecuting(context);
+        }
 
     }
 }

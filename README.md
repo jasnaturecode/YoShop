@@ -48,3 +48,4 @@
 
 #### 优秀博客
 * 1.[SqlSugar入门级教程+.net core下的实例](https://www.cnblogs.com/rulasann/p/9438654.html)
+* 2.[ASP.NET Core使用TagHelper制作分页组件](https://www.cnblogs.com/diwu0510/p/9748774.html)*

@@ -11,12 +11,13 @@ using Newtonsoft.Json.Linq;
 using QuickWeb.Controllers.Common;
 using QuickWeb.Extensions;
 using QuickWeb.Extensions.Common;
+using QuickWeb.Extensions.UEditor;
 using QuickWeb.Models.RequestModel;
 
 namespace QuickWeb.Controllers
 {
     /// <summary>
-    /// 资源管理器
+    /// UEditor通用资源管理器
     /// </summary>
     [Route("[controller]/[action]")]
     [ApiExplorerSettings(IgnoreApi = true)] 
@@ -98,7 +99,7 @@ namespace QuickWeb.Controllers
             {
                 foreach (var t in Request.Form.Files)
                 {
-                    string path = Path.Combine(_hostingEnvironment.ContentRootPath, AppConfig.PathRoot.TrimStart('\\', '/'), destination.TrimStart('\\', '/'), t.FileName);
+                    string path = Path.Combine(_hostingEnvironment.ContentRootPath, UeditorConfig.GetString("PathRoot").TrimStart('\\', '/'), destination.TrimStart('\\', '/'), t.FileName);
                     using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         t.CopyTo(fs);
@@ -120,7 +121,7 @@ namespace QuickWeb.Controllers
         public ActionResult Handle([FromBody]FileRequest req)
         {
             List<object> list = new List<object>();
-            var root = Path.Combine(_hostingEnvironment.ContentRootPath, AppConfig.PathRoot.TrimStart('\\', '/'));
+            var root = Path.Combine(_hostingEnvironment.ContentRootPath, UeditorConfig.GetString("PathRoot").TrimStart('\\', '/'));
             switch (req.Action)
             {
                 case "list":
@@ -284,7 +285,7 @@ namespace QuickWeb.Controllers
         public ActionResult Handle(string path, string[] items, string toFilename)
         {
             path = path?.TrimStart('\\', '/') ?? "";
-            var root = AppConfig.PathRoot.TrimStart('\\', '/');
+            var root = UeditorConfig.GetString("PathRoot").TrimStart('\\', '/');
             var file = Path.Combine(_hostingEnvironment.ContentRootPath, root, path);
             switch (Request.Query["action"])
             {

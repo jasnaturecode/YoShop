@@ -72,35 +72,36 @@
         </member>
         <member name="M:QuickWeb.Controllers.Common.AdminBaseController.IsAdminLogin">
             <summary>
-            
+            管理员是否登录
             </summary>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.Common.AdminBaseController.GetAdminSession">
             <summary>
-            
+            获取管理员登录信息
             </summary>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.Common.AdminBaseController.SetAdminSession(Quick.Models.Dto.AdminDto)">
             <summary>
-            
+            设置管理员登录信息
             </summary>
             <param name="dto"></param>
         </member>
         <member name="M:QuickWeb.Controllers.Common.AdminBaseController.SetAdminLogOut">
             <summary>
+            注销管理员账户
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.AdminBaseController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
             
             </summary>
+            <param name="context"></param>
         </member>
         <member name="T:QuickWeb.Controllers.Common.BaseController">
             <summary>
             基础公共控制器
-            </summary>
-        </member>
-        <member name="F:QuickWeb.Controllers.Common.BaseController.IsDebug">
-            <summary>
-            应用程序的Debug模式
             </summary>
         </member>
         <member name="M:QuickWeb.Controllers.Common.BaseController.Build(System.Int32,System.String,System.Object,System.String)">
@@ -300,9 +301,53 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:QuickWeb.Controllers.Common.UploadController">
+            <summary>
+            UEditor通用文件上传
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.UploadController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            文件上传
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.UploadController.UploadWord">
+            <summary>
+            上传Word转码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.UploadController.DecodeDataUri(System.String)">
+            <summary>
+            解码Base64图片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.UploadController.Download(System.String)">
+            <summary>
+            文件下载
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.UploadController.UeditorFileUploader">
+            <summary>
+            UEditor文件上传处理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.Common.UploadController.UploadFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Controllers.FileController">
             <summary>
-            资源管理器
+            UEditor通用资源管理器
             </summary>
         </member>
         <member name="M:QuickWeb.Controllers.FileController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Masuit.Tools.Files.ISevenZipCompressor)">
@@ -855,39 +900,6 @@
             yoshop_upload_group对象业务方法
             </summary>
         </member>
-        <member name="M:QuickWeb.Controllers.UploadController.UploadWord">
-            <summary>
-            上传Word转码
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.DecodeDataUri(System.String)">
-            <summary>
-            解码Base64图片
-            </summary>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.Download(System.String)">
-            <summary>
-            文件下载
-            </summary>
-            <param name="path"></param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.UeditorFileUploader">
-            <summary>
-            UEditor文件上传处理
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QuickWeb.Controllers.UploadController.UploadFile(Microsoft.AspNetCore.Http.IFormFile)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="file"></param>
-            <returns></returns>
-        </member>
         <member name="M:QuickWeb.Controllers.UploadController.LibraryFileList(QuickWeb.Models.RequestModel.FilePageRequest,System.String,System.Int32)">
             <summary>
             文件库列表
@@ -947,9 +959,14 @@
             用户管理
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.UserController.UserService">
+            <summary>
+            yoshop_user对象业务方法
+            </summary>
+        </member>
         <member name="M:QuickWeb.Controllers.UserController.Index">
             <summary>
-            
+            用户列表
             </summary>
             <returns></returns>
         </member>
@@ -1006,21 +1023,6 @@
         <member name="P:QuickWeb.Extensions.AppConfig.BaiduAK">
             <summary>
             百度密钥
-            </summary>
-        </member>
-        <member name="P:QuickWeb.Extensions.AppConfig.AppTitle">
-            <summary>
-            程序名称
-            </summary>
-        </member>
-        <member name="P:QuickWeb.Extensions.AppConfig.AppVersion">
-            <summary>
-            程序版本
-            </summary>
-        </member>
-        <member name="P:QuickWeb.Extensions.AppConfig.PathRoot">
-            <summary>
-            UEditor上传根目录
             </summary>
         </member>
         <member name="T:QuickWeb.Extensions.RedisConfig">
@@ -1261,6 +1263,28 @@
             <param name="method">调用方法</param>
             <param name="queue">队列名</param>
             <param name="args">调用参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.CustomCompressionProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.CustomCompressionProvider.EncodingName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.CustomCompressionProvider.SupportsFlush">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.CustomCompressionProvider.CreateStream(System.IO.Stream)">
+            <summary>
+            
+            </summary>
+            <param name="outputStream"></param>
             <returns></returns>
         </member>
         <member name="T:QuickWeb.Extensions.DateTimeExtensions">
@@ -2085,6 +2109,38 @@
             </summary>
             <param name="options"></param>
             <returns></returns>
+        </member>
+        <member name="T:QuickWeb.Extensions.TagHelpers.QuickPagerTagHelper">
+            <summary>
+            分页TagHelper帮助类
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.TagHelpers.QuickPagerTagHelper.ViewContext">
+            <summary>
+            视图上下文
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.TagHelpers.QuickPagerTagHelper.TotalCount">
+            <summary>
+            总记录数
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.TagHelpers.QuickPagerTagHelper.PageSize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Extensions.TagHelpers.QuickPagerTagHelper.RouteUrl">
+            <summary>
+            请求地址
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Extensions.TagHelpers.QuickPagerTagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)">
+            <summary>
+            渲染分页条码
+            </summary>
+            <param name="context"></param>
+            <param name="output"></param>
         </member>
         <member name="T:QuickWeb.Extensions.UEditor.ConfigHandler">
             <summary>
