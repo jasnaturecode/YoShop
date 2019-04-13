@@ -8,10 +8,12 @@ using Newtonsoft.Json.Linq;
 using Quick.Common;
 using Quick.Common.Helpers;
 using Quick.IService;
+using Quick.Models.Dto;
 using Quick.Models.Entity.Table;
 using QuickWeb.Controllers.Common;
 using QuickWeb.Extensions;
 using QuickWeb.Extensions.Common;
+using QuickWeb.Models.ViewModel;
 
 namespace QuickWeb.Controllers
 {
@@ -34,6 +36,12 @@ namespace QuickWeb.Controllers
         /// yoshop_delivery_rule对象业务方法
         /// </summary>
         public Iyoshop_delivery_ruleService DeliveryRuleService { get; set; }
+
+        /// <summary>
+        /// yoshop_region对象业务方法
+        /// </summary>
+        public Iyoshop_regionService RegionService { get; set; }
+
 
         #region 商城设置
 
@@ -133,25 +141,120 @@ namespace QuickWeb.Controllers
         #region 配送设置
 
         /// <summary>
-        /// 配送设置
+        /// 运费模板列表
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("/setting.delivery/index")]
-        public IActionResult DeliveryIndex()
+        public IActionResult DeliveryIndex(int? page, int? size)
         {
+            int total = 0;
+            var list = DeliveryService.LoadPageEntities<uint>(page ?? 1, size ?? 15, ref total, l => true, x => x.sort, true).Mapper<IEnumerable<DeliveryDto>>();
+            return View(new DeliveryListViewModel(list, total));
+        }
 
+        /// <summary>
+        /// 添加运费模板页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("/setting.delivery/add")]
+        public IActionResult DeliveryAdd()
+        {
+            ViewData["regions"] = GetRegionTreeData();
+            return View(new yoshop_delivery());
+        }
+
+        /// <summary>
+        /// 保存运费模板
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost, Route("/setting.delivery/add"), ValidateAntiForgeryToken]
+        public IActionResult DeliveryAdd(yoshop_delivery model)
+        {
+            var dt = DateTime.Now.ConvertToTimeStamp();
+            model.create_time = dt;
+            model.update_time = dt;
+            model.wxapp_id = GetAdminSession().wxapp_id;
+
+            try
+            {
+                DeliveryService.AddEntityReturnIdentity(model);
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+
+            return YesRedirect("添加成功", "/setting.delivery/index");
+        }
+
+        /// <summary>
+        /// 编辑运费模板页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("/setting.delivery/edit/delivery_id/{id}")]
+        public IActionResult DeliveryEdit(uint id)
+        {
             return View();
         }
 
         /// <summary>
-        /// 保存配送设置
+        /// 保存运费模板
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        [HttpPost, Route("/setting.delivery/index"), ValidateAntiForgeryToken]
-        public IActionResult DeliveryIndex(string str)
+        [HttpPost, Route("/setting.delivery/edit/delivery_id/{id}"), ValidateAntiForgeryToken]
+        public IActionResult DeliveryEdit(string str)
         {
-            return Yes("更新成功");
+            return Yes("保存成功");
+        }
+
+        /// <summary>
+        /// 保存运费模板
+        /// </summary>
+        /// <param name="delivery_id"></param>
+        /// <returns></returns>
+        [HttpPost, Route("/setting.delivery/delete"), ValidateAntiForgeryToken]
+        public IActionResult DeliveryDelete(uint delivery_id)
+        {
+            try
+            {
+                DeliveryService.Delete(l => l.delivery_id == delivery_id);
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+            return Yes("保存成功");
+        }
+
+
+        private string GetRegionTreeData()
+        {
+            var regions = RegionService.GetAll().Select<RegionDto>().ToList();
+
+            JObject root = new JObject();
+
+            foreach (var province in regions)
+            {
+                if (province.level == 1)  // 省份
+                    root[province.id] = province.ObjectToJson();
+                foreach (var city in regions)
+                {
+                    if (city.level == 2 && city.pid == province.id) // 城市
+                        root[province.id]["city"][city.id] = city.ObjectToJson();
+
+                    foreach (var region in regions)
+                    {
+                        if (region.level == 3 && region.pid == city.id) // 地区
+                            root[province.id]["city"][city.id]["region"][region.id] = region.ObjectToJson();
+                    }
+                }
+            }
+
+            return root.ObjectToJson();
         }
 
         #endregion

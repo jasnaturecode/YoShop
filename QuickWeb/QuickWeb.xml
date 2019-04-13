@@ -746,17 +746,43 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.SettingController.DeliveryIndex">
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryIndex(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            配送设置
+            运费模板列表
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.SettingController.DeliveryIndex(System.String)">
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryAdd">
             <summary>
-            保存配送设置
+            添加运费模板页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryAdd(System.String)">
+            <summary>
+            保存运费模板
             </summary>
             <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryEdit(System.UInt32)">
+            <summary>
+            编辑运费模板页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryEdit(System.String)">
+            <summary>
+            保存运费模板
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryDelete(System.UInt32)">
+            <summary>
+            保存运费模板
+            </summary>
+            <param name="delivery_id"></param>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.SettingController.Sms">
@@ -2839,6 +2865,33 @@
         <member name="P:QuickWeb.Models.RequestModel.UploadGroupRequest.group_type">
             <summary>
             分组类别
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Models.ViewModel.DeliveryListViewModel">
+            <summary>
+            运费模板列表
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Models.ViewModel.DeliveryListViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Models.ViewModel.DeliveryListViewModel.#ctor(System.Collections.Generic.IEnumerable{Quick.Models.Dto.DeliveryDto},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+            <param name="total"></param>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryListViewModel.list">
+            <summary>
+            用户列表
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryListViewModel.total">
+            <summary>
+            总记录数
             </summary>
         </member>
         <member name="T:QuickWeb.Models.ViewModel.UserListViewModel">
