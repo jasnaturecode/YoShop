@@ -55,19 +55,19 @@
                 '       <a class="edit" href="javascript:;">编辑</a>' +
                 '       <a class="delete" href="javascript:;">删除</a>' +
                 '   </p>' +
-                '   <input type="hidden" name="delivery[rule][region][]" value="' + checkedIds + '">' +
+                '   <input type="hidden" name="regions" value="' + checkedIds + '">' +
                 '</td>' +
                 '<td>' +
-                '   <input type="number" name="delivery[rule][first][]" value="1" required>' +
+                '   <input type="number" name="firsts" value="1" required>' +
                 '</td>' +
                 '<td>' +
-                '   <input type="number" name="delivery[rule][first_fee][]" value="0.00" required>' +
+                '   <input type="number" name="first_fees" value="0.00" required>' +
                 '</td>' +
                 '<td>' +
-                '   <input type="number" name="delivery[rule][additional][]" value="0">' +
+                '   <input type="number" name="additionals" value="0">' +
                 '</td>' +
                 '<td>' +
-                '   <input type="number" name="delivery[rule][additional_fee][]" value="0.00">' +
+                '   <input type="number" name="additional_fees" value="0.00">' +
                 '</td>' +
                 '</tr>'
             );
@@ -140,7 +140,7 @@
          * 切换计费方式
          */
         clickMethodEvent: function () {
-            $('input:radio[name="delivery[method]"]').change(function (e) {
+            $('input:radio[name="method"]').change(function (e) {
                 var $first = $('.first')
                     , $additional = $('.additional');
                 if (e.currentTarget.value === '20')

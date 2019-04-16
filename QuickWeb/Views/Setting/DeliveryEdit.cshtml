@@ -1,8 +1,9 @@
 ﻿@model yoshop_delivery
 @{
-    ViewData["Title"] = "添加运费模板";
+    ViewData["Title"] = "编辑运费模板";
     ViewBag.SecondSidebarIndex = 6;
     string regions = ViewData["regions"] as string;
+    List<DeliveryRuleRegionViewModel> rules = ViewData["rules"] as List<DeliveryRuleRegionViewModel>;
 }
 
 <div class="row-content am-cf">
@@ -13,13 +14,13 @@
                     <div class="widget-body">
                         <fieldset>
                             <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">新建运费模版</div>
+                                <div class="widget-title am-fl">编辑运费模版</div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">模版名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" asp-for="name"
-                                           value="" required>
+                                           value="@(Model.name)" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -56,6 +57,41 @@
                                                     </th>
                                                     <th>续费 (元)</th>
                                                 </tr>
+                                                @if (rules != null && rules.Any())
+                                                {
+                                                    foreach (var item in rules)
+                                                    {
+                                                        <tr>
+                                                            <td class="am-text-left">
+                                                                <p class="selected-content am-margin-bottom-xs">
+                                                                    @(Html.Raw(item.region_content))
+                                                                </p>
+                                                                <p class="operation am-margin-bottom-xs">
+                                                                    <a class="edit" href="javascript:;">编辑</a>
+                                                                    <a class="delete" href="javascript:;">删除</a>
+                                                                </p>
+                                                                <input type="hidden" name="regions"
+                                                                       value="@(item.region)">
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" name="firsts"
+                                                                       value="@(item.first)" required>
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" name="first_fees"
+                                                                       value="@(item.first_fee)" required>
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" name="additionals"
+                                                                       value="@(item.additional)">
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" name="additional_fees"
+                                                                       value="@(item.additional_fee)">
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
                                                 <tr>
                                                     <td colspan="5" class="am-text-left">
                                                         <a class="add-region am-btn am-btn-default am-btn-xs"
@@ -74,7 +110,7 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" asp-for="sort"
-                                           value="100" required>
+                                           value="@(Model.sort)" required>
                                     <small>数字越小越靠前</small>
                                 </div>
                             </div>

@@ -29,8 +29,11 @@ namespace QuickWeb.Extensions.Common
                     .ForMember(dst => dst.create_time, opt => { opt.MapFrom(src => src.create_time.ConvertToTimeStamp()); })
                     .ForMember(dst => dst.update_time, opt => { opt.MapFrom(src => src.update_time.ConvertToTimeStamp()); });
                 m.CreateMap<yoshop_user, UserDto>()
-                    .ForMember(dst => dst.create_time,  opt => {  opt.MapFrom(src => src.create_time.ConvertToDateTime()); })
-                    .ForMember(dst => dst.update_time,  opt => {  opt.MapFrom(src => src.update_time.ConvertToDateTime()); });
+                    .ForMember(dst => dst.create_time, opt => { opt.MapFrom(src => src.create_time.ConvertToDateTime()); })
+                    .ForMember(dst => dst.update_time, opt => { opt.MapFrom(src => src.update_time.ConvertToDateTime()); });
+
+                m.CreateMap<yoshop_delivery_rule, DeliveryRuleRegionViewModel>()
+                    .ForMember(dst => dst.region_content, opt => { opt.Ignore(); });
 
             });
         }

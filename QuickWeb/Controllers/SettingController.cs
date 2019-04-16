@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Masuit.Tools.Logging;
 using Microsoft.AspNetCore.Mvc;
@@ -159,7 +160,7 @@ namespace QuickWeb.Controllers
         [HttpGet, Route("/setting.delivery/add")]
         public IActionResult DeliveryAdd()
         {
-            ViewData["regions"] = GetRegionTreeData();
+            ViewData["regions"] = GetRegionTreeData().ObjectToJson();
             return View(new yoshop_delivery());
         }
 
@@ -167,18 +168,54 @@ namespace QuickWeb.Controllers
         /// 保存运费模板
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="additionals"></param>
+        /// <param name="additional_fees"></param>
+        /// <param name="firsts"></param>
+        /// <param name="first_fees"></param>
+        /// <param name="regions"></param>
         /// <returns></returns>
         [HttpPost, Route("/setting.delivery/add"), ValidateAntiForgeryToken]
-        public IActionResult DeliveryAdd(yoshop_delivery model)
+        public IActionResult DeliveryAdd(yoshop_delivery model, List<string> regions, List<double> firsts, List<decimal> first_fees, List<double> additionals, List<decimal> additional_fees)
         {
             var dt = DateTime.Now.ConvertToTimeStamp();
+            var wxapp_id = GetAdminSession().wxapp_id;
+
             model.create_time = dt;
             model.update_time = dt;
-            model.wxapp_id = GetAdminSession().wxapp_id;
+            model.wxapp_id = wxapp_id;
 
             try
             {
-                DeliveryService.AddEntityReturnIdentity(model);
+                //LogManager.Info(regions.ObjectToJson());
+                uint delivery_id = (uint)DeliveryService.AddEntityReturnIdentity(model);
+                if (delivery_id > 0)
+                {
+                    if (regions != null && regions.Any())
+                    {
+                        List<yoshop_delivery_rule> rules = new List<yoshop_delivery_rule>();
+
+                        for (int i = 0; i < regions.Count; i++)
+                        {
+                            var _ = new yoshop_delivery_rule
+                            {
+                                region = regions[i],
+                                first = firsts[i],
+                                first_fee = first_fees[i],
+                                additional = additionals[i],
+                                additional_fee = additional_fees[i],
+                                delivery_id = delivery_id,
+                                wxapp_id = wxapp_id,
+                                create_time = dt
+                            };
+                            rules.Add(_);
+                        }
+                        DeliveryRuleService.AddEntities(rules);
+                    }
+                    else
+                    {
+                        return No("请选择可配送区域");
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -196,18 +233,79 @@ namespace QuickWeb.Controllers
         [HttpGet, Route("/setting.delivery/edit/delivery_id/{id}")]
         public IActionResult DeliveryEdit(uint id)
         {
-            return View();
+            var model = DeliveryService.GetFirstEntity(l => l.delivery_id == id);
+            ViewData["regions"] = GetRegionTreeData().ObjectToJson();
+            var list = DeliveryRuleService.LoadEntities(l => l.delivery_id == id)?.ToList();
+            if (list != null && list.Any())
+            {
+                var rules = list.Mapper<List<DeliveryRuleRegionViewModel>>();
+                foreach (var item in rules)
+                    item.region_content = GetRegionContent(item.region);
+
+                ViewData["rules"] = rules;
+            }
+            return View(model);
         }
 
         /// <summary>
         /// 保存运费模板
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <param name="additionals"></param>
+        /// <param name="additional_fees"></param>
+        /// <param name="firsts"></param>
+        /// <param name="first_fees"></param>
+        /// <param name="regions"></param>
         /// <returns></returns>
         [HttpPost, Route("/setting.delivery/edit/delivery_id/{id}"), ValidateAntiForgeryToken]
-        public IActionResult DeliveryEdit(string str)
+        public IActionResult DeliveryEdit(uint id, yoshop_delivery model, List<string> regions, List<double> firsts, List<decimal> first_fees, List<double> additionals, List<decimal> additional_fees)
         {
-            return Yes("保存成功");
+            var dt = DateTime.Now.ConvertToTimeStamp();
+
+            try
+            {
+                var delivery = DeliveryService.GetFirstEntity(l => l.delivery_id == id);
+                delivery.name = model.name;
+                delivery.method = model.method;
+                delivery.sort = model.sort;
+                delivery.update_time = dt;
+
+                if (regions != null && regions.Any())
+                {
+                    List<yoshop_delivery_rule> rules = new List<yoshop_delivery_rule>();
+
+                    for (int i = 0; i < regions.Count; i++)
+                    {
+                        var _ = new yoshop_delivery_rule
+                        {
+                            region = regions[i],
+                            first = firsts[i],
+                            first_fee = first_fees[i],
+                            additional = additionals[i],
+                            additional_fee = additional_fees[i],
+                            delivery_id = delivery.delivery_id,
+                            wxapp_id = delivery.wxapp_id,
+                            create_time = dt
+                        };
+                        rules.Add(_);
+                    }
+
+                    if (DeliveryRuleService.Delete(l => l.delivery_id == delivery.delivery_id))
+                        DeliveryRuleService.AddEntities(rules);
+                }
+                else
+                {
+                    return No("请选择可配送区域");
+                }
+            }
+            catch (Exception e)
+            {
+                LogManager.Error(GetType(), e);
+                return No(e.Message);
+            }
+
+            return YesRedirect("编辑成功", "/setting.delivery/index");
         }
 
         /// <summary>
@@ -221,6 +319,7 @@ namespace QuickWeb.Controllers
             try
             {
                 DeliveryService.Delete(l => l.delivery_id == delivery_id);
+                DeliveryRuleService.Delete(l => l.delivery_id == delivery_id);
             }
             catch (Exception e)
             {
@@ -230,31 +329,80 @@ namespace QuickWeb.Controllers
             return Yes("保存成功");
         }
 
-
-        private string GetRegionTreeData()
+        /// <summary>
+        /// 得到地区数据
+        /// </summary>
+        /// <returns></returns>
+        private JObject GetRegionTreeData()
         {
             var regions = RegionService.GetAll().Select<RegionDto>().ToList();
 
             JObject root = new JObject();
-
             foreach (var province in regions)
             {
                 if (province.level == 1)  // 省份
-                    root[province.id] = province.ObjectToJson();
-                foreach (var city in regions)
                 {
-                    if (city.level == 2 && city.pid == province.id) // 城市
-                        root[province.id]["city"][city.id] = city.ObjectToJson();
+                    root[province.id.ToString()] = JObject.FromObject(province);
 
-                    foreach (var region in regions)
+                    JObject second = new JObject();
+                    foreach (var city in regions)
                     {
-                        if (region.level == 3 && region.pid == city.id) // 地区
-                            root[province.id]["city"][city.id]["region"][region.id] = region.ObjectToJson();
+
+                        if (city.level == 2 && city.pid == province.id) // 城市
+                        {
+                            second[city.id.ToString()] = JObject.FromObject(city);
+
+                            JObject third = new JObject();
+                            foreach (var region in regions)
+                            {
+                                if (region.level == 3 && region.pid == city.id)  // 地区
+                                    third[region.id.ToString()] = JObject.FromObject(region);
+                            }
+
+                            second[city.id.ToString()]["region"] = third;
+                        }
                     }
+
+                    root[province.id.ToString()]["city"] = second;
                 }
             }
 
-            return root.ObjectToJson();
+            return root;
+        }
+
+        /// <summary>
+        /// 得到地区详情
+        /// </summary>
+        /// <param name="region"></param>
+        /// <returns></returns>
+        private string GetRegionContent(string region)
+        {
+            var ids = region.Split(',').Select(item => item.ToUInt32());
+
+            var sb = new StringBuilder();
+
+            if (ids != null && ids.Any())
+            {
+                var kv = new Dictionary<string, IEnumerable<string>>();
+
+                foreach (var id in ids)
+                {
+                    var model = RegionService.GetFirstEntity(l => l.id == id);
+                    var key = model.merger_name.Split(',')[model.level.ToInt32() - 1];
+                    if (kv.ContainsKey(key))
+                        kv[key] = kv[key].Append(model.shortname);
+                    else
+                        kv.Add(key, new List<string> { model.shortname });
+                }
+                var result = kv.ToDictionary(x => x.Key, x => string.Join('、', x.Value));
+
+                foreach (var item in result)
+                {
+                    sb.Append($"{item.Key}(<span class=\"am-link-muted\">{item.Value}</span>)");
+                }
+            }
+
+            return sb.ToString();
         }
 
         #endregion

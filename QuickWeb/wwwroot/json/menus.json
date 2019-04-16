@@ -13,18 +13,18 @@
 				"name": "商品列表",
 				"index": "/goods/index",
 				"uris": [
-					"goods/index",
-					"goods/add",
-					"goods/edit"
+					"/goods/index",
+					"/goods/add",
+					"/goods/edit"
 				]
 			},
 			{
 				"name": "商品分类",
 				"index": "/goods.category/index",
 				"uris": [
-					"goods.category/index",
-					"goods.category/add",
-					"goods.category/edit"
+					"/goods.category/index",
+					"/goods.category/add",
+					"/goods.category/edit"
 				]
 			}
 		]
@@ -93,10 +93,10 @@
 				"name": "帮助中心",
 				"index": "/wxapp.help/index",
 				"uris": [
-					"wxapp.help/index",
-					"wxapp.help/add",
-					"wxapp.help/edit",
-					"wxapp.help/delete"
+					"/wxapp.help/index",
+					"/wxapp.help/add",
+					"/wxapp.help/edit",
+					"/wxapp.help/delete"
 				]
 			},
 			{
@@ -128,9 +128,9 @@
 				"name": "配送设置",
 				"index": "/setting.delivery/index",
 				"uris": [
-					"setting.delivery/index",
-					"setting.delivery/add",
-					"setting.delivery/edit"
+					"/setting.delivery/index",
+					"/setting.delivery/add",
+					"/setting.delivery/edit"
 				]
 			},
 			{

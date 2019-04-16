@@ -48,6 +48,23 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:QuickWeb.Components.Navigation2ViewComponent">
+            <summary>
+            视图组件
+            </summary>
+        </member>
+        <member name="M:QuickWeb.Components.Navigation2ViewComponent.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            视图组件
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:QuickWeb.Components.Navigation2ViewComponent.InvokeAsync">
+            <summary>
+            渲染菜单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:QuickWeb.Components.NavigationViewComponent">
             <summary>
             视图组件
@@ -59,7 +76,7 @@
             </summary>
             <param name="hostingEnvironment"></param>
         </member>
-        <member name="M:QuickWeb.Components.NavigationViewComponent.Invoke">
+        <member name="M:QuickWeb.Components.NavigationViewComponent.InvokeAsync">
             <summary>
             渲染菜单
             </summary>
@@ -722,6 +739,11 @@
             yoshop_delivery_rule对象业务方法
             </summary>
         </member>
+        <member name="P:QuickWeb.Controllers.SettingController.RegionService">
+            <summary>
+            yoshop_region对象业务方法
+            </summary>
+        </member>
         <member name="M:QuickWeb.Controllers.SettingController.Store">
             <summary>
             商城设置
@@ -758,11 +780,16 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:QuickWeb.Controllers.SettingController.DeliveryAdd(System.String)">
+        <member name="M:QuickWeb.Controllers.SettingController.DeliveryAdd(Quick.Models.Entity.Table.yoshop_delivery,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Double},System.Collections.Generic.List{System.Decimal},System.Collections.Generic.List{System.Double},System.Collections.Generic.List{System.Decimal})">
             <summary>
             保存运费模板
             </summary>
-            <param name="str"></param>
+            <param name="model"></param>
+            <param name="additionals"></param>
+            <param name="additional_fees"></param>
+            <param name="firsts"></param>
+            <param name="first_fees"></param>
+            <param name="regions"></param>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.SettingController.DeliveryEdit(System.UInt32)">
@@ -783,6 +810,19 @@
             保存运费模板
             </summary>
             <param name="delivery_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.GetRegionTreeData">
+            <summary>
+            得到地区数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickWeb.Controllers.SettingController.GetRegionContent(System.String)">
+            <summary>
+            得到地区详情
+            </summary>
+            <param name="region"></param>
             <returns></returns>
         </member>
         <member name="M:QuickWeb.Controllers.SettingController.Sms">
@@ -2892,6 +2932,41 @@
         <member name="P:QuickWeb.Models.ViewModel.DeliveryListViewModel.total">
             <summary>
             总记录数
+            </summary>
+        </member>
+        <member name="T:QuickWeb.Models.ViewModel.DeliveryRuleRegionViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryRuleRegionViewModel.region_content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryRuleRegionViewModel.region">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryRuleRegionViewModel.first">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryRuleRegionViewModel.first_fee">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryRuleRegionViewModel.additional">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QuickWeb.Models.ViewModel.DeliveryRuleRegionViewModel.additional_fee">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:QuickWeb.Models.ViewModel.UserListViewModel">
